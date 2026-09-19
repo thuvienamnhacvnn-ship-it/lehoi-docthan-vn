@@ -1258,6 +1258,233 @@ export const en: MessagesFor = {
       organizerLabel: 'Organiser',
     },
 
+    experience: {
+      metaTitle: 'Day Festival',
+      metaDescription:
+        'A whole day before the concert: flashmob, Colour Run, Connection Zone, Happy Lunch, pet zone, Mega Zone, visual art.',
+      kicker: 'Daytime',
+      lead:
+        'Before it gets dark there is a whole festival. This is the part most people will remember longest — not because of the stage, but because of the people they met.',
+      rhythmKicker: 'The rhythm of a day',
+      rhythmTitle: 'Morning · midday · golden hour · night',
+      rhythmLead: 'The site changes light four times a day. This page follows the same rhythm.',
+      railKickerA: 'daytime activities',
+      railTitle: 'Drag sideways to explore',
+      filmKicker: 'Film',
+      filmTitle: 'A day at the Day Festival',
+      stories: {
+        flashmob: {
+          title: 'Opening on one shared beat',
+          body: 'The festival opens with a flashmob on the main plaza. Simple moves, fifteen minutes of rehearsal, anyone can join — and by the end everyone knows a few more faces.',
+        },
+        'color-run': {
+          title: 'A run with no clock',
+          body: 'The Colour Run goes through three colour stations and across the line. No leaderboard, just a badge you can wear and a set of clothes covered in colour.',
+        },
+        'tram-gap': {
+          title: 'The Connection Zone — where strangers sit down together',
+          body: 'Coffee Talk for people who like to listen, Coffee Circles for people who want to talk, Match & Meet for people ready to meet one to one. Everything is hosted, and you can stop at any time.',
+        },
+        pets: {
+          title: 'A pet zone divided by temperament',
+          body: 'Small dogs, large dogs, cats and senior dogs each have their own area. There are puppy socialisation sessions, a small afternoon parade and a photo spot.',
+        },
+        'match-meet': {
+          title: 'Match & Meet: one to one, with set times',
+          body: 'Two-seat tables in the connection area, a few minutes each, then you rotate to someone new. There is a clear code of conduct, a host present, and you can stop whenever you like.',
+        },
+        'music-corner': {
+          title: 'An acoustic corner in the middle of the day',
+          body: 'One artist, one guitar, a few dozen people sitting around. The smallest music of the festival and usually the bit people remember longest.',
+        },
+        art: {
+          title: 'Walking through three layers of light',
+          body: 'A large visual installation inspired by the resilience of succulents. A one-way route; walk it to the end and you understand the festival’s journey without anyone explaining it.',
+        },
+      },
+    },
+
+    oneBeatNight: {
+      metaTitle: 'One Beat Night — the concert',
+      metaDescription:
+        'The peak of the festival: live music, the headliner, singer × DJ, Match Cam, Happiness Toast and the moment thousands of LED wristbands light up together.',
+      kicker: 'The peak',
+      lead:
+        'When it gets dark the whole site changes colour. This is where everything that happened all day gathers into one evening.',
+      headlinerLabel: 'Headliner',
+      dateLabel: 'Date',
+      stageLabel: 'Stage',
+      stageValue: 'Main Stage',
+      scriptKicker: 'Run of show',
+      scriptTitle: 'The night runs on five roles',
+      scriptLead:
+        'The artist list has not been announced. What is settled is the structure of the night: who appears when, and what for.',
+      interactKicker: 'Interaction',
+      interactTitle: 'The crowd is part of the stage too',
+      interactLead:
+        'Match Cam, Happiness Toast and the hosted moments in between — where the audience becomes the main character.',
+      crewKicker: 'Behind the scenes',
+      crewTitle: 'A concert works because of the people who never go on stage',
+      crewLead:
+        'Lighting, sound, video, backstage coordination — the craft that decides the quality of the night.',
+      closingTitle: 'The last part of the night is not the loudest — it is the quietest.',
+      closingBody:
+        'After the finale the lights drop and the music softens. What remains is thousands of people who have just shared an evening — many of whom arrived on their own.',
+      rolesCta: 'The performance roles',
+      programCta: 'Concert programme',
+    },
+
+    tickets: {
+      metaTitle: 'Tickets & tiers',
+      metaDescription:
+        'The five ONE BEAT NIGHT ticket tiers, what each one includes, the purchase flow and the LED wristband journey.',
+      kicker: 'Join in',
+      titleA: 'Tickets',
+      titleB: '& tiers',
+      lead:
+        'What each tier includes is fixed by the experience. Prices and the on-sale date will be announced once the organisers confirm them — this page shows no unverified figures.',
+      priceLabel: 'Ticket price',
+      priceShort: 'Price',
+      onsaleLabel: 'On sale from',
+      tiersCountA: 'ticket tiers',
+      chooseTitle: 'Choose how you want to spend the day',
+      chooseLead:
+        'The difference is where you stand, how you are looked after and which entrance you use — not what you get to see.',
+      proposedTitle: 'A tier proposed by the design team; not yet approved by the organisers',
+      compareKicker: 'Side by side',
+      compareTitle: 'What each tier includes',
+      compareCaption: 'Comparison of what each ticket tier includes',
+      yes: 'Yes',
+      no: 'No',
+      flowKicker: 'The flow',
+      flowTitle: 'From choosing a tier to your ticket wallet',
+      flowLead:
+        'The whole flow is built except the payment step — the site is not connected to any provider and does not pretend to be.',
+      techKicker: 'Event technology',
+      techTitle: 'Ticket → check-in → wristband → experience',
+      techLead:
+        'You collect the LED wristband at the gate and it lights with the music during the concert. The capabilities below are architecture held in reserve — no system has been confirmed as deployed.',
+      capabilitiesLabel: 'Extended capabilities',
+      notConfirmed: 'not confirmed',
+    },
+
+    press: {
+      metaTitle: 'Press room',
+      metaDescription: 'Media kit, logo pack, festival photography, event details and press accreditation.',
+      kicker: 'Press',
+      titleA: 'Press',
+      titleB: 'room',
+      lead: 'The festival’s official material for newsrooms, broadcasters and content creators.',
+      downloadsKicker: 'Material',
+      downloadsTitle: 'Downloads',
+      inLibrary: 'Available in the image library',
+      preparing: 'In preparation',
+      moreTitle: 'Need something else?',
+      moreBody: 'Photography on request, interviews, figures — send your request through the press contact.',
+      downloadsNote:
+        'The packaged files (media kit PDF, zipped photo set) will replace these once the organisers approve the final versions. This page does not create download links to files that do not exist.',
+      brandKicker: 'Identity',
+      brandTitleA: 'Studio',
+      brandTitleB: 'imagery',
+      brandLead:
+        'Logo, emblem, ticket, wristband, merchandise, app and materials — high-resolution originals with no text over them.',
+      photosKicker: 'Photography',
+      photosTitle: 'Official photographs',
+      photosLead:
+        'Tap an image to see it full size. The photographs carry no text, no year and no watermark — all the information comes from the site itself.',
+      infoKicker: 'Details',
+      infoTitle: 'The organisers',
+      eventNameLabel: 'Event name',
+      cityLabel: 'City',
+      organizerLabel: 'Organiser',
+      dateLabel: 'Date',
+      venueLabel: 'Venue',
+      pressContactLabel: 'Press contact',
+      accredTitle: 'Press accreditation',
+      accredBody:
+        'The press working area opens for accreditation once the event date is announced. The form below is built; the intake system is not yet connected.',
+      accredItems: [
+        'Publication / channel',
+        'Reporter name and role',
+        'Type of coverage: photo, video, writing, livestream',
+        'Equipment being brought',
+      ],
+      accredBadge: 'Accreditation opens once the date is announced',
+    },
+
+    partners: {
+      metaTitle: 'Sponsors & partners',
+      metaDescription:
+        'The ONE BEAT NIGHT brand ecosystem: visibility, experience, commerce, data, hospitality, content and CSR opportunities.',
+      kicker: 'Partners',
+      titleA: 'Not an advertising warehouse.',
+      titleB: 'An ecosystem.',
+      lead:
+        'A brand is not buying a place to hang a logo. A brand chooses a role in the day of thousands of people.',
+      contactLine: 'Partnership contact:',
+      whyKicker: '01 — Why ONE BEAT NIGHT',
+      whyTitle: 'Nine layers of value in a single event',
+      whyLead: 'Each layer is a different way for a brand to take part. Few events have all nine.',
+      layers: {
+        movement: { label: 'A cultural movement', note: 'A clear position: freedom, self-love, community — not a dating event' },
+        community: { label: 'A community', note: 'Vietnamese adults living independently, across three age groups' },
+        day: { label: 'A daytime festival', note: 'Activities running from morning through golden hour' },
+        music: { label: 'A concert', note: 'A large stage with professional lighting and sound' },
+        media: { label: 'A media platform', note: 'Podcast, UGC, livestream, press, OOH, recap film' },
+        commerce: { label: 'A commerce platform', note: 'Mega Zone, MegaSale, O2O, payments' },
+        activation: { label: 'A brand activation environment', note: 'Experience areas placed along the visitor journey' },
+        data: { label: 'A data and interaction layer', note: 'Opt-in sign-ups, measurement at every step' },
+        ip: { label: 'A long-term asset', note: 'Architecture built for several editions, not one' },
+      },
+      audienceKicker: '02 — Audience',
+      audienceTitle: 'Who will be standing in front of your stand',
+      audienceLead:
+        'Three age groups are set out in the positioning documents. The exact scale has not been announced — and this page does not guess on the organisers’ behalf.',
+      scaleLabel: 'Expected scale:',
+      reachLabel: 'Media reach:',
+      ecosystemKicker: '03 — Festival ecosystem',
+      ecosystemTitle: 'Ten zones, ten different ways of reaching the audience',
+      opportunitiesKicker: '04 — Brand opportunities',
+      opportunitiesTitleA: 'ways to take part',
+      opportunitiesLead:
+        'Pick one to see what the brand does at each step: activate, engage, convert and measure.',
+      formatsKicker: '05 — Activation formats',
+      formatsTitle: 'Eight groups of value',
+      mediaKicker: '06 — Media system',
+      mediaTitle: 'The brand appears inside the content, not only in the advertising',
+      mediaLead:
+        'Eight content formats running before, during and after the festival — each one a place a brand can take part.',
+      commercialKicker: '07 — Commercial opportunities',
+      commercialTitle: 'From experience to transaction',
+      commercialLead:
+        'Mega Zone, MegaSale, Happiness Deals, the O2O collection counter and on-site payments — an unbroken chain from the moment of attention to the moment of payment.',
+      hospitalityKicker: '08 — VIP & hospitality',
+      hospitalityTitle: 'Invite your partners to an evening worth remembering',
+      hospitalityLead:
+        'A private hosting area, table service, a view of the stage, support with welcoming guests. Partnerships come along more easily here than in a meeting room.',
+      csrKicker: '09 — CSR / ESG',
+      csrTitle: 'Happiness Fund',
+      csrLead:
+        'The festival’s community contribution involves the visitors directly — so the story afterwards rests on what was actually done, not on a cheque held up for a photo.',
+      measureKicker: '10 — Measurement',
+      measureTitle: 'If you cannot measure it, do not claim it',
+      measureLead:
+        'Eleven measurement modules are built. All of them are empty because the festival has no verified figures yet — and no number will be entered here before it is real.',
+      measureCaption: 'The analytics team watching operational figures during the event — where the real data will come from.',
+      packagesKicker: '11 — Ways to partner',
+      packagesTitle: 'No rate card yet',
+      packagesLead:
+        'The organisers have not published any sponsorship package or investment level. This page describes the roles available; a specific proposal is built brand by brand.',
+      contactKicker: '12 — Contact',
+      contactTitle: 'ONE BEAT NIGHT IS NOT A WAREHOUSE. IT IS AN ECOSYSTEM FOR BRANDS TO STEP INTO.',
+      contactLead:
+        'Tell us which role your brand wants to play, and the proposal will be built around it.',
+      partnerEmailLabel: 'Partnership email:',
+      organizerLabel: 'Organiser:',
+      hotlineLabel: 'Hotline:',
+      pressCta: 'Download material from the press room',
+    },
+
     news: {
       metaTitle: 'Stories & content',
       metaDescription:

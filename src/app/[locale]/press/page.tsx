@@ -8,12 +8,22 @@ import { Pending } from '@/components/system/Pending';
 import { brandMockups, pressDownloads } from '@/data/community';
 import { assetsByKit } from '@/lib/assets';
 
-export const metadata: Metadata = {
-  title: 'Phòng báo chí',
-  description: 'Media kit, bộ logo, ảnh lễ hội, thông tin tổ chức và đăng ký tác nghiệp báo chí.',
-};
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
-export default function PressPage() {
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.press.metaTitle, description: t.pages.press.metaDescription };
+}
+
+
+export default async function PressPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.press;
   const pressPhotos = [
     ...assetsByKit('KIT-01').slice(2, 10),
     ...assetsByKit('KIT-03').slice(0, 4),
@@ -22,13 +32,13 @@ export default function PressPage() {
   return (
     <>
       <PageHero
-        kicker="Báo chí"
+        kicker={c.kicker}
         title={
           <>
-            Phòng <span className="t-outline">báo chí</span>
+            {c.titleA} <span className="t-outline">{c.titleB}</span>
           </>
         }
-        lead="Tư liệu chính thức của lễ hội dành cho toà soạn, đài và người sáng tạo nội dung."
+        lead={c.lead}
         assetId="kit-04-19-press-conference-wide"
         focal="center 30%"
         env="night"
@@ -38,7 +48,7 @@ export default function PressPage() {
       {/* Tải về */}
       <section data-env-zone="night" className="section" style={{ background: '#050507' }}>
         <div className="wrap">
-          <SectionHeader kicker="Tư liệu" title="Tải về" align="split" />
+          <SectionHeader kicker={c.downloadsKicker} title={c.downloadsTitle} align="split" />
           <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {pressDownloads.map((d, i) => (
               <Reveal key={d.id} delay={i * 60}>
@@ -49,10 +59,10 @@ export default function PressPage() {
                   <AssetImage id={d.assetId} sizes="third" ratio="16 / 10" className="w-full" />
                   <div className="flex flex-1 flex-col p-5">
                     <p className="font-display text-[1.05rem]" style={{ color: '#f4f1ea' }}>
-                      {d.label}
+                      {t.pressDownloads[d.id].label}
                     </p>
                     <p className="mt-1.5 flex-1 text-[0.8rem]" style={{ color: 'rgb(244 241 234 / 0.58)' }}>
-                      {d.note}
+                      {t.pressDownloads[d.id].note}
                     </p>
                     <p className="mt-4">
                       {d.ready ? (
@@ -60,14 +70,14 @@ export default function PressPage() {
                           className="inline-flex rounded-full border px-3.5 py-1.5 text-[0.74rem] font-semibold"
                           style={{ borderColor: 'rgb(245 185 66 / 0.5)', color: 'var(--color-gold)' }}
                         >
-                          Có sẵn trong thư viện ảnh
+                          {c.inLibrary}
                         </span>
                       ) : (
                         <span
                           className="inline-flex rounded-full border px-3.5 py-1.5 text-[0.74rem]"
                           style={{ borderColor: 'rgb(244 241 234 / 0.18)', color: 'rgb(244 241 234 / 0.5)' }}
                         >
-                          Đang chuẩn bị
+                          {c.preparing}
                         </span>
                       )}
                     </p>
@@ -85,10 +95,10 @@ export default function PressPage() {
                 <AssetImage id="kit-04-20-journalist-camera-line" sizes="third" ratio="16 / 10" className="w-full" />
                 <div className="flex flex-1 flex-col p-5">
                   <p className="font-display text-[1.05rem]" style={{ color: '#f4f1ea' }}>
-                    Cần tư liệu khác?
+                    {c.moreTitle}
                   </p>
                   <p className="mt-1.5 flex-1 text-[0.8rem]" style={{ color: 'rgb(244 241 234 / 0.58)' }}>
-                    Ảnh theo yêu cầu, phỏng vấn, số liệu — gửi yêu cầu qua đầu mối báo chí.
+                    {c.moreBody}
                   </p>
                   <p className="mt-4">
                     <Pending k="PRESS_EMAIL" />
@@ -98,8 +108,7 @@ export default function PressPage() {
             </Reveal>
           </ul>
           <p className="mt-6 text-[0.78rem]" style={{ color: 'rgb(244 241 234 / 0.45)' }}>
-            Các tệp đóng gói (PDF media kit, bộ ảnh nén) sẽ được thay vào đây khi ban tổ chức duyệt bản cuối. Trang này
-            không tạo liên kết tải về trỏ tới tệp chưa tồn tại.
+            {c.downloadsNote}
           </p>
         </div>
       </section>
@@ -108,13 +117,13 @@ export default function PressPage() {
       <section data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Nhận diện"
+            kicker={c.brandKicker}
             title={
               <>
-                Bộ ảnh <span className="t-outline">dựng sẵn</span>
+                {c.brandTitleA} <span className="t-outline">{c.brandTitleB}</span>
               </>
             }
-            lead="Logo, biểu tượng, vé, vòng tay, quà lưu niệm, ứng dụng và chất liệu — ảnh gốc độ phân giải cao, không chữ đè."
+            lead={c.brandLead}
             align="split"
           />
           <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -127,10 +136,10 @@ export default function PressPage() {
                   <AssetImage id={m.assetId} sizes="third" ratio="4 / 3" className="w-full" />
                   <div className="p-4">
                     <p className="font-display fx-t-underline text-[0.98rem]" style={{ color: '#f4f1ea' }}>
-                      {m.label}
+                      {t.brandMockups[m.id].label}
                     </p>
                     <p className="mt-1 text-[0.76rem] leading-snug" style={{ color: 'rgb(244 241 234 / 0.55)' }}>
-                      {m.note}
+                      {t.brandMockups[m.id].note}
                     </p>
                   </div>
                 </li>
@@ -144,9 +153,9 @@ export default function PressPage() {
       <section data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Ảnh"
-            title="Ảnh chính thức"
-            lead="Bấm vào ảnh để xem cỡ lớn. Ảnh không chứa chữ, không có năm, không watermark — mọi thông tin do trang web hiển thị."
+            kicker={c.photosKicker}
+            title={c.photosTitle}
+            lead={c.photosLead}
             align="split"
           />
           <div className="mt-10">
@@ -169,30 +178,30 @@ export default function PressPage() {
         />
         <div className="wrap relative grid gap-10 lg:grid-cols-2">
           <div>
-            <SectionHeader kicker="Thông tin" title="Ban tổ chức" />
+            <SectionHeader kicker={c.infoKicker} title={c.infoTitle} />
             <dl className="mt-8 space-y-4 text-[0.88rem]">
-              <Info label="Tên sự kiện" value="ONE BEAT NIGHT — Lễ hội độc thân" />
-              <Info label="Thành phố" value="Thành phố Hồ Chí Minh, Việt Nam" />
+              <Info label={c.eventNameLabel} value={`${t.brand.name} — ${t.brand.subtitle}`} />
+              <Info label={c.cityLabel} value={`${t.brand.city}, ${t.brand.country}`} />
               <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                <dt className="kicker w-40">Đơn vị tổ chức</dt>
+                <dt className="kicker w-40">{c.organizerLabel}</dt>
                 <dd>
                   <Pending k="ORGANIZER" />
                 </dd>
               </div>
               <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                <dt className="kicker w-40">Ngày tổ chức</dt>
+                <dt className="kicker w-40">{c.dateLabel}</dt>
                 <dd>
                   <Pending k="EVENT_DATE" />
                 </dd>
               </div>
               <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                <dt className="kicker w-40">Địa điểm</dt>
+                <dt className="kicker w-40">{c.venueLabel}</dt>
                 <dd>
                   <Pending k="VENUE" />
                 </dd>
               </div>
               <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                <dt className="kicker w-40">Liên hệ báo chí</dt>
+                <dt className="kicker w-40">{c.pressContactLabel}</dt>
                 <dd>
                   <Pending k="PRESS_EMAIL" />
                 </dd>
@@ -201,22 +210,20 @@ export default function PressPage() {
           </div>
 
           <div className="surface p-6 sm:p-8">
-            <p className="font-display text-[1.25rem]">Đăng ký tác nghiệp</p>
+            <p className="font-display text-[1.25rem]">{c.accredTitle}</p>
             <p className="mt-2 text-[0.85rem]" style={{ color: 'var(--env-muted)' }}>
-              Khu tác nghiệp báo chí sẽ mở đăng ký khi ngày sự kiện được công bố. Biểu mẫu bên dưới đã dựng sẵn cấu
-              trúc; hệ thống nhận đăng ký chưa được kết nối.
+              {c.accredBody}
             </p>
             <ul className="mt-6 space-y-2 text-[0.84rem]" style={{ color: 'var(--env-faint)' }}>
-              <li>— Toà soạn / kênh</li>
-              <li>— Họ tên phóng viên, vị trí</li>
-              <li>— Loại hình tác nghiệp: ảnh, video, viết, livestream</li>
-              <li>— Thiết bị mang theo</li>
+              {c.accredItems.map((it) => (
+                <li key={it}>— {it}</li>
+              ))}
             </ul>
             <p
               className="mt-7 inline-flex rounded-full border px-4 py-2 text-[0.76rem] font-semibold"
               style={{ borderColor: 'rgb(245 185 66 / 0.45)', color: 'var(--color-gold)' }}
             >
-              Mở đăng ký sau khi công bố ngày sự kiện
+              {c.accredBadge}
             </p>
           </div>
         </div>

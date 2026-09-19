@@ -36,7 +36,23 @@ export interface ActivationStep {
 }
 
 export interface SponsorOpportunity {
-  id: string;
+  id:
+    | 'central-activation'
+    | 'immersive-brand'
+    | 'sampling'
+    | 'lead-gen'
+    | 'qr-voucher'
+    | 'product-launch'
+    | 'beauty'
+    | 'technology'
+    | 'fintech'
+    | 'hospitality'
+    | 'stage-recognition'
+    | 'naming-rights'
+    | 'megasale'
+    | 'o2o'
+    | 'csr'
+    | 'content';
   name: string;
   category: OpportunityCategory;
   lead: string;

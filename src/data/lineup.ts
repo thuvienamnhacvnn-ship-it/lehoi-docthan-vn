@@ -90,4 +90,4 @@ export const production = [
   { id: 'backstage', label: 'Hậu trường', assetId: 'kit-03-13-concert-backstage-artist', note: 'Khu chờ và đường vào sân khấu' },
   { id: 'stage-entry', label: 'Đường vào sân khấu', assetId: 'kit-03-14-artist-stage-entry', note: 'Hành lang tối dẫn ra ánh sáng' },
   { id: 'stage-side', label: 'Góc cánh gà', assetId: 'kit-03-18-stage-side-performer-silhouette', note: 'Vị trí nhìn thấy cả sân khấu lẫn khán đài' },
-];
+] as const;

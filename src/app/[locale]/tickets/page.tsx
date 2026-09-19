@@ -7,7 +7,18 @@ import { Pending } from '@/components/system/Pending';
 import { TicketFlow } from '@/components/tickets/TicketFlow';
 import { ticketTiers, wristbandCapabilities, wristbandFlow } from '@/data/tickets';
 
-export const metadata: Metadata = {
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
+
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.tickets.metaTitle, description: t.pages.tickets.metaDescription };
+}
+
+const _unusedMetadata = {
   title: 'Vé',
   description: 'Ba hạng vé của lễ hội, ví vé điện tử, quy trình check-in và vòng tay LED. Giá và ngày mở bán sẽ công bố sau.',
 };
@@ -25,23 +36,27 @@ export const metadata: Metadata = {
  * Hạng có cờ `proposed` là đề xuất của đội thiết kế, chưa được ban tổ chức duyệt — phải
  * gắn nhãn rõ để không ai nhầm là đã chốt.
  */
-export default function TicketsPage() {
-  const featured = ticketTiers.find((t) => t.featured) ?? ticketTiers[0];
-  const rest = ticketTiers.filter((t) => t.id !== featured.id);
+export default async function TicketsPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.tickets;
+  const featured = ticketTiers.find((x) => x.featured) ?? ticketTiers[0];
+  const rest = ticketTiers.filter((x) => x.id !== featured.id);
 
-  /** Mọi quyền lợi xuất hiện trong các hạng, để dựng bảng so sánh. */
-  const allBenefits = Array.from(new Set(ticketTiers.flatMap((t) => t.benefits)));
+  /** Mọi quyền lợi xuất hiện trong các hạng, để dựng bảng so sánh. Lấy từ bộ chữ
+      đang dùng, nên bảng so khớp đúng theo thứ tiếng người đọc đang xem. */
+  const allBenefits = Array.from(new Set(ticketTiers.flatMap((x) => t.ticketTiers[x.id].benefits)));
 
   return (
     <>
       <PageHero
-        kicker="Tham gia"
+        kicker={c.kicker}
         title={
           <>
-            Vé <span className="t-outline">&amp; hạng vé</span>
+            {c.titleA} <span className="t-outline">{c.titleB}</span>
           </>
         }
-        lead="Quyền lợi từng hạng đã cố định theo trải nghiệm. Giá và ngày mở bán sẽ công bố khi ban tổ chức chốt — trang này không hiển thị con số chưa được xác nhận."
+        lead={c.lead}
         assetId="kit-01-16-entrance-gate"
         focal="center 34%"
         env="night"
@@ -80,8 +95,8 @@ export default function TicketsPage() {
         <div className="wrap">
           <SectionHeader
             kicker={`${ticketTiers.length} hạng vé`}
-            title="Chọn cách bạn muốn trải qua ngày hội"
-            lead="Khác nhau ở chỗ bạn đứng ở đâu, được phục vụ thế nào và vào cổng bằng lối nào — không khác nhau ở việc được xem gì."
+            title={c.chooseTitle}
+            lead={c.chooseLead}
             align="wide"
           />
 
@@ -131,7 +146,7 @@ export default function TicketsPage() {
                     className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t pt-6"
                     style={{ borderColor: 'rgb(244 241 234 / 0.14)' }}
                   >
-                    <span className="kicker">Giá vé</span>
+                    <span className="kicker">{c.priceLabel}</span>
                     <Pending k="TICKET_PRICE" tone="gold" />
                   </div>
                 </div>
@@ -140,13 +155,13 @@ export default function TicketsPage() {
 
             {/* Bốn hạng còn lại — lưới 2×2 nên không còn ô trống */}
             <div className="grid gap-4 sm:grid-cols-2">
-              {rest.map((t, i) => (
-                <Reveal key={t.id} delay={(i + 1) * 90}>
+              {rest.map((tier, i) => (
+                <Reveal key={tier.id} delay={(i + 1) * 90}>
                   <article
                     className="group fx-c-lift fx-c-zoom fx-c-edge relative flex h-full flex-col overflow-hidden rounded-[var(--radius-md)] border"
                     style={{ borderColor: 'rgb(244 241 234 / 0.12)' }}
                   >
-                    {t.proposed && (
+                    {tier.proposed && (
                       <span
                         className="absolute right-3 top-3 z-10 rounded-full border px-2.5 py-1 text-[0.56rem] font-bold uppercase tracking-[0.16em] backdrop-blur"
                         style={{
@@ -154,30 +169,30 @@ export default function TicketsPage() {
                           color: 'rgb(244 241 234 / 0.8)',
                           background: 'rgb(5 5 7 / 0.55)',
                         }}
-                        title="Hạng do đội thiết kế đề xuất, ban tổ chức chưa duyệt"
+                        title={c.proposedTitle}
                       >
-                        Đề xuất
+                        {t.common.proposed}
                       </span>
                     )}
-                    <AssetImage id={t.assetId} sizes="third" ratio="16 / 10" className="w-full" />
+                    <AssetImage id={tier.assetId} sizes="third" ratio="16 / 10" className="w-full" />
                     <div className="flex flex-1 flex-col p-5">
-                      <p className="kicker" style={{ color: t.accent }}>
-                        {t.en}
+                      <p className="kicker" style={{ color: tier.accent }}>
+                        {tier.en}
                       </p>
                       <h2 className="font-display fx-t-underline mt-1.5 text-[1.15rem]" style={{ color: '#f4f1ea' }}>
-                        {t.name}
+                        {t.ticketTiers[tier.id].name}
                       </h2>
                       <p className="mt-1.5 text-[0.82rem] leading-snug" style={{ color: 'rgb(244 241 234 / 0.62)' }}>
-                        {t.lead}
+                        {t.ticketTiers[tier.id].lead}
                       </p>
                       <ul className="mt-3.5 flex-1 space-y-1.5">
-                        {t.benefits.slice(0, 3).map((b) => (
+                        {t.ticketTiers[tier.id].benefits.slice(0, 3).map((b) => (
                           <li
                             key={b}
                             className="flex gap-2 text-[0.8rem] leading-snug"
                             style={{ color: 'rgb(244 241 234 / 0.7)' }}
                           >
-                            <span aria-hidden style={{ color: t.accent }}>
+                            <span aria-hidden style={{ color: tier.accent }}>
                               ·
                             </span>
                             {b}
@@ -188,7 +203,7 @@ export default function TicketsPage() {
                         className="mt-5 flex items-center justify-between gap-3 border-t pt-4"
                         style={{ borderColor: 'rgb(244 241 234 / 0.12)' }}
                       >
-                        <span className="kicker">Giá</span>
+                        <span className="kicker">{c.priceShort}</span>
                         <Pending k="TICKET_PRICE" />
                       </p>
                     </div>
@@ -203,12 +218,12 @@ export default function TicketsPage() {
       {/* ---- Bảng so sánh quyền lợi ---- */}
       <section data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
-          <SectionHeader kicker="Đối chiếu" title="Hạng nào có gì" align="split" />
+          <SectionHeader kicker={c.compareKicker} title={c.compareTitle} align="split" />
 
           <Reveal>
             <div className="mt-10 overflow-x-auto">
               <table className="w-full border-collapse text-left" style={{ minWidth: 820 }}>
-                <caption className="sr-only">Bảng so sánh quyền lợi ba hạng vé</caption>
+                <caption className="sr-only">{c.compareCaption}</caption>
                 <thead>
                   <tr>
                     <th
@@ -260,11 +275,11 @@ export default function TicketsPage() {
                           >
                             {has ? (
                               <span className="fx-i-beat inline-block text-[0.95rem]" style={{ color: t.accent }}>
-                                ✓<span className="sr-only">Có</span>
+                                ✓<span className="sr-only">{c.yes}</span>
                               </span>
                             ) : (
                               <span style={{ color: 'rgb(244 241 234 / 0.2)' }}>
-                                —<span className="sr-only">Không</span>
+                                —<span className="sr-only">{c.no}</span>
                               </span>
                             )}
                           </td>
@@ -293,9 +308,9 @@ export default function TicketsPage() {
       <section data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Quy trình"
-            title="Từ chọn vé tới ví vé"
-            lead="Toàn bộ luồng đã dựng sẵn, trừ bước thanh toán — website chưa nối với nhà cung cấp nào và không giả vờ là đã nối."
+            kicker={c.flowKicker}
+            title={c.flowTitle}
+            lead={c.flowLead}
             align="split"
           />
           <div className="mt-12">
@@ -308,9 +323,9 @@ export default function TicketsPage() {
       <section data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Công nghệ sự kiện"
-            title="Vé → check-in → vòng tay → trải nghiệm"
-            lead="Vòng tay LED nhận tại cổng, sáng theo nhạc trong đêm nhạc. Các năng lực mở rộng bên dưới là kiến trúc dự phòng — chưa hệ thống nào được xác nhận triển khai."
+            kicker={c.techKicker}
+            title={c.techTitle}
+            lead={c.techLead}
             align="split"
           />
 
@@ -342,14 +357,14 @@ export default function TicketsPage() {
           </ol>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <span className="kicker">Năng lực mở rộng</span>
-            {wristbandCapabilities.map((c) => (
+            <span className="kicker">{c.capabilitiesLabel}</span>
+            {wristbandCapabilities.map((cap) => (
               <span
-                key={c.id}
+                key={cap.id}
                 className="rounded-full border px-3.5 py-1.5 text-[0.74rem]"
                 style={{ borderColor: 'rgb(244 241 234 / 0.16)', color: 'rgb(244 241 234 / 0.5)' }}
               >
-                {c.label} · chưa xác nhận
+                {t.wristbandCapabilities[cap.id]} · {c.notConfirmed}
               </span>
             ))}
           </div>

@@ -16,42 +16,52 @@ import { audienceGroups, contentFormats } from '@/data/community';
 import { zones } from '@/data/zones';
 import { videos } from '@/data/videos';
 
-export const metadata: Metadata = {
-  title: 'Nhà tài trợ & đối tác',
-  description:
-    'ONE BEAT NIGHT không phải kho quảng cáo — đây là hệ sinh thái mà một thương hiệu có thể bước vào: trải nghiệm, thương mại, dữ liệu, tiếp khách, nội dung và cộng đồng.',
-};
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
-const whyPoints = [
-  { id: 'movement', label: 'Một phong trào văn hoá', note: 'Định vị rõ: tự do, yêu mình, cộng đồng — không phải sự kiện hẹn hò' },
-  { id: 'community', label: 'Một cộng đồng', note: 'Người trưởng thành Việt Nam đang sống độc lập, ba nhóm tuổi' },
-  { id: 'day', label: 'Một ngày hội ban ngày', note: 'Hoạt động trải dài từ sáng tới giờ vàng' },
-  { id: 'music', label: 'Một đêm nhạc', note: 'Sân khấu lớn, dàn đèn và âm thanh chuyên nghiệp' },
-  { id: 'media', label: 'Một nền tảng truyền thông', note: 'Podcast, UGC, livestream, báo chí, OOH, phim tổng kết' },
-  { id: 'commerce', label: 'Một nền tảng thương mại', note: 'Mega Zone, MegaSale, O2O, thanh toán' },
-  { id: 'activation', label: 'Một môi trường kích hoạt thương hiệu', note: 'Khu trải nghiệm đặt trong hành trình của khách' },
-  { id: 'data', label: 'Một hệ dữ liệu và tương tác', note: 'Đăng ký có opt-in, đo lường theo từng bước' },
-  { id: 'ip', label: 'Một tài sản dài hạn', note: 'Kiến trúc dựng cho nhiều mùa, không phải một lần' },
-];
+type PageProps = { params: Promise<{ locale: Locale }> };
 
-export default function PartnersPage() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.partners.metaTitle, description: t.pages.partners.metaDescription };
+}
+
+/** Chín lớp giá trị — chữ ở bộ dịch, đây chỉ giữ thứ tự. */
+const valueLayers = [
+  'movement',
+  'community',
+  'day',
+  'music',
+  'media',
+  'commerce',
+  'activation',
+  'data',
+  'ip',
+] as const;
+
+export default async function PartnersPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.partners;
+
   return (
     <>
       <PageHero
-        kicker="Đối tác"
+        kicker={c.kicker}
         title={
           <>
-            Không phải kho quảng cáo.
+            {c.titleA}
             <br />
-            <span className="gold-text">Một hệ sinh thái.</span>
+            <span className="gold-text">{c.titleB}</span>
           </>
         }
-        lead="Thương hiệu không mua một vị trí treo logo. Thương hiệu chọn một vai trò trong hành trình của hàng nghìn người trong một ngày."
+        lead={c.lead}
         assetId="kit-05-01-sponsor-central-booth"
         env="night"
       >
         <p className="mt-8 flex flex-wrap items-center gap-3 text-[0.84rem]" style={{ color: 'rgb(244 241 234 / 0.6)' }}>
-          <span>Liên hệ hợp tác:</span>
+          <span>{c.contactLine}</span>
           <Pending k="PARTNER_EMAIL" />
         </p>
       </PageHero>
@@ -62,14 +72,14 @@ export default function PartnersPage() {
       <section id="why" data-env-zone="night" className="section" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="01 — Vì sao ONE BEAT NIGHT"
-            title="Chín lớp giá trị trong cùng một sự kiện"
-            lead="Mỗi lớp là một cách khác nhau để một thương hiệu tham gia. Hiếm sự kiện nào có đủ cả chín."
+            kicker={c.whyKicker}
+            title={c.whyTitle}
+            lead={c.whyLead}
             align="split"
           />
           <ol className="grid-3 mt-12">
-            {whyPoints.map((p, i) => (
-              <Reveal key={p.id} delay={i * 50}>
+            {valueLayers.map((key, i) => (
+              <Reveal key={key} delay={i * 50}>
                 <Spotlight
                   as="li"
                   className="group fx-c-lift fx-c-corners h-full rounded-[var(--radius-md)] border border-white/12 p-6"
@@ -78,10 +88,10 @@ export default function PartnersPage() {
                     {String(i + 1).padStart(2, '0')}
                   </p>
                   <p className="font-display fx-t-gold-rise mt-2 text-[1.08rem]" style={{ color: '#f4f1ea' }}>
-                    {p.label}
+                    {c.layers[key].label}
                   </p>
                   <p className="mt-2 text-[0.82rem] leading-relaxed" style={{ color: 'rgb(244 241 234 / 0.58)' }}>
-                    {p.note}
+                    {c.layers[key].note}
                   </p>
                 </Spotlight>
               </Reveal>
@@ -94,9 +104,9 @@ export default function PartnersPage() {
       <section id="audience" data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="02 — Khán giả"
-            title="Ai sẽ đứng trước gian hàng của bạn"
-            lead="Ba nhóm tuổi đã được xác định trong tài liệu định vị. Quy mô cụ thể chưa công bố — và trang này không đoán thay ban tổ chức."
+            kicker={c.audienceKicker}
+            title={c.audienceTitle}
+            lead={c.audienceLead}
             align="split"
           />
           <div className="grid-3 mt-12">
@@ -109,10 +119,10 @@ export default function PartnersPage() {
                       {g.range}
                     </p>
                     <p className="font-display mt-2 text-[1.05rem]" style={{ color: '#f4f1ea' }}>
-                      {g.title}
+                      {t.audience[g.id].title}
                     </p>
                     <p className="mt-2 text-[0.82rem]" style={{ color: 'rgb(244 241 234 / 0.58)' }}>
-                      {g.lead}
+                      {t.audience[g.id].lead}
                     </p>
                   </div>
                 </article>
@@ -120,7 +130,7 @@ export default function PartnersPage() {
             ))}
           </div>
           <p className="mt-8 text-[0.84rem]" style={{ color: 'rgb(244 241 234 / 0.5)' }}>
-            Quy mô dự kiến: <Pending k="EXPECTED_ATTENDANCE" /> · Độ phủ truyền thông: <Pending k="MEDIA_REACH" />
+            {c.scaleLabel} <Pending k="EXPECTED_ATTENDANCE" /> · {c.reachLabel} <Pending k="MEDIA_REACH" />
           </p>
         </div>
       </section>
@@ -129,8 +139,8 @@ export default function PartnersPage() {
       <section id="ecosystem" data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="03 — Hệ sinh thái lễ hội"
-            title="Mười khu vực, mỗi khu một kiểu tiếp cận khán giả"
+            kicker={c.ecosystemKicker}
+            title={c.ecosystemTitle}
             align="split"
           />
           <Reveal>
@@ -162,9 +172,9 @@ export default function PartnersPage() {
       <section id="opportunities" data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="04 — Cơ hội thương hiệu"
-            title={`${opportunities.length} hình thức tham gia`}
-            lead="Chọn một hình thức để xem thương hiệu làm gì ở từng bước: kích hoạt, giữ chân, chuyển đổi và đo lường."
+            kicker={c.opportunitiesKicker}
+            title={`${opportunities.length} ${c.opportunitiesTitleA}`}
+            lead={c.opportunitiesLead}
             align="split"
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -196,7 +206,7 @@ export default function PartnersPage() {
       {/* FORMATS */}
       <section id="formats" data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
-          <SectionHeader kicker="05 — Định dạng hoạt động" title="Tám nhóm giá trị" align="split" />
+          <SectionHeader kicker={c.formatsKicker} title={c.formatsTitle} align="split" />
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {Object.entries(opportunityCategories).map(([key, c], i) => {
               const items = opportunities.filter((o) => o.category === key);
@@ -207,12 +217,12 @@ export default function PartnersPage() {
                       {c.en}
                     </p>
                     <p className="font-display mt-2 text-[1.05rem]" style={{ color: '#f4f1ea' }}>
-                      {c.label}
+                      {t.opportunityCategories[key as keyof typeof t.opportunityCategories]}
                     </p>
                     <ul className="mt-3 space-y-1">
                       {items.map((o) => (
                         <li key={o.id} className="text-[0.78rem]" style={{ color: 'rgb(244 241 234 / 0.55)' }}>
-                          — {o.name}
+                          — {t.opportunities[o.id].name}
                         </li>
                       ))}
                     </ul>
@@ -229,9 +239,9 @@ export default function PartnersPage() {
         <div className="wrap grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <SectionHeader
-              kicker="06 — Hệ truyền thông"
-              title="Thương hiệu xuất hiện trong nội dung, không chỉ trong quảng cáo"
-              lead="Tám định dạng nội dung chạy trước, trong và sau lễ hội — mỗi định dạng là một chỗ thương hiệu có thể tham gia."
+              kicker={c.mediaKicker}
+              title={c.mediaTitle}
+              lead={c.mediaLead}
             />
             <ul className="mt-8 grid gap-2 sm:grid-cols-2">
               {contentFormats.map((c) => (
@@ -261,9 +271,9 @@ export default function PartnersPage() {
       <section id="commercial" data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="07 — Cơ hội thương mại"
-            title="Từ trải nghiệm tới giao dịch"
-            lead="Mega Zone, MegaSale, Happiness Deals, quầy nhận hàng O2O và thanh toán tại chỗ — chuỗi liên tục từ lúc khách chú ý tới lúc khách trả tiền."
+            kicker={c.commercialKicker}
+            title={c.commercialTitle}
+            lead={c.commercialLead}
             align="split"
           />
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -274,9 +284,9 @@ export default function PartnersPage() {
                   <article className="group fx-c-zoom fx-c-scan fx-c-corners relative h-full overflow-hidden rounded-[var(--radius-md)]">
                     <AssetImage id={o.assetId} sizes="third" ratio="4 / 5" className="w-full" scrim="bottom" />
                     <div className="absolute inset-x-0 bottom-0 p-5">
-                      <p className="font-display fx-t-lift text-[1.02rem] text-white">{o.name}</p>
+                      <p className="font-display fx-t-lift text-[1.02rem] text-white">{t.opportunities[o.id].name}</p>
                       <p className="mt-1.5 text-[0.78rem]" style={{ color: 'rgb(244 241 234 / 0.68)' }}>
-                        {o.lead}
+                        {t.opportunities[o.id].lead}
                       </p>
                     </div>
                   </article>
@@ -301,9 +311,9 @@ export default function PartnersPage() {
           </Reveal>
           <Reveal delay={90}>
             <SectionHeader
-              kicker="08 — VIP & tiếp khách"
-              title="Mời đối tác của bạn tới một buổi tối đáng nhớ"
-              lead="Khu tiếp khách riêng, phục vụ tại bàn, tầm nhìn sân khấu, hỗ trợ đón tiếp. Quan hệ đối tác diễn ra dễ hơn ở đây so với một phòng họp."
+              kicker={c.hospitalityKicker}
+              title={c.hospitalityTitle}
+              lead={c.hospitalityLead}
             />
             <ul className="mt-6 flex flex-wrap gap-2">
               {['Lối vào riêng', 'Khu ngồi riêng', 'Phục vụ tại bàn', 'Hỗ trợ điều phối khách mời'].map((s) => (
@@ -321,9 +331,9 @@ export default function PartnersPage() {
         <div className="wrap grid gap-10 lg:grid-cols-2 lg:items-center">
           <Reveal>
             <SectionHeader
-              kicker="09 — CSR / ESG"
-              title="Happiness Fund"
-              lead="Phần đóng góp cộng đồng của lễ hội có sự tham gia trực tiếp của khách tham dự — để câu chuyện sau sự kiện dựa trên việc đã làm, không phải một tấm séc chụp ảnh."
+              kicker={c.csrKicker}
+              title={c.csrTitle}
+              lead={c.csrLead}
             />
           </Reveal>
           <Reveal delay={90}>
@@ -336,9 +346,9 @@ export default function PartnersPage() {
       <section id="measurement" data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="10 — Đo lường"
-            title="Đo được thì mới nói được"
-            lead="Mười một module đo lường đã dựng sẵn. Tất cả đang để trống vì lễ hội chưa có số liệu kiểm chứng — và sẽ không có con số nào được điền vào đây trước khi nó có thật."
+            kicker={c.measureKicker}
+            title={c.measureTitle}
+            lead={c.measureLead}
             align="split"
           />
           <Reveal>
@@ -350,7 +360,7 @@ export default function PartnersPage() {
               scrim="soft"
             />
             <p className="mt-3 text-[0.78rem]" style={{ color: 'rgb(244 241 234 / 0.45)' }}>
-              Đội phân tích theo dõi số liệu vận hành ngay trong sự kiện — nơi dữ liệu thật sẽ về.
+              {c.measureCaption}
             </p>
           </Reveal>
           <div className="mt-12">
@@ -363,9 +373,9 @@ export default function PartnersPage() {
       <section id="packages" data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="11 — Hình thức hợp tác"
-            title="Chưa có bảng giá"
-            lead="Ban tổ chức chưa công bố gói tài trợ hay mức đầu tư nào. Trang này mô tả các vai trò có thể tham gia; đề xuất cụ thể được dựng theo từng thương hiệu."
+            kicker={c.packagesKicker}
+            title={c.packagesTitle}
+            lead={c.packagesLead}
             align="split"
           />
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -373,7 +383,7 @@ export default function PartnersPage() {
               <Reveal key={p.id} delay={i * 50}>
                 <div className="group fx-c-zoom fx-c-corners relative overflow-hidden rounded-[var(--radius-sm)]">
                   <AssetImage id={p.assetId} sizes="thumb" ratio="4 / 3" className="w-full" scrim="bottom" />
-                  <p className="absolute inset-x-0 bottom-0 p-3 text-[0.8rem] font-semibold text-white">{p.label}</p>
+                  <p className="absolute inset-x-0 bottom-0 p-3 text-[0.8rem] font-semibold text-white">{t.partnerCategories[p.id]}</p>
                 </div>
               </Reveal>
             ))}
@@ -386,19 +396,19 @@ export default function PartnersPage() {
         <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-start">
           <div>
             <SectionHeader
-              kicker="12 — Liên hệ"
-              title="ONE BEAT NIGHT KHÔNG PHẢI KHO HÀNG. ĐÂY LÀ HỆ SINH THÁI ĐỂ THƯƠNG HIỆU BƯỚC VÀO."
-              lead="Nói cho chúng tôi biết thương hiệu của bạn muốn đóng vai trò nào, phần đề xuất sẽ được dựng riêng."
+              kicker={c.contactKicker}
+              title={c.contactTitle}
+              lead={c.contactLead}
             />
             <div className="mt-8 space-y-3 text-[0.86rem]" style={{ color: 'rgb(244 241 234 / 0.6)' }}>
               <p>
-                Email hợp tác: <Pending k="PARTNER_EMAIL" />
+                {c.partnerEmailLabel} <Pending k="PARTNER_EMAIL" />
               </p>
               <p>
-                Đơn vị tổ chức: <Pending k="ORGANIZER" />
+                {c.organizerLabel} <Pending k="ORGANIZER" />
               </p>
               <p>
-                Hotline: <Pending k="HOTLINE" />
+                {c.hotlineLabel} <Pending k="HOTLINE" />
               </p>
             </div>
             <L
@@ -406,7 +416,7 @@ export default function PartnersPage() {
               className="fx-t-arrow mt-8 inline-flex text-[0.88rem] font-semibold underline underline-offset-8"
               style={{ color: '#f4f1ea' }}
             >
-              Tải tư liệu ở phòng báo chí <span className="fx-arrow">→</span>
+              {c.pressCta} <span className="fx-arrow">→</span>
             </L>
           </div>
           <PartnerLeadForm />

@@ -1252,6 +1252,225 @@ export const ja: MessagesFor = {
       organizerLabel: '主催',
     },
 
+    experience: {
+      metaTitle: 'Day Festival',
+      metaDescription:
+        'ライブの前にまる一日。フラッシュモブ、Color Run、であいステーション、Happy Lunch、ペットエリア、Mega Zone、ビジュアルアート。',
+      kicker: '昼の部',
+      lead:
+        '暗くなる前に、まる一日のフェスがあります。多くの人がいちばん長く覚えているのはこの時間です。ステージのせいではなく、会った人のせいで。',
+      rhythmKicker: '一日のリズム',
+      rhythmTitle: '朝 · 昼 · ゴールデンアワー · 夜',
+      rhythmLead: '会場の光は一日に四回変わります。このページも同じリズムで進みます。',
+      railKickerA: '件の昼の企画',
+      railTitle: '横にドラッグしてご覧ください',
+      filmKicker: '映像',
+      filmTitle: 'Day Festival の一日',
+      stories: {
+        flashmob: {
+          title: 'ひとつのビートで幕を開ける',
+          body: 'フェスはセントラルプラザのフラッシュモブで始まります。振りは簡単、十五分のリハーサル、誰でも入れます — 終わるころには、お互いの顔を少しずつ覚えています。',
+        },
+        'color-run': {
+          title: '時計のない走り',
+          body: 'Color Run は三つのカラーステーションを抜けてゴールします。順位表はなく、身につけられるバッジと、色まみれの服だけが残ります。',
+        },
+        'tram-gap': {
+          title: 'であいステーション — 知らない人どうしが腰を下ろす場所',
+          body: '聞くのが好きな人には Coffee Talk、話したい人には Coffee Circles、一対一で会う準備ができた人には Match & Meet。どれも進行役がいて、いつでもやめられます。',
+        },
+        pets: {
+          title: '性格で分けたペットエリア',
+          body: '小型犬、大型犬、猫、シニア犬にそれぞれのエリアがあります。子犬の社会化セッション、午後の小さなパレード、撮影スポットもあります。',
+        },
+        'match-meet': {
+          title: 'Match & Meet：一対一、時間を決めて',
+          body: 'コネクションエリアに二人掛けのテーブル。数分ごとに次の人へ移ります。行動規範がはっきりしていて、進行役がいて、いつやめても構いません。',
+        },
+        'music-corner': {
+          title: '昼のなかのアコースティックコーナー',
+          body: 'アーティストひとり、ギター一本、数十人が囲んで座る。フェスでいちばん小さな音楽ですが、いちばん長く覚えていられる場所でもあります。',
+        },
+        art: {
+          title: '三層の光を抜けて',
+          body: '多肉植物の生命力に着想した大型のビジュアルインスタレーション。一方通行の順路で、歩き切れば誰の説明もなしにこのフェスの旅路が分かります。',
+        },
+      },
+    },
+
+    oneBeatNight: {
+      metaTitle: 'One Beat Night — ライブ',
+      metaDescription:
+        'フェスのクライマックス。生演奏、ヘッドライナー、シンガー × DJ、Match Cam、Happiness Toast、そして何千もの LED リストバンドが一斉に光る瞬間。',
+      kicker: 'クライマックス',
+      lead: '日が暮れると、会場全体の色が変わります。一日じゅう起きていたことが、この一夜に集まります。',
+      headlinerLabel: 'ヘッドライナー',
+      dateLabel: '開催日',
+      stageLabel: 'ステージ',
+      stageValue: 'メインステージ',
+      scriptKicker: '進行',
+      scriptTitle: 'この夜は五つのポジションで成り立っています',
+      scriptLead:
+        'アーティストはまだ発表していません。決まっているのは夜の構造です。誰がいつ、何のために出るのか。',
+      interactKicker: '交流',
+      interactTitle: '客席もステージの一部です',
+      interactLead:
+        'Match Cam、Happiness Toast、そのあいだをつなぐ時間 — 観客が主役になる場面です。',
+      crewKicker: '舞台裏',
+      crewTitle: 'ライブが回るのは、ステージに立たない人たちのおかげです',
+      crewLead: '照明、音響、映像、舞台裏の進行 — その夜の質を決めるのは、この仕事です。',
+      closingTitle: '夜の最後はいちばん大きな音ではなく、いちばん静かな時間です。',
+      closingBody:
+        'フィナーレのあと、照明が落ち、音楽が小さくなります。残るのは、いま一緒に一夜を過ごした何千人です。その多くがひとりで来ていました。',
+      rolesCta: '出演ポジション',
+      programCta: 'ライブのタイムテーブル',
+    },
+
+    tickets: {
+      metaTitle: 'チケットと種別',
+      metaDescription:
+        'ONE BEAT NIGHT の 5 種類のチケット、それぞれの内容、購入の流れ、そして LED リストバンドの使い方。',
+      kicker: '参加する',
+      titleA: 'チケット',
+      titleB: 'と種別',
+      lead:
+        '各券種の内容は体験に合わせて決まっています。価格と販売開始日は主催側の確定後に発表します。このページに未確認の数字は出しません。',
+      priceLabel: 'チケット価格',
+      priceShort: '価格',
+      onsaleLabel: '販売開始日',
+      tiersCountA: '種類のチケット',
+      chooseTitle: 'その一日をどう過ごすか選んでください',
+      chooseLead:
+        '違うのは、どこに立つか、どう迎えられるか、どの入口から入るか — 何を見られるかではありません。',
+      proposedTitle: 'デザインチームの提案であり、主催側はまだ承認していません',
+      compareKicker: '比較',
+      compareTitle: 'どの券種に何が付くか',
+      compareCaption: '券種ごとの内容比較表',
+      yes: 'あり',
+      no: 'なし',
+      flowKicker: '流れ',
+      flowTitle: '券種を選んでからウォレットに入るまで',
+      flowLead:
+        '決済の一歩を除いて、流れはすべて出来ています。サイトはどの事業者ともつながっておらず、つながっているふりもしません。',
+      techKicker: 'イベントの技術',
+      techTitle: 'チケット → 入場 → リストバンド → 体験',
+      techLead:
+        'LED リストバンドはゲートで受け取り、ライブ中は音楽に合わせて光ります。下の拡張機能は用意してある設計で、実際に導入が確定したシステムはまだありません。',
+      capabilitiesLabel: '拡張機能',
+      notConfirmed: '未確認',
+    },
+
+    press: {
+      metaTitle: 'プレスルーム',
+      metaDescription: 'メディアキット、ロゴ一式、フェスの写真、イベント情報、取材申請。',
+      kicker: '報道',
+      titleA: 'プレス',
+      titleB: 'ルーム',
+      lead: '編集部、放送局、コンテンツ制作者に向けたフェスの公式素材です。',
+      downloadsKicker: '素材',
+      downloadsTitle: 'ダウンロード',
+      inLibrary: '画像ライブラリにあります',
+      preparing: '準備中',
+      moreTitle: '他の素材が必要ですか？',
+      moreBody: 'ご依頼に応じた写真、取材、数字 — 報道窓口からご連絡ください。',
+      downloadsNote:
+        'パッケージ（メディアキットの PDF、圧縮した写真集）は、主催側が最終版を承認したのちにここへ差し替えます。存在しないファイルへのダウンロードリンクは作りません。',
+      brandKicker: 'アイデンティティ',
+      brandTitleA: '制作済みの',
+      brandTitleB: 'ビジュアル',
+      brandLead:
+        'ロゴ、エンブレム、チケット、リストバンド、グッズ、アプリ、素材 — 高解像度の原版で、文字は載せていません。',
+      photosKicker: '写真',
+      photosTitle: '公式写真',
+      photosLead:
+        '画像をタップすると大きく見られます。写真に文字も、年も、ウォーターマークもありません。情報はすべてサイト側で出しています。',
+      infoKicker: '情報',
+      infoTitle: '主催',
+      eventNameLabel: 'イベント名',
+      cityLabel: '都市',
+      organizerLabel: '主催',
+      dateLabel: '開催日',
+      venueLabel: '会場',
+      pressContactLabel: '報道窓口',
+      accredTitle: '取材申請',
+      accredBody:
+        '報道向けの作業エリアは、開催日が発表され次第、申請を受け付けます。下のフォームは構造まで出来ていて、受付システムはまだつながっていません。',
+      accredItems: ['媒体 / チャンネル', '記者のお名前と役割', '取材の形式：写真、映像、執筆、ライブ配信', '持ち込み機材'],
+      accredBadge: '開催日の発表後に申請を受け付けます',
+    },
+
+    partners: {
+      metaTitle: 'スポンサーとパートナー',
+      metaDescription:
+        'ONE BEAT NIGHT のブランド生態系：露出、体験、商業、データ、ホスピタリティ、コンテンツ、CSR の機会。',
+      kicker: 'パートナー',
+      titleA: '広告の倉庫ではありません。',
+      titleB: 'ひとつの生態系です。',
+      lead:
+        'ブランドが買うのはロゴを掛ける場所ではありません。何千人の一日のなかで、どの役を担うかを選ぶのです。',
+      contactLine: '協業のお問い合わせ：',
+      whyKicker: '01 — なぜ ONE BEAT NIGHT か',
+      whyTitle: 'ひとつのイベントに九つの価値の層',
+      whyLead: 'それぞれの層が、ブランドの参加のしかたです。九つそろうイベントはそう多くありません。',
+      layers: {
+        movement: { label: 'ひとつの文化の動き', note: '立ち位置は明確：自由、自分を大切に、コミュニティ — 婚活イベントではありません' },
+        community: { label: 'ひとつのコミュニティ', note: '自立して暮らすベトナムのおとなたち、三つの年齢層' },
+        day: { label: '昼のフェス', note: '朝からゴールデンアワーまで続く企画' },
+        music: { label: 'ひとつのライブ', note: '大型ステージ、プロ仕様の照明と音響' },
+        media: { label: 'ひとつの発信基盤', note: 'ポッドキャスト、UGC、ライブ配信、報道、屋外、リキャップ映像' },
+        commerce: { label: 'ひとつの商業基盤', note: 'Mega Zone、MegaSale、O2O、決済' },
+        activation: { label: 'ブランド企画の場', note: '来場者の動線のなかに置かれた体験エリア' },
+        data: { label: 'データと交流の層', note: 'オプトインの登録、各段階での測定' },
+        ip: { label: '長く残る資産', note: '一度きりではなく、複数回を前提にした設計' },
+      },
+      audienceKicker: '02 — 来場者',
+      audienceTitle: 'あなたのブースの前に立つのは誰か',
+      audienceLead:
+        '三つの年齢層はポジショニング資料に定めてあります。具体的な規模は未発表で、このページが主催側に代わって推測することはしません。',
+      scaleLabel: '想定規模：',
+      reachLabel: 'メディアリーチ：',
+      ecosystemKicker: '03 — フェスの生態系',
+      ecosystemTitle: '10 のエリア、10 通りの来場者への届き方',
+      opportunitiesKicker: '04 — ブランドの機会',
+      opportunitiesTitleA: '通りの参加のかたち',
+      opportunitiesLead:
+        'ひとつ選ぶと、各段階でブランドが何をするかが見られます。立ち上げ、引き留め、転換、そして測定。',
+      formatsKicker: '05 — 企画の形式',
+      formatsTitle: '八つの価値のグループ',
+      mediaKicker: '06 — 発信の体系',
+      mediaTitle: 'ブランドは広告のなかだけでなく、コンテンツのなかに現れます',
+      mediaLead:
+        'フェスの前・中・後に走る八つのコンテンツ形式 — そのどれもが、ブランドが入れる場所です。',
+      commercialKicker: '07 — 商業の機会',
+      commercialTitle: '体験から取引へ',
+      commercialLead:
+        'Mega Zone、MegaSale、Happiness Deals、O2O の受取カウンター、そして会場での決済 — 注意を向けた瞬間から支払いまで、途切れない一本の線です。',
+      hospitalityKicker: '08 — VIP とホスピタリティ',
+      hospitalityTitle: 'パートナーを、記憶に残る一夜へ招待する',
+      hospitalityLead:
+        '専用の接待エリア、テーブルサービス、ステージの眺め、お迎えのサポート。会議室よりも、ここのほうが関係は進みます。',
+      csrKicker: '09 — CSR / ESG',
+      csrTitle: 'Happiness Fund',
+      csrLead:
+        'フェスの社会貢献には来場者が直接参加します。だから開催後の物語は、実際にやったことの上に立ちます。小切手を掲げた一枚の写真ではありません。',
+      measureKicker: '10 — 効果測定',
+      measureTitle: '測れないことは、言いません',
+      measureLead:
+        '測定モジュールを十一件用意しています。いずれも空です。検証済みの数字がまだないからで、本物になる前にここへ数字を書き込むことはありません。',
+      measureCaption: 'イベント中に運営数値を追う分析チーム — 本物のデータはここから戻ってきます。',
+      packagesKicker: '11 — 協業のかたち',
+      packagesTitle: '料金表はまだありません',
+      packagesLead:
+        '主催側は協賛パッケージも金額も公表していません。このページに書いてあるのは担える役割で、具体的な提案はブランドごとに組み立てます。',
+      contactKicker: '12 — お問い合わせ',
+      contactTitle: 'ONE BEAT NIGHT は倉庫ではありません。ブランドが入っていける生態系です。',
+      contactLead: 'ブランドがどの役を担いたいかをお聞かせください。提案はそれに合わせて組み立てます。',
+      partnerEmailLabel: '協業用メール：',
+      organizerLabel: '主催：',
+      hotlineLabel: 'ホットライン：',
+      pressCta: 'プレスルームで素材をダウンロード',
+    },
+
     news: {
       metaTitle: 'ストーリーとコンテンツ',
       metaDescription:

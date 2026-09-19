@@ -11,7 +11,7 @@
  */
 
 export interface TicketTier {
-  id: string;
+  id: 'standard' | 'day' | 'vip' | 'group' | 'hospitality';
   name: string;
   en: string;
   lead: string;
@@ -139,4 +139,4 @@ export const wristbandCapabilities = [
   { id: 'cashless', label: 'Thanh toán không tiền mặt', confirmed: false },
   { id: 'access', label: 'Kiểm soát ra vào', confirmed: false },
   { id: 'tracking', label: 'Đo lường hoạt động thương hiệu', confirmed: false },
-];
+] as const;

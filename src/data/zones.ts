@@ -221,4 +221,4 @@ export const dayPhases = [
   { id: 'midday', label: 'Giữa ngày', assetId: 'kit-06-16-midday-festival-life', env: 'day' as const },
   { id: 'golden', label: 'Giờ vàng', assetId: 'kit-06-17-golden-hour-transition', env: 'golden' as const },
   { id: 'night', label: 'Đêm nhạc', assetId: 'kit-06-18-night-festival-campus', env: 'night' as const },
-];
+] as const;

@@ -26,7 +26,7 @@ export function OpportunityExplorer() {
   const active = opportunities.find((o) => o.id === activeId) ?? list[0];
   const [step, setStep] = useState(0);
 
-  const pick = (id: string) => {
+  const pick = (id: (typeof opportunities)[number]['id']) => {
     setActiveId(id);
     setStep(0);
   };

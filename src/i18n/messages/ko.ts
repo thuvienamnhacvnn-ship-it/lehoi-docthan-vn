@@ -1244,6 +1244,225 @@ export const ko: MessagesFor = {
       organizerLabel: '주최',
     },
 
+    experience: {
+      metaTitle: 'Day Festival',
+      metaDescription:
+        '공연 전의 하루: 플래시몹, Color Run, 만남 스테이션, Happy Lunch, 반려동물 구역, Mega Zone, 시각예술.',
+      kicker: '낮 프로그램',
+      lead:
+        '어두워지기 전에 하루짜리 페스티벌이 있습니다. 많은 사람이 가장 오래 기억하는 것도 이 시간입니다. 무대 때문이 아니라, 만난 사람들 때문에.',
+      rhythmKicker: '하루의 호흡',
+      rhythmTitle: '아침 · 낮 · 골든아워 · 밤',
+      rhythmLead: '행사장의 빛은 하루에 네 번 바뀝니다. 이 페이지도 같은 호흡으로 갑니다.',
+      railKickerA: '개의 낮 프로그램',
+      railTitle: '옆으로 끌어서 둘러보세요',
+      filmKicker: '영상',
+      filmTitle: 'Day Festival의 하루',
+      stories: {
+        flashmob: {
+          title: '같은 비트 하나로 시작하기',
+          body: '페스티벌은 중앙 광장의 플래시몹으로 시작합니다. 동작은 단순하고, 15분 연습하면 누구나 들어올 수 있습니다 — 끝날 무렵엔 서로 얼굴을 조금씩 알게 됩니다.',
+        },
+        'color-run': {
+          title: '시계 없는 달리기',
+          body: 'Color Run은 세 개의 컬러 스테이션을 지나 결승선을 넘습니다. 순위표는 없고, 착용할 수 있는 배지와 색으로 뒤덮인 옷만 남습니다.',
+        },
+        'tram-gap': {
+          title: '만남 스테이션 — 낯선 사람들이 함께 앉는 곳',
+          body: '듣는 게 좋은 사람에게는 Coffee Talk, 말하고 싶은 사람에게는 Coffee Circles, 일대일로 만날 준비가 된 사람에게는 Match & Meet. 모두 진행자가 있고, 언제든 멈출 수 있습니다.',
+        },
+        pets: {
+          title: '성향에 따라 나눈 반려동물 구역',
+          body: '소형견, 대형견, 고양이, 노령견에게 각각의 구역이 있습니다. 강아지 사회화 시간, 오후의 작은 퍼레이드, 사진 촬영 공간도 있습니다.',
+        },
+        'match-meet': {
+          title: 'Match & Meet: 일대일, 정해진 시간에',
+          body: '연결 구역에 2인용 테이블을 놓고, 몇 분마다 다음 사람에게 넘어갑니다. 행동 규칙이 분명하고 진행자가 있으며, 언제든 멈춰도 됩니다.',
+        },
+        'music-corner': {
+          title: '낮 한가운데의 어쿠스틱 코너',
+          body: '아티스트 한 명, 기타 한 대, 수십 명이 둘러앉습니다. 페스티벌에서 가장 작은 음악이지만, 대개 가장 오래 남는 자리이기도 합니다.',
+        },
+        art: {
+          title: '세 겹의 빛을 지나며',
+          body: '다육식물의 생명력에서 출발한 대형 시각 설치. 일방향 동선이며, 끝까지 걸으면 누가 설명하지 않아도 이 페스티벌의 여정을 알게 됩니다.',
+        },
+      },
+    },
+
+    oneBeatNight: {
+      metaTitle: 'One Beat Night — 공연의 밤',
+      metaDescription:
+        '페스티벌의 절정: 라이브 음악, 헤드라이너, 가수 × DJ, Match Cam, Happiness Toast, 그리고 수천 개의 LED 팔찌가 함께 켜지는 순간.',
+      kicker: '절정',
+      lead: '해가 지면 행사장 전체의 색이 바뀝니다. 하루 종일 있었던 일들이 이 하룻밤으로 모입니다.',
+      headlinerLabel: '헤드라이너',
+      dateLabel: '날짜',
+      stageLabel: '무대',
+      stageValue: '메인 스테이지',
+      scriptKicker: '진행',
+      scriptTitle: '이 밤은 다섯 개의 역할로 굴러갑니다',
+      scriptLead:
+        '아티스트 명단은 아직 공개되지 않았습니다. 정해진 것은 밤의 구조입니다. 누가 언제, 무엇을 위해 나오는지.',
+      interactKicker: '교감',
+      interactTitle: '객석도 무대의 일부입니다',
+      interactLead:
+        'Match Cam, Happiness Toast, 그리고 그 사이를 잇는 순서들 — 관객이 주인공이 되는 순간들.',
+      crewKicker: '무대 뒤',
+      crewTitle: '공연이 굴러가는 건 무대에 오르지 않는 사람들 덕분입니다',
+      crewLead: '조명, 음향, 영상, 무대 뒤 진행 — 그날 밤의 품질을 정하는 건 이 일들입니다.',
+      closingTitle: '밤의 마지막은 가장 시끄러운 대목이 아니라, 가장 조용한 대목입니다.',
+      closingBody:
+        '피날레가 끝나면 조명이 내려가고 음악이 작아집니다. 남는 것은 방금 함께 하룻밤을 보낸 수천 명입니다. 그중 많은 사람이 혼자 왔습니다.',
+      rolesCta: '무대 역할들',
+      programCta: '공연 타임테이블',
+    },
+
+    tickets: {
+      metaTitle: '티켓과 등급',
+      metaDescription:
+        'ONE BEAT NIGHT의 다섯 가지 티켓, 등급별 내용, 구매 흐름, 그리고 LED 팔찌의 여정.',
+      kicker: '참여하기',
+      titleA: '티켓',
+      titleB: '과 등급',
+      lead:
+        '등급별 혜택은 경험에 따라 정해져 있습니다. 가격과 판매 시작일은 주최 측이 확정하면 공개합니다 — 이 페이지에는 확인되지 않은 숫자를 올리지 않습니다.',
+      priceLabel: '티켓 가격',
+      priceShort: '가격',
+      onsaleLabel: '판매 시작일',
+      tiersCountA: '가지 등급',
+      chooseTitle: '그날을 어떻게 보낼지 고르세요',
+      chooseLead:
+        '차이는 어디에 서는지, 어떻게 대접받는지, 어느 입구로 들어오는지에 있습니다 — 무엇을 볼 수 있는지가 아니라.',
+      proposedTitle: '디자인팀이 제안한 등급이며, 주최 측이 아직 승인하지 않았습니다',
+      compareKicker: '비교',
+      compareTitle: '등급별로 무엇이 포함되나',
+      compareCaption: '등급별 혜택 비교표',
+      yes: '있음',
+      no: '없음',
+      flowKicker: '흐름',
+      flowTitle: '등급 선택에서 티켓 지갑까지',
+      flowLead:
+        '결제 단계만 빼고 전체 흐름이 만들어져 있습니다 — 사이트는 어떤 사업자와도 연결되어 있지 않고, 연결된 척하지도 않습니다.',
+      techKicker: '행사 기술',
+      techTitle: '티켓 → 입장 → 팔찌 → 체험',
+      techLead:
+        'LED 팔찌는 게이트에서 받고, 공연 중 음악에 맞춰 빛납니다. 아래의 확장 기능은 준비해 둔 구조이며, 실제 도입이 확정된 시스템은 아직 없습니다.',
+      capabilitiesLabel: '확장 기능',
+      notConfirmed: '미확인',
+    },
+
+    press: {
+      metaTitle: '프레스룸',
+      metaDescription: '미디어킷, 로고 모음, 페스티벌 사진, 행사 정보, 취재 등록.',
+      kicker: '언론',
+      titleA: '프레스',
+      titleB: '룸',
+      lead: '편집국, 방송사, 콘텐츠 창작자를 위한 페스티벌 공식 자료입니다.',
+      downloadsKicker: '자료',
+      downloadsTitle: '내려받기',
+      inLibrary: '이미지 라이브러리에 있습니다',
+      preparing: '준비 중',
+      moreTitle: '다른 자료가 필요하신가요?',
+      moreBody: '요청에 따른 사진, 인터뷰, 수치 — 보도 창구로 요청해 주세요.',
+      downloadsNote:
+        '패키지 파일(미디어킷 PDF, 압축 사진 모음)은 주최 측이 최종본을 승인하면 여기에 들어갑니다. 존재하지 않는 파일로 가는 내려받기 링크는 만들지 않습니다.',
+      brandKicker: '아이덴티티',
+      brandTitleA: '제작된',
+      brandTitleB: '비주얼',
+      brandLead:
+        '로고, 엠블럼, 티켓, 팔찌, 굿즈, 앱, 소재 — 고해상도 원본이며 위에 글자를 얹지 않았습니다.',
+      photosKicker: '사진',
+      photosTitle: '공식 사진',
+      photosLead:
+        '이미지를 누르면 크게 볼 수 있습니다. 사진에는 글자도, 연도도, 워터마크도 없습니다 — 모든 정보는 사이트가 보여줍니다.',
+      infoKicker: '정보',
+      infoTitle: '주최',
+      eventNameLabel: '행사명',
+      cityLabel: '도시',
+      organizerLabel: '주최',
+      dateLabel: '개최일',
+      venueLabel: '장소',
+      pressContactLabel: '보도 문의',
+      accredTitle: '취재 등록',
+      accredBody:
+        '언론 작업 구역은 행사 날짜가 공개되면 등록을 받습니다. 아래 양식은 구조까지 만들어져 있고, 접수 시스템은 아직 연결되지 않았습니다.',
+      accredItems: ['매체 / 채널', '기자 이름과 직책', '취재 형태: 사진, 영상, 기사, 라이브 방송', '반입 장비'],
+      accredBadge: '행사 날짜 공개 후 등록을 받습니다',
+    },
+
+    partners: {
+      metaTitle: '스폰서와 파트너',
+      metaDescription:
+        'ONE BEAT NIGHT의 브랜드 생태계: 노출, 체험, 상업, 데이터, 접객, 콘텐츠, CSR 기회.',
+      kicker: '파트너',
+      titleA: '광고 창고가 아닙니다.',
+      titleB: '하나의 생태계입니다.',
+      lead:
+        '브랜드가 사는 것은 로고를 걸 자리가 아닙니다. 수천 명의 하루 안에서 어떤 역할을 맡을지 고르는 것입니다.',
+      contactLine: '제휴 문의:',
+      whyKicker: '01 — 왜 ONE BEAT NIGHT인가',
+      whyTitle: '한 행사 안의 아홉 겹의 가치',
+      whyLead: '각 겹이 브랜드가 참여하는 서로 다른 방식입니다. 아홉 겹을 다 갖춘 행사는 드뭅니다.',
+      layers: {
+        movement: { label: '하나의 문화적 흐름', note: '입장이 분명합니다: 자유, 나를 아끼기, 커뮤니티 — 소개팅 행사가 아닙니다' },
+        community: { label: '하나의 커뮤니티', note: '독립적으로 살아가는 베트남 어른들, 세 연령대' },
+        day: { label: '낮의 페스티벌', note: '아침부터 골든아워까지 이어지는 프로그램' },
+        music: { label: '하나의 공연', note: '대형 무대, 전문 조명과 음향' },
+        media: { label: '하나의 미디어 플랫폼', note: '팟캐스트, UGC, 라이브 방송, 언론, 옥외, 리캡 영상' },
+        commerce: { label: '하나의 상업 플랫폼', note: 'Mega Zone, MegaSale, O2O, 결제' },
+        activation: { label: '브랜드 기획의 무대', note: '방문객 동선 위에 놓인 체험 구역' },
+        data: { label: '데이터와 교감의 층', note: '옵트인 등록, 단계마다 측정' },
+        ip: { label: '오래 남는 자산', note: '한 번이 아니라 여러 회차를 전제로 만든 구조' },
+      },
+      audienceKicker: '02 — 관객',
+      audienceTitle: '당신의 부스 앞에 설 사람은 누구인가',
+      audienceLead:
+        '세 연령대는 포지셔닝 문서에 정해져 있습니다. 구체적인 규모는 아직 공개되지 않았고, 이 페이지가 주최 측을 대신해 추측하지 않습니다.',
+      scaleLabel: '예상 규모:',
+      reachLabel: '미디어 도달:',
+      ecosystemKicker: '03 — 페스티벌 생태계',
+      ecosystemTitle: '열 개 구역, 관객에게 닿는 열 가지 방식',
+      opportunitiesKicker: '04 — 브랜드 기회',
+      opportunitiesTitleA: '가지 참여 방식',
+      opportunitiesLead:
+        '하나를 고르면 브랜드가 각 단계에서 무엇을 하는지 볼 수 있습니다. 시작, 붙잡기, 전환, 그리고 측정.',
+      formatsKicker: '05 — 기획 형식',
+      formatsTitle: '여덟 가지 가치 묶음',
+      mediaKicker: '06 — 커뮤니케이션 체계',
+      mediaTitle: '브랜드는 광고 안에만이 아니라 콘텐츠 안에 등장합니다',
+      mediaLead:
+        '페스티벌 전·중·후로 이어지는 여덟 가지 콘텐츠 형식 — 각각이 브랜드가 들어갈 수 있는 자리입니다.',
+      commercialKicker: '07 — 상업 기회',
+      commercialTitle: '체험에서 거래까지',
+      commercialLead:
+        'Mega Zone, MegaSale, Happiness Deals, O2O 수령 카운터, 현장 결제 — 주목한 순간부터 결제까지 끊기지 않는 한 줄기입니다.',
+      hospitalityKicker: '08 — VIP와 접객',
+      hospitalityTitle: '파트너를 기억에 남을 하룻밤으로 초대하세요',
+      hospitalityLead:
+        '전용 접객 구역, 테이블 서비스, 무대가 보이는 시야, 영접 지원. 회의실보다 여기에서 관계가 더 잘 풀립니다.',
+      csrKicker: '09 — CSR / ESG',
+      csrTitle: 'Happiness Fund',
+      csrLead:
+        '페스티벌의 사회 기여에는 참가자가 직접 참여합니다 — 그래서 행사 뒤의 이야기가 실제로 한 일 위에 서게 됩니다. 수표를 든 사진 한 장이 아니라.',
+      measureKicker: '10 — 성과 측정',
+      measureTitle: '잴 수 없으면 말하지 않습니다',
+      measureLead:
+        '측정 모듈 열한 개가 준비되어 있습니다. 전부 비어 있습니다. 페스티벌에 아직 검증된 수치가 없기 때문이며, 진짜가 되기 전에는 여기에 어떤 숫자도 넣지 않습니다.',
+      measureCaption: '행사 중 운영 수치를 지켜보는 분석팀 — 진짜 데이터가 돌아올 곳입니다.',
+      packagesKicker: '11 — 협업 방식',
+      packagesTitle: '아직 가격표가 없습니다',
+      packagesLead:
+        '주최 측은 어떤 후원 패키지나 투자 규모도 공개하지 않았습니다. 이 페이지는 맡을 수 있는 역할을 설명하며, 구체적인 제안은 브랜드마다 따로 만듭니다.',
+      contactKicker: '12 — 문의',
+      contactTitle: 'ONE BEAT NIGHT은 창고가 아닙니다. 브랜드가 들어올 수 있는 생태계입니다.',
+      contactLead: '브랜드가 어떤 역할을 맡고 싶은지 알려주세요. 제안은 그에 맞춰 만들겠습니다.',
+      partnerEmailLabel: '제휴 메일:',
+      organizerLabel: '주최:',
+      hotlineLabel: '핫라인:',
+      pressCta: '프레스룸에서 자료 내려받기',
+    },
+
     news: {
       metaTitle: '이야기와 콘텐츠',
       metaDescription:

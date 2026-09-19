@@ -190,7 +190,7 @@ export const brandMockups = [
   { id: 'app', label: 'Ứng dụng', note: 'Khung điện thoại trống để ghép giao diện', assetId: 'kit-01-18-app-phone-blank' },
   { id: 'texture', label: 'Vân vàng', note: 'Chất liệu cho viền và chữ hạng VIP', assetId: 'kit-01-26-texture-gold' },
   { id: 'entrance', label: 'Cổng vào', note: 'Cổng vô cực, dùng cho ảnh bìa bài viết', assetId: 'kit-01-16-entrance-gate' },
-];
+] as const;
 
 /** Tài liệu tải về (§13). Chưa có file thật -> ghi rõ đang chuẩn bị, không tạo link giả. */
 export const pressDownloads = [
@@ -199,4 +199,4 @@ export const pressDownloads = [
   { id: 'photo-set', label: 'Bộ ảnh lễ hội', note: 'Thư viện hình ảnh theo 6 KIT', ready: true, assetId: 'kit-01-09-crowd-energy' },
   { id: 'media-kit', label: 'Media kit (PDF)', note: 'Đang chuẩn bị', ready: false, assetId: 'kit-04-19-press-conference-wide' },
   { id: 'fact-sheet', label: 'Thông tin sự kiện', note: 'Chờ ban tổ chức chốt ngày, địa điểm, quy mô', ready: false, assetId: 'kit-06-23-event-operations-control' },
-];
+] as const;

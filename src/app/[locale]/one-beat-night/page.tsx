@@ -12,24 +12,34 @@ import { MediaWall } from '@/components/media/MediaWall';
 import { lineup, production } from '@/data/lineup';
 import { videos } from '@/data/videos';
 
-export const metadata: Metadata = {
-  title: 'One Beat Night — đêm nhạc',
-  description:
-    'Cao trào của lễ hội: nhạc sống, nghệ sĩ chính, ca sĩ × DJ, Match Cam, Happiness Toast và khoảnh khắc hàng nghìn vòng tay LED cùng sáng.',
-};
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
-export default function OneBeatNightPage() {
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.oneBeatNight.metaTitle, description: t.pages.oneBeatNight.metaDescription };
+}
+
+
+export default async function OneBeatNightPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.oneBeatNight;
+
   return (
     <>
       <PageHero
-        kicker="Cao trào"
+        kicker={c.kicker}
         title={
           <>
             <span className="t-outline">ONE BEAT</span>{' '}
             <span style={{ color: 'var(--color-magenta)' }}>NIGHT</span>
           </>
         }
-        lead="Khi trời tối, cả khu lễ hội đổi màu. Đây là phần mà mọi thứ diễn ra suốt cả ngày dồn lại thành một buổi tối."
+        lead={c.lead}
         assetId="kit-03-04-headline-singer-wide"
         focal="center 26%"
         mobileAssetId="kit-03-05-headline-singer-portrait"
@@ -38,7 +48,7 @@ export default function OneBeatNightPage() {
         <dl className="mt-9 flex flex-wrap gap-x-12 gap-y-5">
           <div>
             <dt className="kicker mb-2" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-              Nghệ sĩ chính
+              {c.headlinerLabel}
             </dt>
             <dd>
               <Pending k="HEADLINER" />
@@ -46,7 +56,7 @@ export default function OneBeatNightPage() {
           </div>
           <div>
             <dt className="kicker mb-2" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-              Ngày
+              {c.dateLabel}
             </dt>
             <dd>
               <Pending k="EVENT_DATE" />
@@ -54,10 +64,10 @@ export default function OneBeatNightPage() {
           </div>
           <div>
             <dt className="kicker mb-2" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-              Sân khấu
+              {c.stageLabel}
             </dt>
             <dd className="text-[0.88rem]" style={{ color: 'rgb(244 241 234 / 0.72)' }}>
-              Sân khấu chính
+              {c.stageValue}
             </dd>
           </div>
         </dl>
@@ -67,9 +77,9 @@ export default function OneBeatNightPage() {
       <section data-env-zone="night" className="section" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Kịch bản"
-            title="Đêm nhạc đi theo năm vị trí"
-            lead="Danh sách nghệ sĩ chưa công bố. Cái đã chốt là cấu trúc của đêm: ai xuất hiện lúc nào và để làm gì."
+            kicker={c.scriptKicker}
+            title={c.scriptTitle}
+            lead={c.scriptLead}
             align="split"
           />
 
@@ -91,10 +101,10 @@ export default function OneBeatNightPage() {
                       {slot.roleEn}
                     </p>
                     <h3 className="font-display mt-2 text-[1.3rem]" style={{ color: '#f4f1ea' }}>
-                      {slot.name ?? slot.role}
+                      {slot.name ?? t.lineup[slot.id].role}
                     </h3>
                     <p className="mt-2 max-w-[62ch] text-[0.88rem] leading-relaxed" style={{ color: 'rgb(244 241 234 / 0.62)' }}>
-                      {slot.bio ?? slot.description}
+                      {slot.bio ?? t.lineup[slot.id].description}
                     </p>
                   </div>
                   <div className="sm:text-right">
@@ -116,9 +126,9 @@ export default function OneBeatNightPage() {
       <section data-env-zone="night" className="section pb-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Tương tác"
-            title="Khán đài cũng là một phần của sân khấu"
-            lead="Match Cam, Happiness Toast và các phần dẫn dắt giữa đêm — những khoảnh khắc khán giả thành nhân vật chính."
+            kicker={c.interactKicker}
+            title={c.interactTitle}
+            lead={c.interactLead}
             align="split"
           />
         </div>
@@ -131,9 +141,9 @@ export default function OneBeatNightPage() {
       <section data-env-zone="night" className="section" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Hậu trường"
-            title="Một đêm nhạc chạy được là nhờ những người không lên sân khấu"
-            lead="Ánh sáng, âm thanh, hình ảnh, điều phối hậu trường — phần nghề nghiệp làm nên chất lượng của đêm."
+            kicker={c.crewKicker}
+            title={c.crewTitle}
+            lead={c.crewLead}
             align="split"
           />
           <div className="grid-3 mt-12">
@@ -142,9 +152,9 @@ export default function OneBeatNightPage() {
                 <figure className="group fx-c-zoom fx-c-shine relative overflow-hidden rounded-[var(--radius-md)]">
                   <AssetImage id={p.assetId} sizes="third" ratio="4 / 3" className="w-full" scrim="bottom" />
                   <figcaption className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="font-display fx-t-lift text-[1.05rem] text-white">{p.label}</p>
+                    <p className="font-display fx-t-lift text-[1.05rem] text-white">{t.production[p.id].label}</p>
                     <p className="mt-1 text-[0.78rem]" style={{ color: 'rgb(244 241 234 / 0.66)' }}>
-                      {p.note}
+                      {t.production[p.id].note}
                     </p>
                   </figcaption>
                 </figure>
@@ -162,11 +172,10 @@ export default function OneBeatNightPage() {
           </Reveal>
           <Reveal delay={100}>
             <h3 className="font-display t-lg" style={{ color: '#f4f1ea' }}>
-              Phần cuối của đêm không ồn ào nhất — nó lặng nhất.
+              {c.closingTitle}
             </h3>
             <p className="mt-5 text-[0.95rem] leading-relaxed" style={{ color: 'rgb(244 241 234 / 0.66)' }}>
-              Sau finale, đèn hạ xuống, nhạc nhỏ lại. Cái còn lại là hàng nghìn người vừa cùng nhau trải qua một
-              buổi tối — nhiều người trong số đó đến một mình.
+              {c.closingBody}
             </p>
             <div className="mt-8">
               <MediaWall
@@ -188,21 +197,21 @@ export default function OneBeatNightPage() {
             className="fx-b-press rounded-full px-6 py-3 text-[0.86rem] font-bold"
             style={{ background: 'var(--color-gold)', color: '#16120a' }}
           >
-            Xem vé
+            {t.common.viewTickets}
           </L>
           <L
             href="/artists"
             className="fx-b-fill fx-b-press rounded-full border px-6 py-3 text-[0.86rem] font-semibold"
             style={{ borderColor: 'rgb(244 241 234 / 0.25)', color: '#f4f1ea' }}
           >
-            Các vị trí biểu diễn
+            {c.rolesCta}
           </L>
           <L
             href="/program"
             className="fx-b-fill fx-b-press rounded-full border px-6 py-3 text-[0.86rem] font-semibold"
             style={{ borderColor: 'rgb(244 241 234 / 0.25)', color: '#f4f1ea' }}
           >
-            Lịch trình đêm nhạc
+            {c.programCta}
           </L>
         </div>
       </section>
