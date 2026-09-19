@@ -6,8 +6,21 @@
  * và `masterplanAssetId`, phần còn lại của bản đồ chạy nguyên.
  */
 
+/** Mã của mười khu — dùng chung cho hoạt động, lịch trình và cơ hội tài trợ. */
+export type ZoneId =
+  | 'main-plaza'
+  | 'mega-zone'
+  | 'tram-gap'
+  | 'pets'
+  | 'visual-art'
+  | 'food'
+  | 'color-run'
+  | 'concert'
+  | 'vip'
+  | 'support';
+
 export interface Zone {
-  id: string;
+  id: ZoneId;
   name: string;
   en: string;
   short: string;

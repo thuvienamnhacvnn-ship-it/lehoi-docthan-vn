@@ -6,48 +6,35 @@ import { Reveal } from '@/components/system/Reveal';
 import { Pending } from '@/components/system/Pending';
 import { PartnerLeadForm } from '@/components/sponsor/PartnerLeadForm';
 
-export const metadata: Metadata = {
-  title: 'Liên hệ',
-  description: 'Các kênh làm việc với ban tổ chức ONE BEAT NIGHT: hợp tác thương hiệu, báo chí, khách tham dự.',
-};
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.contact.metaTitle, description: t.pages.contact.metaDescription };
+}
+
+/** Ba cửa liên hệ — chữ ở bộ dịch, đây giữ đích đến, ô trống và ảnh. */
 const channels = [
-  {
-    id: 'partners',
-    label: 'Hợp tác thương hiệu',
-    note: 'Tài trợ, hoạt động thương hiệu, tiếp khách doanh nghiệp, thương mại tại lễ hội.',
-    placeholder: 'PARTNER_EMAIL' as const,
-    href: '/partners',
-    cta: 'Xem cơ hội hợp tác',
-    assetId: 'kit-05-13-sponsor-handshake',
-  },
-  {
-    id: 'press',
-    label: 'Báo chí & truyền thông',
-    note: 'Media kit, ảnh chính thức, phỏng vấn, đăng ký tác nghiệp.',
-    placeholder: 'PRESS_EMAIL' as const,
-    href: '/press',
-    cta: 'Vào phòng báo chí',
-    assetId: 'kit-04-20-journalist-camera-line',
-  },
-  {
-    id: 'visitors',
-    label: 'Khách tham dự',
-    note: 'Vé, lịch trình, quy định tham dự, hỗ trợ tiếp cận.',
-    placeholder: 'HOTLINE' as const,
-    href: '/faq',
-    cta: 'Xem hỏi đáp',
-    assetId: 'kit-06-19-information-help-desk',
-  },
-];
+  { id: 'partners', placeholder: 'PARTNER_EMAIL' as const, href: '/partners', assetId: 'kit-05-13-sponsor-handshake' },
+  { id: 'press', placeholder: 'PRESS_EMAIL' as const, href: '/press', assetId: 'kit-04-20-journalist-camera-line' },
+  { id: 'visitors', placeholder: 'HOTLINE' as const, href: '/faq', assetId: 'kit-06-19-information-help-desk' },
+] as const;
 
-export default function ContactPage() {
+export default async function ContactPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const p = t.pages.contact;
+
   return (
     <>
       <PageHero
-        kicker="Liên hệ"
-        title="Kênh làm việc"
-        lead="Thông tin liên hệ chính thức sẽ được bổ sung khi ban tổ chức cung cấp. Biểu mẫu bên dưới đã dựng sẵn để nối vào hệ thống nhận thông tin."
+        kicker={p.kicker}
+        title={p.title}
+        lead={p.lead}
         assetId="kit-06-24-event-staff-briefing"
         focal="center 30%"
         env="night"
@@ -66,10 +53,10 @@ export default function ContactPage() {
                   <AssetImage id={c.assetId} sizes="third" ratio="16 / 10" className="w-full" />
                   <div className="flex flex-1 flex-col p-6">
                     <h2 className="font-display text-[1.15rem]" style={{ color: '#f4f1ea' }}>
-                      {c.label}
+                      {p.channels[c.id].label}
                     </h2>
                     <p className="mt-2 flex-1 text-[0.85rem] leading-relaxed" style={{ color: 'rgb(244 241 234 / 0.6)' }}>
-                      {c.note}
+                      {p.channels[c.id].note}
                     </p>
                     <p className="mt-5">
                       <Pending k={c.placeholder} />
@@ -79,7 +66,7 @@ export default function ContactPage() {
                       className="fx-t-arrow mt-5 inline-flex text-[0.84rem] font-semibold underline underline-offset-8"
                       style={{ color: '#f4f1ea' }}
                     >
-                      {c.cta} <span className="fx-arrow">→</span>
+                      {p.channels[c.id].cta} <span className="fx-arrow">→</span>
                     </L>
                   </div>
                 </article>
@@ -89,32 +76,34 @@ export default function ContactPage() {
 
           <div className="mt-16 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <div>
-              <p className="kicker mb-4">Thông tin sự kiện</p>
+              <p className="kicker mb-4">{p.infoKicker}</p>
               <dl className="space-y-4 text-[0.88rem]">
                 <div className="flex flex-wrap items-baseline gap-x-4">
-                  <dt className="kicker w-36">Thành phố</dt>
-                  <dd style={{ color: 'rgb(244 241 234 / 0.8)' }}>Thành phố Hồ Chí Minh, Việt Nam</dd>
+                  <dt className="kicker w-36">{p.cityLabel}</dt>
+                  <dd style={{ color: 'rgb(244 241 234 / 0.8)' }}>
+                    {t.brand.city}, {t.brand.country}
+                  </dd>
                 </div>
                 <div className="flex flex-wrap items-baseline gap-x-4">
-                  <dt className="kicker w-36">Địa điểm</dt>
+                  <dt className="kicker w-36">{p.venueLabel}</dt>
                   <dd>
                     <Pending k="VENUE" />
                   </dd>
                 </div>
                 <div className="flex flex-wrap items-baseline gap-x-4">
-                  <dt className="kicker w-36">Địa chỉ</dt>
+                  <dt className="kicker w-36">{p.addressLabel}</dt>
                   <dd>
                     <Pending k="VENUE_ADDRESS" />
                   </dd>
                 </div>
                 <div className="flex flex-wrap items-baseline gap-x-4">
-                  <dt className="kicker w-36">Ngày tổ chức</dt>
+                  <dt className="kicker w-36">{p.dateLabel}</dt>
                   <dd>
                     <Pending k="EVENT_DATE" />
                   </dd>
                 </div>
                 <div className="flex flex-wrap items-baseline gap-x-4">
-                  <dt className="kicker w-36">Đơn vị tổ chức</dt>
+                  <dt className="kicker w-36">{p.organizerLabel}</dt>
                   <dd>
                     <Pending k="ORGANIZER" />
                   </dd>

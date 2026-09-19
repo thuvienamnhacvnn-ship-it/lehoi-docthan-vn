@@ -3,20 +3,31 @@ import { L } from '../../../components/system/L';
 import { PageHero } from '@/components/ui/PageHero';
 import { AssetImage } from '@/components/media/AssetImage';
 import { Reveal } from '@/components/system/Reveal';
-import { faqs } from '@/data/community';
 
-export const metadata: Metadata = {
-  title: 'Hỏi đáp',
-  description: 'Câu hỏi thường gặp về ONE BEAT NIGHT: định vị lễ hội, vé, line-up, thú cưng, tiếp cận và an toàn.',
-};
 
-export default function FaqPage() {
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
+
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.faq.metaTitle, description: t.pages.faq.metaDescription };
+}
+
+
+export default async function FaqPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.faq;
+
   return (
     <>
       <PageHero
-        kicker="Hỏi đáp"
-        title="Những câu hỏi hay gặp nhất"
-        lead="Câu nào chưa có đáp án cụ thể là vì ban tổ chức chưa công bố — trang này không đoán thay."
+        kicker={c.kicker}
+        title={c.title}
+        lead={c.lead}
         assetId="legacy-11-2026-07-02-neon-festival-energy-in-the-city"
         focal="center 40%"
         env="night"
@@ -26,7 +37,7 @@ export default function FaqPage() {
       <section data-env-zone="night" className="section" style={{ background: '#050507' }}>
         <div className="wrap-narrow">
           <div className="space-y-2">
-            {faqs.map((f, i) => (
+            {t.faqs.map((f, i) => (
               <Reveal key={f.q} delay={i * 40}>
                 <details
                   className="group rounded-[var(--radius-md)] border px-5 py-4 transition-colors"
@@ -64,10 +75,10 @@ export default function FaqPage() {
               />
               <div className="relative">
               <p className="font-display text-[1.2rem]" style={{ color: '#f4f1ea' }}>
-                Chưa thấy câu của bạn?
+                {c.moreTitle}
               </p>
               <p className="mt-2 text-[0.88rem]" style={{ color: 'rgb(244 241 234 / 0.6)' }}>
-                Cẩm nang tham dự có phần chi tiết hơn về đi lại, thú cưng, tiếp cận và an toàn.
+                {c.moreLead}
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <L
@@ -75,14 +86,14 @@ export default function FaqPage() {
                   className="fx-b-fill fx-b-press rounded-full border px-6 py-3 text-[0.85rem] font-semibold"
                   style={{ borderColor: 'rgb(244 241 234 / 0.25)', color: '#f4f1ea' }}
                 >
-                  Cẩm nang tham dự
+                  {c.guideCta}
                 </L>
                 <L
                   href="/contact"
                   className="fx-b-press rounded-full px-6 py-3 text-[0.85rem] font-bold"
                   style={{ background: 'var(--color-gold)', color: '#16120a' }}
                 >
-                  Liên hệ
+                  {c.contactCta}
                 </L>
               </div>
               </div>

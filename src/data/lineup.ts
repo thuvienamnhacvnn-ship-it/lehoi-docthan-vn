@@ -7,7 +7,7 @@
  */
 
 export interface LineupSlot {
-  id: string;
+  id: 'live-band' | 'headliner' | 'singer-dj' | 'dj' | 'host';
   role: string;
   roleEn: string;
   description: string;

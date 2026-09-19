@@ -1,3 +1,5 @@
+'use client';
+
 import { L } from '../system/L';
 import { AssetImage } from '@/components/media/AssetImage';
 import { VideoExperience } from '@/components/media/VideoExperience';
@@ -6,6 +8,7 @@ import { KineticTitle } from '@/components/system/KineticTitle';
 import { SectionHeader, Tag } from '@/components/ui/Section';
 import { Pending } from '@/components/system/Pending';
 import { festival } from '@/data/festival';
+import { useI18n } from '@/i18n/I18nProvider';
 import { audienceGroups } from '@/data/community';
 import { megaZoneCategories } from '@/data/activities';
 import { videos } from '@/data/videos';
@@ -13,33 +16,33 @@ import { assetStats } from '@/lib/assets';
 
 /** 02 — PHONG TRÀO: vì sao lễ hội này tồn tại. */
 export function MovementSection() {
+  const { t } = useI18n();
   return (
     <section data-env-zone="night" className="section" style={{ background: '#050507' }}>
       <div className="wrap grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-start">
         <Reveal>
-          <p className="kicker mb-5">01 — Phong trào</p>
+          <p className="kicker mb-5">{t.home.movement.kicker}</p>
           <KineticTitle as="h2" className="font-display t-xl">
-            <span className="t-neon">Độc thân</span> không còn là <span className="gold-text">một mình</span>.
+            <span className="t-neon">{t.home.movement.titleA}</span> {t.home.movement.titleB}{' '}
+            <span className="gold-text">{t.home.movement.titleC}</span>.
           </KineticTitle>
           <div className="mt-7 space-y-5" style={{ color: 'rgb(244 241 234 / 0.68)' }}>
             <p className="lede" style={{ color: 'inherit' }}>
-              ONE BEAT NIGHT không phải một sự kiện ghép đôi. Đây là một ngày hội cho những người đang sống một mình
-              theo cách chủ động: tự do, tự biết mình, và sẵn sàng gặp người khác khi thấy đúng lúc.
+              {t.home.movement.lead}
             </p>
             <p className="max-w-[58ch] text-[0.94rem] leading-relaxed">
-              Tình cảm có thể nảy ra ở đây. Nhưng nó không phải mục tiêu, cũng không phải thước đo xem hôm đó bạn có
-              vui hay không.
+              {t.home.movement.body}
             </p>
           </div>
           <ul className="mt-9 flex flex-wrap gap-2">
             {festival.values.map((v) => (
               <li key={v.en}>
-                <Tag>{v.vi}</Tag>
+                <Tag>{t.values[v.en]}</Tag>
               </li>
             ))}
           </ul>
           <p className="mt-8 text-[0.8rem]" style={{ color: 'rgb(244 241 234 / 0.4)' }}>
-            Không phải: {festival.isNotA.join(' · ')}
+            {t.home.movement.notA} {t.isNotA.join(' · ')}
           </p>
         </Reveal>
 
@@ -51,7 +54,7 @@ export function MovementSection() {
             style={{ boxShadow: 'var(--env-shadow)' }}
           />
           <p className="mt-3 text-[0.78rem] leading-snug" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-            Sợi chỉ đỏ nối hai người đứng xa nhau — hình ảnh gốc của dự án.
+            {t.home.movement.captionMain}
           </p>
           <div className="mt-3 grid grid-cols-2 gap-3">
             {/* Chú thích để NGOÀI khung bo góc: để bên trong thì overflow-hidden cắt mất chữ đầu dòng */}
@@ -60,7 +63,7 @@ export function MovementSection() {
                 <AssetImage id="kit-01-06-freedom-symbol" sizes="third" ratio="1 / 1" className="w-full" />
               </div>
               <figcaption className="mt-2 text-[0.72rem] leading-snug" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-                Chim vàng rời khỏi dải vô cực — tự do
+                {t.home.movement.captionFreedom}
               </figcaption>
             </figure>
             <figure>
@@ -68,7 +71,7 @@ export function MovementSection() {
                 <AssetImage id="kit-01-12-connection-hands" sizes="third" ratio="1 / 1" className="w-full" />
               </div>
               <figcaption className="mt-2 text-[0.72rem] leading-snug" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-                Hai bàn tay đeo vòng LED — kết nối
+                {t.home.movement.captionConnection}
               </figcaption>
             </figure>
           </div>
@@ -80,27 +83,28 @@ export function MovementSection() {
 
 /** 03 — DÀNH CHO AI. */
 export function AudienceSection() {
+  const { t } = useI18n();
   return (
     <section data-env-zone="day" className="section" style={{ background: 'var(--env-bg)' }}>
       <div className="wrap">
         <SectionHeader
-          kicker="02 — Dành cho ai"
+          kicker={t.home.audience.kicker}
           title={
             <>
-              Người trưởng thành Việt Nam
+              {t.home.audience.titleA}
               <br />
-              đang sống{' '}
+              {t.home.audience.titleB}{' '}
               <span className="t-outline" style={{ color: 'var(--color-purple)' }}>
-                độc lập
+                {t.home.audience.titleC}
               </span>
               .
             </>
           }
-          lead="Ba nhóm tuổi, ba cách sống một mình khác nhau — và một điểm chung: không ai trong số họ coi độc thân là một khiếm khuyết cần sửa."
+          lead={t.home.audience.lead}
           align="wide"
           aside={
             <div className="lg:text-right">
-              <p className="kicker mb-3">Ba nhóm tuổi</p>
+              <p className="kicker mb-3">{t.home.audience.asideKicker}</p>
               <ul className="flex flex-wrap items-baseline gap-x-7 gap-y-2 lg:justify-end">
                 {audienceGroups.map((g) => (
                   <li key={g.id}>
@@ -129,17 +133,17 @@ export function AudienceSection() {
                   <p className="num-oversized fx-i-beat text-[2rem]" style={{ color: g.accent }}>
                     {g.range}
                   </p>
-                  <h3 className="font-display fx-t-underline mt-3 text-[1.2rem]">{g.title}</h3>
+                  <h3 className="font-display fx-t-underline mt-3 text-[1.2rem]">{t.audience[g.id].title}</h3>
                   <p className="mt-3 flex-1 text-[0.88rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-                    {g.lead}
+                    {t.audience[g.id].lead}
                   </p>
                   <ul className="mt-5 space-y-1.5 pt-1">
-                    {g.traits.map((t) => (
-                      <li key={t} className="flex gap-2 text-[0.8rem]" style={{ color: 'var(--env-faint)' }}>
+                    {t.audience[g.id].traits.map((trait) => (
+                      <li key={trait} className="flex gap-2 text-[0.8rem]" style={{ color: 'var(--env-faint)' }}>
                         <span aria-hidden style={{ color: g.accent }}>
                           —
                         </span>
-                        {t}
+                        {trait}
                       </li>
                     ))}
                   </ul>
@@ -151,7 +155,7 @@ export function AudienceSection() {
 
         <Reveal>
           <p className="mt-10 text-[0.82rem]" style={{ color: 'var(--env-faint)' }}>
-            Nhóm tuổi lấy từ tài liệu định vị của dự án. Quy mô khán giả dự kiến: <Pending k="EXPECTED_ATTENDANCE" tone="quiet" />
+            {t.home.audience.note} <Pending k="EXPECTED_ATTENDANCE" tone="quiet" />
           </p>
         </Reveal>
       </div>
@@ -161,17 +165,18 @@ export function AudienceSection() {
 
 /** 05 — DAY FESTIVAL (giới thiệu, dải hoạt động nằm ở component riêng). */
 export function DayFestivalIntro() {
+  const { t } = useI18n();
   return (
     <section data-env-zone="day" className="section pb-0" style={{ background: 'var(--env-bg)' }}>
       <div className="wrap">
         <SectionHeader
-          kicker="03 — Ban ngày"
+          kicker={t.home.day.kicker}
           title={
             <>
               DAY <span style={{ color: 'var(--color-blue)' }}>FESTIVAL</span>
             </>
           }
-          lead="Trước khi đêm nhạc bắt đầu là cả một ngày hội: chạy, nói chuyện, ăn cùng nhau, dắt chó đi dạo, xem triển lãm, thử đồ mới. Kéo ngang để xem."
+          lead={t.home.day.lead}
           align="split"
         />
       </div>
@@ -181,17 +186,18 @@ export function DayFestivalIntro() {
 
 /** 06 — MEGA ZONE. */
 export function MegaZoneSection() {
+  const { t } = useI18n();
   return (
     <section data-env-zone="golden" className="section">
       <div className="wrap">
         <SectionHeader
-          kicker="04 — Thương mại trải nghiệm"
+          kicker={t.home.mega.kicker}
           title={
             <>
               MEGA <span className="t-outline">ZONE</span>
             </>
           }
-          lead="Bảy cụm ngành trong một khu chợ trải nghiệm. Khách thử sản phẩm thật, thương hiệu gặp đúng nhóm người — và đây cũng là nơi phần lớn hoạt động tài trợ diễn ra."
+          lead={t.home.mega.lead}
           align="split"
         />
 
@@ -200,9 +206,9 @@ export function MegaZoneSection() {
             <div className="group fx-c-zoom fx-c-shine fx-c-corners relative h-full overflow-hidden rounded-[var(--radius-md)]">
               <AssetImage id="kit-02-21-mega-zone-overview" sizes="half" ratio="4 / 5" className="h-full w-full" scrim="bottom" />
               <div className="absolute inset-x-0 bottom-0 p-6">
-                <h3 className="font-display fx-t-sweep text-[1.6rem] text-white">Một khu chợ, bảy thế giới</h3>
+                <h3 className="font-display fx-t-sweep text-[1.6rem] text-white">{t.home.mega.heroTitle}</h3>
                 <p className="mt-2 max-w-[38ch] text-[0.86rem]" style={{ color: 'rgb(244 241 234 / 0.75)' }}>
-                  Gian hàng dựng theo cụm ngành, đi hết một vòng là chạm được tất cả.
+                  {t.home.mega.heroLead}
                 </p>
               </div>
             </div>
@@ -214,9 +220,9 @@ export function MegaZoneSection() {
                 {/* Ảnh phủ kín ô: để tỉ lệ cố định thì ô nhỏ thấp hơn hàng lưới, chừa mảng đen vô lý */}
                 <AssetImage id={c.assetId} sizes="third" fill scrim="bottom" />
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <h4 className="font-display fx-t-lift text-[1rem] text-white">{c.name}</h4>
+                  <h4 className="font-display fx-t-lift text-[1rem] text-white">{t.megaZoneCategories[c.id].name}</h4>
                   <p className="mt-1 text-[0.76rem]" style={{ color: 'rgb(244 241 234 / 0.68)' }}>
-                    {c.note}
+                    {t.megaZoneCategories[c.id].note}
                   </p>
                 </div>
               </article>
@@ -237,9 +243,9 @@ export function MegaZoneSection() {
                 scrim="full"
               />
               <span className="relative p-4">
-                <span className="font-display fx-t-lift block text-[1rem] text-white">Xem toàn bộ khu chợ</span>
+                <span className="font-display fx-t-lift block text-[1rem] text-white">{t.home.mega.allTitle}</span>
                 <span className="mt-1 block text-[0.76rem]" style={{ color: 'rgb(244 241 234 / 0.68)' }}>
-                  Bảy cụm ngành, khung giờ ưu đãi, quầy nhận hàng <span className="fx-arrow inline-block">→</span>
+                  {t.home.mega.allLead} <span className="fx-arrow inline-block">→</span>
                 </span>
               </span>
             </L>
@@ -251,7 +257,7 @@ export function MegaZoneSection() {
             href="/mega-zone"
             className="fx-t-arrow mt-10 inline-flex items-center gap-2 text-[0.9rem] font-semibold underline underline-offset-8"
           >
-            Xem toàn bộ Mega Zone <span className="fx-arrow">→</span>
+            {t.home.mega.cta} <span className="fx-arrow">→</span>
           </L>
         </Reveal>
       </div>
@@ -261,6 +267,7 @@ export function MegaZoneSection() {
 
 /** 07 — CỘNG ĐỒNG + hệ nội dung. */
 export function CommunitySection() {
+  const { t } = useI18n();
   return (
     <section data-env-zone="golden" className="section">
       <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center">
@@ -276,11 +283,10 @@ export function CommunitySection() {
           </div>
         </Reveal>
         <Reveal delay={110}>
-          <p className="kicker mb-5">05 — Cộng đồng</p>
-          <h2 className="font-display t-xl">Lễ hội này thuộc về những người đến.</h2>
+          <p className="kicker mb-5">{t.home.community.kicker}</p>
+          <h2 className="font-display t-xl">{t.home.community.title}</h2>
           <p className="lede mt-6">
-            Có podcast riêng, có cuộc thi nội dung, có livestream từ trong sân khấu, có phim tổng kết sau sự kiện.
-            Câu chuyện của lễ hội do chính người tham dự kể tiếp.
+            {t.home.community.lead}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <L
@@ -288,14 +294,14 @@ export function CommunitySection() {
               className="fx-b-fill fx-b-press rounded-full border px-6 py-3 text-[0.85rem] font-semibold"
               style={{ borderColor: 'var(--env-card-line)' }}
             >
-              Chân dung cộng đồng
+              {t.home.community.ctaPeople}
             </L>
             <L
               href="/news"
               className="fx-b-fill fx-b-press rounded-full border px-6 py-3 text-[0.85rem] font-semibold"
               style={{ borderColor: 'var(--env-card-line)' }}
             >
-              Hệ nội dung
+              {t.home.community.ctaContent}
             </L>
           </div>
         </Reveal>
@@ -335,6 +341,7 @@ export function EmblemBand() {
 
 /** 09 — ĐÊM NHẠC (mở màn cho khối night). */
 export function NightIntro() {
+  const { t } = useI18n();
   return (
     <section data-env-zone="night" className="relative overflow-hidden" style={{ background: '#050507' }}>
       <div className="relative">
@@ -343,7 +350,7 @@ export function NightIntro() {
         <div className="wrap absolute inset-0 flex flex-col justify-center">
           <Reveal>
             <p className="kicker" style={{ color: 'rgb(244 241 234 / 0.5)' }}>
-              06 — Cao trào
+              {t.home.night.kicker}
             </p>
             <KineticTitle as="h2" className="font-display t-mega mt-4" stagger={90}>
               <span className="t-outline">ONE BEAT</span>
@@ -357,26 +364,25 @@ export function NightIntro() {
       <div className="wrap grid gap-10 py-16 lg:grid-cols-[1.05fr_1fr] lg:items-start">
         <Reveal>
           <p className="lede" style={{ color: 'rgb(244 241 234 / 0.75)' }}>
-            Khi trời tối, cả khu lễ hội đổi màu. Nhạc sống, ca sĩ chính, định dạng ca sĩ × DJ, những phần tương tác
-            giữa sân khấu và khán đài — rồi đến khoảnh khắc hàng nghìn vòng tay LED cùng sáng một nhịp.
+            {t.home.night.lead}
           </p>
           <dl className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3">
             <div>
-              <dt className="kicker mb-2">Nghệ sĩ chính</dt>
+              <dt className="kicker mb-2">{t.home.night.headliner}</dt>
               <dd>
                 <Pending k="HEADLINER" />
               </dd>
             </div>
             <div>
-              <dt className="kicker mb-2">Sân khấu</dt>
+              <dt className="kicker mb-2">{t.home.night.stage}</dt>
               <dd className="text-[0.86rem]" style={{ color: 'rgb(244 241 234 / 0.75)' }}>
-                Sân khấu chính
+                {t.home.night.stageValue}
               </dd>
             </div>
             <div>
-              <dt className="kicker mb-2">Thời lượng</dt>
+              <dt className="kicker mb-2">{t.home.night.duration}</dt>
               <dd className="text-[0.86rem]" style={{ color: 'rgb(244 241 234 / 0.75)' }}>
-                Trọn buổi tối
+                {t.home.night.durationValue}
               </dd>
             </div>
           </dl>
@@ -385,7 +391,7 @@ export function NightIntro() {
             className="fx-b-press mt-8 inline-flex rounded-full px-6 py-3 text-[0.86rem] font-bold"
             style={{ background: 'var(--color-magenta)', color: '#fff' }}
           >
-            Vào đêm nhạc
+            {t.home.night.cta}
           </L>
         </Reveal>
 
@@ -399,6 +405,7 @@ export function NightIntro() {
 
 /** 12 — KẾT: ba câu, ba hành động. */
 export function FinalCta() {
+  const { t } = useI18n();
   return (
     <section data-env-zone="night" className="relative overflow-hidden" style={{ background: '#050507' }}>
       <AssetImage
@@ -428,7 +435,7 @@ export function FinalCta() {
             className="fx-i-shine fx-i-beat mx-auto h-20 w-20 object-contain"
           />
           <p className="kicker mt-8" style={{ color: 'rgb(244 241 234 / 0.5)' }}>
-            Lời cuối
+            {t.home.final.kicker}
           </p>
           {/* Ba cụm này là tên ba chặng trong tài liệu dự án, không phải ba câu.
               Trước đây đặt dấu chấm sau mỗi cụm nên đọc lên thành câu cụt — bỏ dấu chấm,
@@ -437,13 +444,13 @@ export function FinalCta() {
               dòng chữ làm dòng cuối trồi ra ngoài hộp và đè lên đoạn văn bên dưới. */}
           <KineticTitle as="h2" className="font-display t-xl mt-6 space-y-1" stagger={120}>
             <span className="block">
-              <span className="t-outline">GẶP MÌNH</span>{' '}
+              <span className="t-outline">{t.journey['gap-minh'].title}</span>{' '}
               <span aria-hidden style={{ color: 'rgb(244 241 234 / 0.35)' }}>
                 →
               </span>
             </span>
             <span className="block">
-              <span className="t-outline">GẶP NHAU</span>{' '}
+              <span className="t-outline">{t.journey['gap-nhau'].title}</span>{' '}
               <span aria-hidden style={{ color: 'rgb(244 241 234 / 0.35)' }}>
                 →
               </span>
@@ -451,12 +458,11 @@ export function FinalCta() {
             {/* Vàng đặc, không dùng gradient cắt-theo-chữ: chữ tô gradient nằm trong khung
                 chuyển động bị tính sai bề rộng rồi tụt xuống đè lên đoạn văn. */}
             <span className="block" style={{ color: 'var(--color-gold)' }}>
-              GẶP HẠNH PHÚC
+              {t.journey['gap-hanh-phuc'].title}
             </span>
           </KineticTitle>
           <p className="lede mx-auto mt-7" style={{ color: 'rgb(244 241 234 / 0.68)' }}>
-            Lễ hội không bảo bạn đi tìm một ai đó. Nó mời bạn gặp lại chính mình trước, gặp những người khác sau, rồi
-            cùng nhau có một ngày đáng nhớ.
+            {t.home.final.lead}
           </p>
         </Reveal>
 
@@ -467,28 +473,28 @@ export function FinalCta() {
               className="fx-b-fill fx-b-press rounded-full border px-7 py-3.5 text-[0.9rem] font-semibold"
               style={{ borderColor: 'rgb(244 241 234 / 0.28)', color: '#f4f1ea' }}
             >
-              Khám phá lễ hội
+              {t.common.explore}
             </L>
             <L
               href="/tickets"
               className="fx-b-press rounded-full px-7 py-3.5 text-[0.9rem] font-bold"
               style={{ background: 'var(--color-gold)', color: '#16120a' }}
             >
-              Vé
+              {t.common.tickets}
             </L>
             <L
               href="/partners"
               className="fx-b-fill fx-b-press rounded-full border px-7 py-3.5 text-[0.9rem] font-semibold"
               style={{ borderColor: 'rgb(244 241 234 / 0.28)', color: '#f4f1ea' }}
             >
-              Trở thành đối tác
+              {t.common.becomePartner}
             </L>
           </div>
           <p className="mt-8 font-display text-[1.05rem] tracking-[0.18em]" style={{ color: 'rgb(244 241 234 / 0.55)' }}>
-            {festival.slogan.toUpperCase()}
+            {t.brand.slogan.toUpperCase()}
           </p>
           <p className="mt-6 text-[0.72rem]" style={{ color: 'rgb(244 241 234 / 0.3)' }}>
-            {assetStats.library} hình ảnh trong sáu KIT đang vận hành trang này.
+            {assetStats.library} {t.home.final.imagesNote}
           </p>
         </Reveal>
       </div>

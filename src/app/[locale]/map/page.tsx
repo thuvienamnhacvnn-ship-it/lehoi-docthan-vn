@@ -7,22 +7,33 @@ import { SectionHeader, Tag } from '@/components/ui/Section';
 import { zones } from '@/data/zones';
 import { operations } from '@/data/community';
 
-export const metadata: Metadata = {
-  title: 'Bản đồ lễ hội',
-  description: 'Mười khu vực của lễ hội: Mega Zone, Trạm Gặp, khu thú cưng, triển lãm, ẩm thực, Color Run, sân khấu, VIP và hỗ trợ.',
-};
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
-export default function MapPage() {
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.map.metaTitle, description: t.pages.map.metaDescription };
+}
+
+
+export default async function MapPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.map;
+
   return (
     <>
       <PageHero
-        kicker="Định vị"
+        kicker={c.kicker}
         title={
           <>
-            Bản đồ <span className="t-outline">lễ hội</span>
+            {c.titleA} <span className="t-outline">{c.titleB}</span>
           </>
         }
-        lead="Mười khu vực, mỗi khu một nhịp riêng. Bấm vào một vùng để xem hoạt động, dịch vụ và ảnh thực tế của khu đó."
+        lead={c.lead}
         assetId="kit-06-07-festival-masterplan-aerial"
         env="night"
         height="short"
@@ -37,7 +48,7 @@ export default function MapPage() {
       {/* Phóng to từng khu */}
       <section data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
-          <SectionHeader kicker="Nhìn gần" title="Từng khu nhìn từ trên xuống" align="split" />
+          <SectionHeader kicker={c.closeKicker} title={c.closeTitle} align="split" />
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {zones.map((z, i) => (
               <Reveal key={z.id} delay={i * 60}>
@@ -48,13 +59,13 @@ export default function MapPage() {
                       {z.en}
                     </p>
                     <h3 className="font-display fx-t-underline mt-2 text-[1.1rem]" style={{ color: '#f4f1ea' }}>
-                      {z.name}
+                      {t.zones[z.id].name}
                     </h3>
                     <p className="mt-2 text-[0.84rem] leading-relaxed" style={{ color: 'rgb(244 241 234 / 0.6)' }}>
-                      {z.description}
+                      {t.zones[z.id].description}
                     </p>
                     <ul className="mt-4 flex flex-wrap gap-2">
-                      {z.services.map((s) => (
+                      {t.zones[z.id].services.map((s) => (
                         <li key={s}>
                           <Tag>{s}</Tag>
                         </li>
@@ -72,9 +83,9 @@ export default function MapPage() {
       <section data-env-zone="night" className="section pt-0" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Vận hành"
-            title="Ai đứng sau khu lễ hội"
-            lead="Thông tin, y tế, an toàn, lối đi tiếp cận và phòng điều hành — phần không ai chú ý khi mọi thứ chạy tốt."
+            kicker={c.opsKicker}
+            title={c.opsTitle}
+            lead={c.opsLead}
             align="split"
           />
           <div className="grid-3 mt-12">
@@ -83,9 +94,9 @@ export default function MapPage() {
                 <figure className="group fx-c-zoom fx-c-shine relative overflow-hidden rounded-[var(--radius-md)]">
                   <AssetImage id={o.assetId} sizes="third" ratio="4 / 3" className="w-full" scrim="bottom" />
                   <figcaption className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="font-display fx-t-lift text-[1rem] text-white">{o.label}</p>
+                    <p className="font-display fx-t-lift text-[1rem] text-white">{t.operations[o.id].label}</p>
                     <p className="mt-1 text-[0.76rem]" style={{ color: 'rgb(244 241 234 / 0.66)' }}>
-                      {o.note}
+                      {t.operations[o.id].note}
                     </p>
                   </figcaption>
                 </figure>

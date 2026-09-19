@@ -1,3 +1,5 @@
+import type { ZoneId } from './zones';
+
 /**
  * Danh mục hoạt động — lấy từ MASTER BUILD PROMPT (§KIT-02, §07, §08) và ánh xạ ảnh
  * theo assets-manifest.json. Đây là mô hình nội dung, sau này có thể thay bằng CMS/API.
@@ -43,7 +45,7 @@ export interface Activity {
   detail: string;
   category: ActivityCategory;
   phase: DayPhase;
-  zoneId: string;
+  zoneId: ZoneId;
   assetId: string;
   /** Ảnh dọc cho bố cục mobile / thẻ cao. */
   portraitAssetId?: string;
@@ -414,6 +416,6 @@ export const megaZoneCategories = [
     assetId: 'kit-02-28-happiness-box-unboxing',
     note: 'Ưu đãi theo khung giờ, hộp quà nhiều nhãn',
   },
-];
+] as const;
 
 export const activitiesById = new Map(activities.map((a) => [a.id, a]));

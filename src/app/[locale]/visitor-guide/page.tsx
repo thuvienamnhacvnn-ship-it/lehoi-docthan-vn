@@ -7,76 +7,37 @@ import { SectionHeader } from '@/components/ui/Section';
 import { Pending } from '@/components/system/Pending';
 import { operations } from '@/data/community';
 
-export const metadata: Metadata = {
-  title: 'Cẩm nang tham dự',
-  description: 'Chuẩn bị gì, đi lại thế nào, quy định thú cưng, hỗ trợ tiếp cận và an toàn tại ONE BEAT NIGHT.',
-};
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.visitorGuide.metaTitle, description: t.pages.visitorGuide.metaDescription };
+}
+
+/** Năm phần của cẩm nang — chữ ở bộ dịch, đây giữ thứ tự và ảnh. */
 const guideSections = [
-  {
-    id: 'before',
-    title: 'Trước khi đi',
-    items: [
-      'Vé điện tử nằm trong ví vé của webapp — không cần in ra giấy.',
-      'Lưu trước “Lịch của tôi” để biết mình muốn đi đâu, nhất là các hoạt động cần đăng ký.',
-      'Mặc đồ thoải mái: phần lớn hoạt động ban ngày diễn ra ngoài trời.',
-      'Ngày, giờ mở cổng và địa điểm cụ thể sẽ được cập nhật ngay trên trang này khi công bố.',
-    ],
-    assetId: 'kit-01-19-ticket',
-  },
-  {
-    id: 'arrive',
-    title: 'Tới nơi và vào cổng',
-    items: [
-      'Quét mã QR trên vé tại cổng để check-in.',
-      'Nhận vòng tay LED tại cổng — vòng này dùng cho phần ánh sáng đồng bộ trong đêm nhạc.',
-      'Khách VIP và khách mời của đối tác có lối vào riêng.',
-      'Quầy thông tin đặt ngay sau cổng, có nhân sự hỗ trợ.',
-    ],
-    assetId: 'kit-01-16-entrance-gate',
-  },
-  {
-    id: 'pets',
-    title: 'Mang thú cưng',
-    items: [
-      'Khu thú cưng chia theo kích cỡ và tính cách: chó nhỏ, chó lớn, mèo, chó lớn tuổi.',
-      'Chủ nuôi chịu trách nhiệm trông giữ vật nuôi của mình trong suốt thời gian tham dự.',
-      'Có nước cho thú cưng, khu bóng mát và góc chụp ảnh.',
-      'Quy định cụ thể về giấy tiêm phòng và giống loài sẽ được công bố cùng thông tin sự kiện.',
-    ],
-    assetId: 'kit-02-15-pets-large-dogs',
-  },
-  {
-    id: 'access',
-    title: 'Tiếp cận',
-    items: [
-      'Lối đi chính không bậc, đủ rộng cho xe lăn và xe đẩy.',
-      'Khu xem đêm nhạc có vị trí dành cho khách cần hỗ trợ.',
-      'Nhân sự hỗ trợ có mặt tại mọi khu, dễ nhận ra bằng đồng phục.',
-      'Điểm sơ cứu và khu nghỉ yên tĩnh mở suốt thời gian sự kiện.',
-    ],
-    assetId: 'kit-06-22-accessible-event-pathway',
-  },
-  {
-    id: 'respect',
-    title: 'Ứng xử và an toàn',
-    items: [
-      'Mọi hoạt động kết nối đều có người điều phối và quy tắc ứng xử rõ ràng.',
-      'Bạn có quyền rời khỏi bất kỳ hoạt động nào vào bất kỳ lúc nào, không cần giải thích.',
-      'Nếu thấy không thoải mái, báo ngay nhân sự tại khu — họ được hướng dẫn xử lý tình huống này.',
-      'Không chụp hoặc quay người khác khi họ chưa đồng ý.',
-    ],
-    assetId: 'kit-06-20-safety-staff-support',
-  },
-];
+  { id: 'before', assetId: 'kit-01-19-ticket' },
+  { id: 'arrive', assetId: 'kit-01-16-entrance-gate' },
+  { id: 'pets', assetId: 'kit-02-15-pets-large-dogs' },
+  { id: 'access', assetId: 'kit-06-22-accessible-event-pathway' },
+  { id: 'respect', assetId: 'kit-06-20-safety-staff-support' },
+] as const;
 
-export default function VisitorGuidePage() {
+export default async function VisitorGuidePage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.visitorGuide;
+
   return (
     <>
       <PageHero
-        kicker="Chuẩn bị"
-        title="Cẩm nang tham dự"
-        lead="Mọi thứ cần biết trước khi tới: vào cổng, đi lại trong khu lễ hội, mang thú cưng, hỗ trợ tiếp cận và nguyên tắc ứng xử."
+        kicker={c.kicker}
+        title={c.title}
+        lead={c.lead}
         assetId="kit-06-19-information-help-desk"
         focal="center 32%"
         env="day"
@@ -84,13 +45,13 @@ export default function VisitorGuidePage() {
       >
         <p className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-[0.84rem]" style={{ color: 'var(--env-muted)' }}>
           <span>
-            Ngày: <Pending k="EVENT_DATE" />
+            {c.dateLabel} <Pending k="EVENT_DATE" />
           </span>
           <span>
-            Mở cổng: <Pending k="EVENT_TIME" />
+            {c.doorsLabel} <Pending k="EVENT_TIME" />
           </span>
           <span>
-            Địa điểm: <Pending k="VENUE" />
+            {c.venueLabel} <Pending k="VENUE" />
           </span>
         </p>
       </PageHero>
@@ -102,9 +63,9 @@ export default function VisitorGuidePage() {
               <article className={`grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center ${i % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
                 <AssetImage id={s.assetId} sizes="half" ratio="4 / 3" className="rounded-[var(--radius-md)]" />
                 <div>
-                  <h2 className="font-display t-lg">{s.title}</h2>
+                  <h2 className="font-display t-lg">{c.sections[s.id].title}</h2>
                   <ul className="mt-6 space-y-3">
-                    {s.items.map((it) => (
+                    {c.sections[s.id].items.map((it) => (
                       <li key={it} className="flex gap-3 text-[0.9rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
                         <span aria-hidden style={{ color: 'var(--env-accent)' }}>
                           —
@@ -122,16 +83,16 @@ export default function VisitorGuidePage() {
 
       <section data-env-zone="golden" className="section">
         <div className="wrap">
-          <SectionHeader kicker="Dịch vụ tại chỗ" title="Ai giúp bạn khi cần" align="split" />
+          <SectionHeader kicker={c.servicesKicker} title={c.servicesTitle} align="split" />
           <div className="grid-3 mt-12">
             {operations.slice(0, 3).map((o, i) => (
               <Reveal key={o.id} delay={i * 70}>
                 <figure className="group fx-c-zoom fx-c-shine relative overflow-hidden rounded-[var(--radius-md)]">
                   <AssetImage id={o.assetId} sizes="third" ratio="4 / 3" className="w-full" scrim="bottom" />
                   <figcaption className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="font-display fx-t-lift text-[1.05rem] text-white">{o.label}</p>
+                    <p className="font-display fx-t-lift text-[1.05rem] text-white">{t.operations[o.id].label}</p>
                     <p className="mt-1 text-[0.78rem]" style={{ color: 'rgb(244 241 234 / 0.7)' }}>
-                      {o.note}
+                      {t.operations[o.id].note}
                     </p>
                   </figcaption>
                 </figure>
@@ -142,13 +103,13 @@ export default function VisitorGuidePage() {
           <Reveal>
             <div className="mt-12 flex flex-wrap gap-3">
               <L href="/map" className="fx-b-fill fx-b-press rounded-full border px-6 py-3 text-[0.86rem] font-semibold" style={{ borderColor: 'var(--env-card-line)' }}>
-                Bản đồ lễ hội
+                {t.common.festivalMap}
               </L>
               <L href="/program" className="fx-b-fill fx-b-press rounded-full border px-6 py-3 text-[0.86rem] font-semibold" style={{ borderColor: 'var(--env-card-line)' }}>
-                Lịch trình
+                {t.nav.program}
               </L>
               <L href="/faq" className="fx-b-fill fx-b-press rounded-full border px-6 py-3 text-[0.86rem] font-semibold" style={{ borderColor: 'var(--env-card-line)' }}>
-                Hỏi đáp
+                {t.pages.faq.kicker}
               </L>
             </div>
           </Reveal>

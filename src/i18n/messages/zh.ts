@@ -865,6 +865,340 @@ export const zh: MessagesFor = {
       '节庆的数字平台。日期、地点、票价、演出阵容以及任何数据，都要等主办方确认后才会出现在本站。',
   },
 
+  values: {
+    FREEDOM: '自由',
+    'SELF-LOVE': '爱自己',
+    COMMUNITY: '社群',
+    CONNECTION: '连接',
+    HAPPINESS: '幸福',
+  },
+
+  isNotA: ['相亲活动', '配对节目', '交友软件'],
+
+  home: {
+    heroLeadA: '一场关于自由、社群与音乐的节庆——在这里，单身不再等于一个人。三段旅程：',
+    heroStageA: '遇见自己',
+    heroStageB: '遇见彼此',
+    heroStageC: '遇见幸福',
+
+    movement: {
+      kicker: '01 — 一场风潮',
+      titleA: '单身',
+      titleB: '不再等于',
+      titleC: '一个人',
+      lead:
+        'ONE BEAT NIGHT 不是配对活动。这是为主动选择独自生活的人准备的节庆：自由、清楚自己，也愿意在合适的时候认识别人。',
+      body: '感情当然可能在这里萌芽。但那不是目的，也不是衡量你这一天开不开心的尺子。',
+      notA: '它不是：',
+      captionMain: '一根红线连起相隔而立的两个人——项目最初的画面。',
+      captionFreedom: '金鸟离开无限符号——自由',
+      captionConnection: '两只戴着 LED 手环的手——连接',
+    },
+
+    audience: {
+      kicker: '02 — 写给谁',
+      titleA: '正在独立生活的',
+      titleB: '越南',
+      titleC: '成年人',
+      lead: '三个年龄层，三种独自生活的方式——但有一点相同：没有人把单身当成需要修补的缺陷。',
+      asideKicker: '三个年龄层',
+      note: '年龄层取自项目的定位文件。预计观众规模：',
+    },
+
+    day: {
+      kicker: '03 — 白天',
+      lead: '音乐之夜开始之前，是一整天的节庆：跑步、聊天、一起吃饭、遛狗、看展、试新东西。横向拖动查看。',
+    },
+
+    mega: {
+      kicker: '04 — 体验式商业',
+      lead:
+        '一个体验市集里的七大品类。来客真的动手试产品，品牌遇上对的人——大部分赞助活动也在这里发生。',
+      heroTitle: '一个市集，七个世界',
+      heroLead: '展位按品类分区，走完一圈就全都碰到了。',
+      allTitle: '看整个市集',
+      allLead: '七大品类、限时优惠、取货柜台',
+      cta: '查看整个 Mega Zone',
+    },
+
+    community: {
+      kicker: '05 — 社群',
+      title: '这个节庆属于来到这里的人。',
+      lead:
+        '有自己的播客、有内容比赛、有从场内出发的直播、有活动后的回顾影片。节庆的故事，由参加的人继续讲下去。',
+      ctaPeople: '社群群像',
+      ctaContent: '内容体系',
+    },
+
+    night: {
+      kicker: '06 — 高潮',
+      lead:
+        '天一黑，整个场地就换了颜色。现场乐队、压轴艺人、歌手 × DJ 的组合、舞台与观众之间的互动——然后是成千上万只 LED 手环在同一个节拍亮起的瞬间。',
+      headliner: '压轴艺人',
+      stage: '舞台',
+      stageValue: '主舞台',
+      duration: '时长',
+      durationValue: '整个晚上',
+      cta: '进入音乐之夜',
+    },
+
+    final: {
+      kicker: '最后一句',
+      lead:
+        '这个节庆不会叫你去找一个人。它邀请你先遇见自己，再遇见别人，然后大家一起过一个值得记住的日子。',
+      imagesNote: '张图片，分属六个 KIT，支撑着这个网站。',
+    },
+  },
+
+  contentKinds: {
+    podcast: '播客',
+    ugc: '用户创作',
+    media: '媒体',
+    ooh: '户外',
+    social: '社交平台',
+    recap: '回顾',
+  },
+
+  pages: {
+    gallery: {
+      metaTitle: '图片库',
+      metaDescription: '节庆完整的图片库，按六个 KIT 分类。',
+      kicker: '影像',
+      titleA: '节庆',
+      titleB: '图片库',
+      leadA: '张图片，分属六个 KIT —— 支撑这个网站的全部视觉内容。架构可扩展至',
+      leadB: '张；',
+      leadC: '个位置仍空着，等真实照片，不用别的图片凑数。',
+    },
+    account: {
+      metaTitle: '账户',
+      metaDescription: '电子票夹、我的日程与收藏——参加者账户架构。',
+      kicker: '参加者',
+      title: '你的账户',
+      lead: '电子票夹、个人日程与收藏。现阶段一切都存在你自己的设备上——没有服务器账户，也没有任何数据被送出去。',
+    },
+    program: {
+      metaTitle: '日程',
+      metaDescription: '按时段、舞台、区域与活动查看完整节庆日程，并可加入个人日程。',
+      kicker: '节目',
+      titleA: '节庆',
+      titleB: '日程',
+      leadA: '个项目，分布在四个时段：上午、中午、黄金时刻与音乐之夜。加入"我的日程"，把打算去的都留住。',
+      dateLabel: '举办日期：',
+      doorsLabel: '开场时间：',
+    },
+    faq: {
+      metaTitle: '常见问题',
+      metaDescription: '关于 ONE BEAT NIGHT 的常见问题：节庆定位、门票、演出阵容、宠物、无障碍与安全。',
+      kicker: '常见问题',
+      title: '大家问得最多的问题',
+      lead: '有些答案还很笼统，是因为主办方尚未公布——这个页面不会替他们猜。',
+      moreTitle: '没找到你的问题？',
+      moreLead: '参加指南里对交通、宠物、无障碍与安全有更详细的说明。',
+      guideCta: '参加指南',
+      contactCta: '联系我们',
+    },
+    map: {
+      metaTitle: '节庆地图',
+      metaDescription: '节庆的十个区域：Mega Zone、相遇站、宠物区、展览、美食、Color Run、舞台、VIP 与支援。',
+      kicker: '定位',
+      titleA: '节庆',
+      titleB: '地图',
+      lead: '十个区域，每个区域有自己的节奏。点一个区域，就能看到它的活动、服务与实景照片。',
+      closeKicker: '看近一点',
+      closeTitle: '从上往下看每个区域',
+      opsKicker: '运营',
+      opsTitle: '是谁在撑起这片场地',
+      opsLead: '咨询、医疗、安全、无障碍通道与指挥中心——一切顺利时没人会注意到的那部分。',
+    },
+    artists: {
+      metaTitle: '艺人与主持',
+      metaDescription: 'One Beat Night 音乐之夜中的各个演出位置。艺人名单将在之后公布。',
+      kicker: '演出阵容',
+      titleA: '艺人',
+      titleB: '与主持',
+      lead:
+        '艺人名单尚未公布。本页呈现的是流程中已经确定的演出位置——等主办方定下名字，这些位置就会换成真实的艺人。',
+      moreKicker: '还有',
+      moreTitle: '其他位置',
+      moreBody: '音乐之夜的流程还留有嘉宾与特别节目的位置。主办方确认后会补充到这里。',
+      whyKicker: '为什么还没有名字',
+      whyTitle: '不给真实的舞台编造名字',
+      whyLead:
+        '本页只显示项目文件中已确认的内容。演出阵容、演出日期与票价，会在主办方公布的那一刻出现，不会更早。',
+      pressCta: '订阅媒体资讯',
+    },
+    megaZone: {
+      metaTitle: 'Mega Zone',
+      metaDescription: '节庆的体验市集：七大品类、限时优惠，也是大部分品牌活动发生的地方。',
+      kicker: '体验式商业',
+      lead:
+        '一个市集里的七大品类。来客是为了试新东西而来，品牌是为了遇上对的人而来——双方都不必隔着一张传单说话。',
+      sectorsKicker: '七大品类',
+      sectorsTitle: '走完一圈，就全都碰到了',
+      boxTitle: '多品牌礼盒',
+      boxNote: '把多个品牌的产品装进同一个盒子',
+      momentsKicker: '交易是怎么发生的',
+      momentsTitle: '一天里的四个买卖瞬间',
+      moments: {
+        sampling: {
+          title: '先试，再决定',
+          body: '来客就在柜台前尝一口、摸一下、用一次。真实反应发生在现场，而不是透过一支广告。',
+        },
+        'flash-sale': {
+          title: '限时优惠时段',
+          body: 'MegaSale 把人潮集中到一个节拍：多个品牌同时开放优惠，整个市集随之动起来。',
+        },
+        'happiness-box': {
+          title: 'Happiness Deals',
+          body: '集合多个品牌的礼盒——一个非常具体的理由，让来客把整个商业区走完。',
+        },
+        pickup: {
+          title: '线上下单，节庆取货',
+          body: '取货柜台把品牌的线上渠道，接到就站在眼前的人流上。',
+        },
+      },
+      sectorsFitKicker: '适合的行业',
+      sectorsFitTitle: '哪些品牌适合这个区域',
+      sectorsFitLead: '这是对行业类别的描述，不是赞助商名单。节庆尚未公布任何合作伙伴。',
+      cta: '查看品牌机会',
+    },
+
+    community: {
+      metaTitle: '社群',
+      metaDescription: '这个节庆属于谁：三个年龄层，八个切面，来自正在独立生活的越南成年人。',
+      kicker: '人',
+      titleA: '这个节庆',
+      titleB: '属于谁',
+      lead:
+        '不是"还没找到人的人"。是正在独立生活的成年人——而且把这当成一种选择，不是一段等待期。',
+      groupsKicker: '三个年龄层',
+      groupsTitle: '同一座城市，三种一个人生活的方式',
+      groupsLead: '年龄层取自项目的定位文件。',
+      lifeKicker: '生活方式',
+      lifeTitle: '独立生活的八个切面',
+      lifeLead: '不是幻灯片上的人口画像。这些是节庆观众平常一周里真实发生的场景。',
+      caption: '两只戴着 LED 手环、即将相碰的手——"连接"这个念头最初的画面。',
+      safetyKicker: '原则',
+      safetyTitle: '有框架的连接',
+      safetyLead:
+        '每一项见面活动都有引导者、有行为准则，也随时可以停下。没有人会被推进自己不想要的对话，也没有人会被晾在角落。',
+      safetyRules: [
+        '相遇站的活动全程都有主持人在场',
+        '行为准则提前公布，现场再说明一次',
+        '每个区域都有支援人员与求助点',
+        '参加者自己决定投入到什么程度',
+      ],
+      scale: '预计观众规模：',
+      guideCta: '参加指南',
+    },
+
+    visitorGuide: {
+      metaTitle: '参加指南',
+      metaDescription: '来 ONE BEAT NIGHT 之前要准备什么、怎么到、宠物规定、无障碍协助与安全。',
+      kicker: '准备',
+      title: '参加指南',
+      lead: '出发前需要知道的一切：入场、场内动线、带宠物、无障碍协助与行为准则。',
+      dateLabel: '日期：',
+      doorsLabel: '开场：',
+      venueLabel: '地点：',
+      sections: {
+        before: {
+          title: '出发之前',
+          items: [
+            '电子票就在网页应用的票夹里——不需要打印。',
+            '先把"我的日程"存好，知道自己想去哪，特别是需要报名的活动。',
+            '穿得舒服些：白天的活动大多在户外。',
+            '具体日期、开场时间与地点一旦公布，本页会立即更新。',
+          ],
+        },
+        arrive: {
+          title: '抵达与入场',
+          items: [
+            '在入口扫门票上的二维码完成入场。',
+            '在入口领取 LED 手环——音乐之夜的同步灯光环节会用到。',
+            'VIP 宾客与合作伙伴嘉宾有专用入口。',
+            '咨询台就设在入口之后，有工作人员在。',
+          ],
+        },
+        pets: {
+          title: '带宠物',
+          items: [
+            '宠物区按体型和性格分开：小型犬、大型犬、猫、老年犬。',
+            '参加期间，饲主需自行看顾自己的宠物。',
+            '设有宠物饮水、遮阴区与拍照角。',
+            '关于疫苗证明与品种的具体规定，将随活动资讯一并公布。',
+          ],
+        },
+        access: {
+          title: '无障碍',
+          items: [
+            '主要通道没有台阶，宽度足以通过轮椅与婴儿车。',
+            '音乐之夜观演区设有需要协助的来客专属位置。',
+            '每个区域都有支援人员，制服很好辨认。',
+            '急救点与安静休息区在活动期间全程开放。',
+          ],
+        },
+        respect: {
+          title: '行为与安全',
+          items: [
+            '所有连接类活动都有引导者与明确的行为准则。',
+            '你可以随时离开任何活动，不需要解释。',
+            '若感觉不舒服，立刻告诉该区的工作人员——他们受过这方面的训练。',
+            '未经对方同意，请不要拍摄他人。',
+          ],
+        },
+      },
+      servicesKicker: '现场服务',
+      servicesTitle: '需要时谁来帮你',
+    },
+
+    contact: {
+      metaTitle: '联系我们',
+      metaDescription: '与 ONE BEAT NIGHT 主办方对接的渠道：品牌合作、媒体、参加者。',
+      kicker: '联系',
+      title: '工作对接渠道',
+      lead: '正式联系方式会在主办方提供后补上。下方表单已经做好，随时可以接到收件系统。',
+      channels: {
+        partners: {
+          label: '品牌合作',
+          note: '赞助、品牌活动、企业贵宾接待、节庆内的商业合作。',
+          cta: '查看合作机会',
+        },
+        press: {
+          label: '媒体与传播',
+          note: '媒体包、官方照片、采访、采访登记。',
+          cta: '进入媒体中心',
+        },
+        visitors: {
+          label: '参加者',
+          note: '门票、日程、参加规定、无障碍协助。',
+          cta: '查看常见问题',
+        },
+      },
+      infoKicker: '活动资讯',
+      cityLabel: '城市',
+      venueLabel: '地点',
+      addressLabel: '地址',
+      dateLabel: '举办日期',
+      organizerLabel: '主办单位',
+    },
+
+    news: {
+      metaTitle: '故事与内容',
+      metaDescription: '节庆的内容体系：WeMeet 播客、用户创作内容、直播、新闻、户外与回顾影片。',
+      kicker: '内容',
+      title: '故事在节庆之前开始，在之后继续',
+      lead: '节庆不只是一天。这里是这个项目的内容形式——还不是已经发布的贴文，因为传播还没启动。',
+      reelsKicker: '竖版形式',
+      reelsTitle: '来自节庆现场的 Reels',
+      emptyKicker: '还没有发布内容',
+      emptyLead:
+        '节庆尚未启动传播，所以这里还没有新闻稿或文章。结构已经就位：真正的内容出现时，就会落在这里。',
+      pressCta: '媒体中心',
+    },
+  },
+
   videos: {
     heroFilm: 'ONE BEAT NIGHT 宣传片',
     dayFestival: 'Day Festival 的一天',

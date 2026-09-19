@@ -2,23 +2,32 @@ import type { Metadata } from 'next';
 import { PageHero } from '@/components/ui/PageHero';
 import { GalleryExplorer } from '@/components/media/GalleryExplorer';
 import { assetStats, plannedSlots } from '@/lib/assets';
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
-export const metadata: Metadata = {
-  title: 'Thư viện hình ảnh',
-  description: 'Toàn bộ thư viện hình ảnh của lễ hội, chia theo sáu KIT.',
-};
+type PageProps = { params: Promise<{ locale: Locale }> };
 
-export default function GalleryPage() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.gallery.metaTitle, description: t.pages.gallery.metaDescription };
+}
+
+export default async function GalleryPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.gallery;
+
   return (
     <>
       <PageHero
-        kicker="Hình ảnh"
+        kicker={c.kicker}
         title={
           <>
-            Thư viện <span className="t-outline">lễ hội</span>
+            {c.titleA} <span className="t-outline">{c.titleB}</span>
           </>
         }
-        lead={`${assetStats.library} ảnh trong sáu KIT — toàn bộ nội dung hình ảnh đang vận hành website này. Kiến trúc mở tới ${assetStats.target} ảnh; ${plannedSlots.length} chỗ còn trống đang chờ ảnh thật, không lấp bằng ảnh khác.`}
+        lead={`${assetStats.library} ${c.leadA} ${assetStats.target} ${c.leadB} ${plannedSlots.length} ${c.leadC}`}
         assetId="legacy-19-2026-09-13-golden-phoenix-infinity-emblem"
         env="night"
         height="short"

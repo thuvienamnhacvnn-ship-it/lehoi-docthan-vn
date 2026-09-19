@@ -1,3 +1,5 @@
+import type { ZoneId } from './zones';
+
 /**
  * Hệ sinh thái tài trợ (§05 KIT-05, §06, §12).
  *
@@ -40,7 +42,7 @@ export interface SponsorOpportunity {
   lead: string;
   body: string;
   assetId: string;
-  zoneId?: string;
+  zoneId?: ZoneId;
   journey: ActivationStep[];
 }
 
@@ -343,4 +345,4 @@ export const partnerCategories = [
   { id: 'travel', label: 'Du lịch & lữ hành', assetId: 'kit-02-26-mega-zone-travel' },
   { id: 'wellness', label: 'Sức khoẻ & thể chất', assetId: 'kit-02-24-mega-zone-wellness' },
   { id: 'pets', label: 'Thú cưng', assetId: 'kit-02-20-pet-photo-booth' },
-];
+] as const;

@@ -4,7 +4,8 @@
  */
 
 export interface AudienceGroup {
-  id: string;
+  /** Trùng khoá trong t.audience — để TypeScript bắt được nếu đặt sai. */
+  id: '21-25' | '26-35' | '36-52';
   range: string;
   title: string;
   lead: string;
@@ -55,11 +56,19 @@ export const lifestyleStories = [
   { id: 'healing', label: 'Chữa lành', note: 'Nói ra được là đã nhẹ đi', assetId: 'kit-04-11-healing-conversation' },
   { id: 'confident-woman', label: 'Tự tin một mình', note: 'Không chờ ai cho phép mình vui', assetId: 'kit-01-10-lifestyle-woman' },
   { id: 'confident-man', label: 'Chủ động sống', note: 'Biết mình muốn gì và không vội', assetId: 'kit-01-11-lifestyle-man' },
-];
+] as const;
 
 /** Hệ nội dung của lễ hội — KIT-04 13→24. Đây là ĐỊNH DẠNG nội dung, không phải bài đã đăng. */
 export interface ContentFormat {
-  id: string;
+  id:
+    | 'wemeet-podcast'
+    | 'podcast-story'
+    | 'ugc'
+    | 'livestream'
+    | 'press'
+    | 'ooh'
+    | 'social'
+    | 'recap';
   name: string;
   kind: 'podcast' | 'ugc' | 'media' | 'ooh' | 'social' | 'recap';
   lead: string;
@@ -147,7 +156,7 @@ export const operations = [
   { id: 'accessible', label: 'Lối đi tiếp cận', note: 'Đường rộng, không bậc, không rào cản', assetId: 'kit-06-22-accessible-event-pathway' },
   { id: 'control', label: 'Phòng điều hành', note: 'Theo dõi toàn khu trong suốt sự kiện', assetId: 'kit-06-23-event-operations-control' },
   { id: 'briefing', label: 'Họp đội ngũ', note: 'Toàn bộ nhân sự được hướng dẫn trước giờ mở cổng', assetId: 'kit-06-24-event-staff-briefing' },
-];
+] as const;
 
 export const faqs = [
   {

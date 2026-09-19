@@ -1,16 +1,19 @@
+'use client';
+
 import { L } from '../system/L';
 import { AssetImage } from '@/components/media/AssetImage';
 import { StageLights } from '@/components/night/StageLights';
 import { HeroEmblem } from '@/components/home/HeroEmblem';
 import { KineticTitle } from '@/components/system/KineticTitle';
 import { Pending } from '@/components/system/Pending';
-import { festival } from '@/data/festival';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * Cửa vào lễ hội. Ảnh hero desktop có 1/3 trái tối, bản mobile có 1/4 dưới tối
  * (theo manifest) — chữ đặt đúng vào vùng tối đó nên không cần phủ thêm lớp đen dày.
  */
 export function Hero() {
+  const { t } = useI18n();
   return (
     <section
       data-env-zone="night"
@@ -82,7 +85,7 @@ export function Hero() {
       >
         <div className="max-w-[46rem]">
           <p className="kicker" style={{ color: 'rgb(244 241 234 / 0.72)' }}>
-            {festival.city} · {festival.country}
+            {t.brand.city} · {t.brand.country}
           </p>
 
           <KineticTitle as="h1" className="font-display t-mega fx-t-run mt-5" stagger={110} delay={160}>
@@ -95,14 +98,14 @@ export function Hero() {
             className="font-display mt-3 text-[clamp(0.95rem,2.2vw,1.5rem)] tracking-[0.3em]"
             style={{ color: 'rgb(244 241 234 / 0.78)' }}
           >
-            LỄ HỘI ĐỘC THÂN
+            {t.brand.subtitle}
           </p>
 
           <p className="lede mt-7" style={{ color: 'rgb(244 241 234 / 0.8)' }}>
-            Một ngày hội của tự do, cộng đồng và âm nhạc — nơi độc thân không còn là một mình.
-            Ba chặng: <strong className="font-semibold text-white">gặp mình</strong>,{' '}
-            <strong className="font-semibold text-white">gặp nhau</strong>,{' '}
-            <strong className="font-semibold text-white">gặp hạnh phúc</strong>.
+            {t.home.heroLeadA}{' '}
+            <strong className="font-semibold text-white">{t.home.heroStageA}</strong>,{' '}
+            <strong className="font-semibold text-white">{t.home.heroStageB}</strong>,{' '}
+            <strong className="font-semibold text-white">{t.home.heroStageC}</strong>.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -111,21 +114,21 @@ export function Hero() {
               className="fx-b-press rounded-full px-7 py-3.5 text-[0.9rem] font-bold tracking-wide"
               style={{ background: 'var(--color-gold)', color: '#16120a' }}
             >
-              Vé &amp; hạng vé
+              {t.common.ticketsFull}
             </L>
             <L
               href="/experience"
               className="fx-b-fill fx-b-press rounded-full border px-7 py-3.5 text-[0.9rem] font-semibold"
               style={{ borderColor: 'rgb(244 241 234 / 0.28)', color: '#f4f1ea' }}
             >
-              Khám phá lễ hội
+              {t.common.explore}
             </L>
             <L
               href="/partners"
               className="fx-t-arrow px-2 py-3.5 text-[0.9rem] font-semibold underline underline-offset-8"
               style={{ color: 'rgb(244 241 234 / 0.7)' }}
             >
-              Trở thành đối tác
+              {t.common.becomePartner}
             </L>
           </div>
 
@@ -134,7 +137,7 @@ export function Hero() {
           <dl className="mt-8 grid gap-y-2.5 text-[0.8rem] sm:flex sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-4 md:mt-11">
             <div className="flex items-center justify-between gap-4 sm:block">
               <dt className="kicker sm:mb-1.5" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-                Ngày tổ chức
+                {t.common.eventDate}
               </dt>
               <dd>
                 <Pending k="EVENT_DATE" />
@@ -142,7 +145,7 @@ export function Hero() {
             </div>
             <div className="flex items-center justify-between gap-4 sm:block">
               <dt className="kicker sm:mb-1.5" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-                Địa điểm
+                {t.common.venue}
               </dt>
               <dd>
                 <Pending k="VENUE" />
@@ -150,7 +153,7 @@ export function Hero() {
             </div>
             <div className="flex items-center justify-between gap-4 sm:block">
               <dt className="kicker sm:mb-1.5" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-                Line-up
+                {t.common.lineup}
               </dt>
               <dd>
                 <Pending k="HEADLINER" />
@@ -164,7 +167,7 @@ export function Hero() {
         className="pointer-events-none absolute bottom-6 right-[var(--gutter)] hidden items-center gap-3 md:flex"
         style={{ color: 'rgb(244 241 234 / 0.45)' }}
       >
-        <span className="kicker">Cuộn để bước vào</span>
+        <span className="kicker">{t.common.scrollToEnter}</span>
         <span className="block h-10 w-px" style={{ background: 'linear-gradient(to bottom, currentColor, transparent)' }} />
       </div>
     </section>

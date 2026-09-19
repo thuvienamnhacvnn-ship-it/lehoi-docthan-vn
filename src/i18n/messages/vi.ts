@@ -925,6 +925,361 @@ export const vi = {
       'nền tảng số của lễ hội. Ngày giờ, địa điểm, giá vé, line-up và mọi số liệu chỉ xuất hiện trên trang này khi ban tổ chức xác nhận.',
   },
 
+  /** Năm giá trị của lễ hội — khoá là bản tiếng Anh in hoa dùng trong dữ liệu. */
+  values: {
+    FREEDOM: 'Tự do',
+    'SELF-LOVE': 'Yêu mình',
+    COMMUNITY: 'Cộng đồng',
+    CONNECTION: 'Kết nối',
+    HAPPINESS: 'Hạnh phúc',
+  },
+
+  isNotA: ['Sự kiện hẹn hò', 'Chương trình ghép đôi', 'Ứng dụng tìm người yêu'],
+
+  home: {
+    heroLeadA: 'Một ngày hội của tự do, cộng đồng và âm nhạc — nơi độc thân không còn là một mình. Ba chặng:',
+    heroStageA: 'gặp mình',
+    heroStageB: 'gặp nhau',
+    heroStageC: 'gặp hạnh phúc',
+
+    movement: {
+      kicker: '01 — Phong trào',
+      titleA: 'Độc thân',
+      titleB: 'không còn là',
+      titleC: 'một mình',
+      lead:
+        'ONE BEAT NIGHT không phải một sự kiện ghép đôi. Đây là một ngày hội cho những người đang sống một mình theo cách chủ động: tự do, tự biết mình, và sẵn sàng gặp người khác khi thấy đúng lúc.',
+      body:
+        'Tình cảm có thể nảy ra ở đây. Nhưng nó không phải mục tiêu, cũng không phải thước đo xem hôm đó bạn có vui hay không.',
+      notA: 'Không phải:',
+      captionMain: 'Sợi chỉ đỏ nối hai người đứng xa nhau — hình ảnh gốc của dự án.',
+      captionFreedom: 'Chim vàng rời khỏi dải vô cực — tự do',
+      captionConnection: 'Hai bàn tay đeo vòng LED — kết nối',
+    },
+
+    audience: {
+      kicker: '02 — Dành cho ai',
+      titleA: 'Người trưởng thành Việt Nam',
+      titleB: 'đang sống',
+      titleC: 'độc lập',
+      lead:
+        'Ba nhóm tuổi, ba cách sống một mình khác nhau — và một điểm chung: không ai trong số họ coi độc thân là một khiếm khuyết cần sửa.',
+      asideKicker: 'Ba nhóm tuổi',
+      note: 'Nhóm tuổi lấy từ tài liệu định vị của dự án. Quy mô khán giả dự kiến:',
+    },
+
+    day: {
+      kicker: '03 — Ban ngày',
+      lead:
+        'Trước khi đêm nhạc bắt đầu là cả một ngày hội: chạy, nói chuyện, ăn cùng nhau, dắt chó đi dạo, xem triển lãm, thử đồ mới. Kéo ngang để xem.',
+    },
+
+    mega: {
+      kicker: '04 — Thương mại trải nghiệm',
+      lead:
+        'Bảy cụm ngành trong một khu chợ trải nghiệm. Khách thử sản phẩm thật, thương hiệu gặp đúng nhóm người — và đây cũng là nơi phần lớn hoạt động tài trợ diễn ra.',
+      heroTitle: 'Một khu chợ, bảy thế giới',
+      heroLead: 'Gian hàng dựng theo cụm ngành, đi hết một vòng là chạm được tất cả.',
+      allTitle: 'Xem toàn bộ khu chợ',
+      allLead: 'Bảy cụm ngành, khung giờ ưu đãi, quầy nhận hàng',
+      cta: 'Xem toàn bộ Mega Zone',
+    },
+
+    community: {
+      kicker: '05 — Cộng đồng',
+      title: 'Lễ hội này thuộc về những người đến.',
+      lead:
+        'Có podcast riêng, có cuộc thi nội dung, có livestream từ trong sân khấu, có phim tổng kết sau sự kiện. Câu chuyện của lễ hội do chính người tham dự kể tiếp.',
+      ctaPeople: 'Chân dung cộng đồng',
+      ctaContent: 'Hệ nội dung',
+    },
+
+    night: {
+      kicker: '06 — Cao trào',
+      lead:
+        'Khi trời tối, cả khu lễ hội đổi màu. Nhạc sống, ca sĩ chính, định dạng ca sĩ × DJ, những phần tương tác giữa sân khấu và khán đài — rồi đến khoảnh khắc hàng nghìn vòng tay LED cùng sáng một nhịp.',
+      headliner: 'Nghệ sĩ chính',
+      stage: 'Sân khấu',
+      stageValue: 'Sân khấu chính',
+      duration: 'Thời lượng',
+      durationValue: 'Trọn buổi tối',
+      cta: 'Vào đêm nhạc',
+    },
+
+    final: {
+      kicker: 'Lời cuối',
+      lead:
+        'Lễ hội không bảo bạn đi tìm một ai đó. Nó mời bạn gặp lại chính mình trước, gặp những người khác sau, rồi cùng nhau có một ngày đáng nhớ.',
+      imagesNote: 'hình ảnh trong sáu KIT đang vận hành trang này.',
+    },
+  },
+
+  contentKinds: {
+    podcast: 'Podcast',
+    ugc: 'Khách tạo',
+    media: 'Truyền thông',
+    ooh: 'Ngoài trời',
+    social: 'Mạng xã hội',
+    recap: 'Tổng kết',
+  },
+
+  pages: {
+    gallery: {
+      metaTitle: 'Thư viện hình ảnh',
+      metaDescription: 'Toàn bộ thư viện hình ảnh của lễ hội, chia theo sáu KIT.',
+      kicker: 'Hình ảnh',
+      titleA: 'Thư viện',
+      titleB: 'lễ hội',
+      leadA: 'ảnh trong sáu KIT — toàn bộ nội dung hình ảnh đang vận hành website này. Kiến trúc mở tới',
+      leadB: 'ảnh;',
+      leadC: 'chỗ còn trống đang chờ ảnh thật, không lấp bằng ảnh khác.',
+    },
+    account: {
+      metaTitle: 'Tài khoản',
+      metaDescription: 'Ví vé, lịch của tôi và danh sách yêu thích — kiến trúc tài khoản người tham dự.',
+      kicker: 'Người tham dự',
+      title: 'Tài khoản của bạn',
+      lead:
+        'Ví vé, lịch cá nhân và danh sách yêu thích. Giai đoạn này mọi thứ lưu ngay trên máy bạn — chưa có tài khoản máy chủ, chưa có dữ liệu nào được gửi đi.',
+    },
+    program: {
+      metaTitle: 'Lịch trình',
+      metaDescription:
+        'Toàn bộ chương trình lễ hội theo khối giờ, sân khấu, khu vực và hoạt động — kèm lịch cá nhân.',
+      kicker: 'Chương trình',
+      titleA: 'Lịch trình',
+      titleB: 'lễ hội',
+      leadA: 'mục trải suốt bốn khối: sáng, giữa ngày, giờ vàng và đêm nhạc. Thêm vào “Lịch của tôi” để giữ lại những gì bạn định đi.',
+      dateLabel: 'Ngày tổ chức:',
+      doorsLabel: 'Giờ mở cổng:',
+    },
+    faq: {
+      metaTitle: 'Hỏi đáp',
+      metaDescription:
+        'Câu hỏi thường gặp về ONE BEAT NIGHT: định vị lễ hội, vé, line-up, thú cưng, tiếp cận và an toàn.',
+      kicker: 'Hỏi đáp',
+      title: 'Những câu hỏi hay gặp nhất',
+      lead: 'Câu nào chưa có đáp án cụ thể là vì ban tổ chức chưa công bố — trang này không đoán thay.',
+      moreTitle: 'Chưa thấy câu của bạn?',
+      moreLead: 'Cẩm nang tham dự có phần chi tiết hơn về đi lại, thú cưng, tiếp cận và an toàn.',
+      guideCta: 'Cẩm nang tham dự',
+      contactCta: 'Liên hệ',
+    },
+    map: {
+      metaTitle: 'Bản đồ lễ hội',
+      metaDescription:
+        'Mười khu vực của lễ hội: Mega Zone, Trạm Gặp, khu thú cưng, triển lãm, ẩm thực, Color Run, sân khấu, VIP và hỗ trợ.',
+      kicker: 'Định vị',
+      titleA: 'Bản đồ',
+      titleB: 'lễ hội',
+      lead:
+        'Mười khu vực, mỗi khu một nhịp riêng. Bấm vào một vùng để xem hoạt động, dịch vụ và ảnh thực tế của khu đó.',
+      closeKicker: 'Nhìn gần',
+      closeTitle: 'Từng khu nhìn từ trên xuống',
+      opsKicker: 'Vận hành',
+      opsTitle: 'Ai đứng sau khu lễ hội',
+      opsLead:
+        'Thông tin, y tế, an toàn, lối đi tiếp cận và phòng điều hành — phần không ai chú ý khi mọi thứ chạy tốt.',
+    },
+    artists: {
+      metaTitle: 'Nghệ sĩ & MC',
+      metaDescription:
+        'Các vị trí biểu diễn trong kịch bản đêm nhạc One Beat Night. Danh sách nghệ sĩ sẽ công bố sau.',
+      kicker: 'Line-up',
+      titleA: 'Nghệ sĩ',
+      titleB: '& MC',
+      lead:
+        'Danh sách nghệ sĩ chưa được công bố. Trang này mô tả các vị trí biểu diễn đã có trong kịch bản — khi ban tổ chức chốt tên, chỗ trống sẽ được thay bằng nghệ sĩ thật.',
+      moreKicker: 'Còn nữa',
+      moreTitle: 'Các vị trí khác',
+      moreBody:
+        'Kịch bản đêm nhạc còn chỗ cho khách mời và tiết mục đặc biệt. Sẽ bổ sung vào đây khi ban tổ chức chốt.',
+      whyKicker: 'Vì sao chưa có tên',
+      whyTitle: 'Không đặt tên giả cho một sân khấu thật',
+      whyLead:
+        'Trang này chỉ hiển thị những gì đã được xác nhận trong tài liệu dự án. Line-up, ngày diễn và giá vé sẽ xuất hiện đúng lúc ban tổ chức công bố, không sớm hơn.',
+      pressCta: 'Đăng ký nhận thông tin báo chí',
+    },
+    megaZone: {
+      metaTitle: 'Mega Zone',
+      metaDescription:
+        'Khu chợ trải nghiệm của lễ hội: bảy cụm ngành, ưu đãi theo khung giờ và nơi diễn ra phần lớn hoạt động thương hiệu.',
+      kicker: 'Thương mại trải nghiệm',
+      lead:
+        'Bảy cụm ngành trong một khu chợ. Khách đến để thử đồ mới, thương hiệu đến để gặp đúng nhóm người — và cả hai đều không phải nói chuyện qua tờ rơi.',
+      sectorsKicker: 'Bảy cụm ngành',
+      sectorsTitle: 'Đi một vòng là chạm được tất cả',
+      boxTitle: 'Hộp quà nhiều nhãn',
+      boxNote: 'Sản phẩm từ nhiều thương hiệu gom trong một hộp',
+      momentsKicker: 'Thương mại diễn ra thế nào',
+      momentsTitle: 'Bốn khoảnh khắc mua bán trong một ngày',
+      moments: {
+        sampling: {
+          title: 'Thử trước, quyết sau',
+          body: 'Khách nếm, chạm, dùng thử ngay tại quầy. Phản ứng thật xảy ra tại chỗ, không phải qua một quảng cáo.',
+        },
+        'flash-sale': {
+          title: 'Khung giờ ưu đãi',
+          body: 'MegaSale dồn khách vào một nhịp: nhiều thương hiệu mở ưu đãi cùng lúc, cả khu chợ chuyển động theo.',
+        },
+        'happiness-box': {
+          title: 'Happiness Deals',
+          body: 'Hộp quà tổng hợp từ nhiều nhãn — một lý do rất cụ thể để khách đi hết khu thương mại.',
+        },
+        pickup: {
+          title: 'Đặt online, lấy tại lễ hội',
+          body: 'Quầy nhận hàng nối kênh bán trực tuyến của thương hiệu với dòng người ngay tại chỗ.',
+        },
+      },
+      sectorsFitKicker: 'Ngành hàng phù hợp',
+      sectorsFitTitle: 'Những nhóm thương hiệu hợp với khu này',
+      sectorsFitLead: 'Đây là mô tả nhóm ngành, không phải danh sách nhà tài trợ. Lễ hội chưa công bố đối tác nào.',
+      cta: 'Xem cơ hội thương hiệu',
+    },
+
+    community: {
+      metaTitle: 'Cộng đồng',
+      metaDescription:
+        'Lễ hội này thuộc về ai: ba nhóm tuổi, tám lát cắt lối sống của người trưởng thành Việt Nam đang sống độc lập.',
+      kicker: 'Con người',
+      titleA: 'Lễ hội này',
+      titleB: 'thuộc về ai',
+      lead:
+        'Không phải “người chưa tìm được ai”. Là những người trưởng thành đang sống độc lập — và coi đó là một lựa chọn chứ không phải một giai đoạn chờ.',
+      groupsKicker: 'Ba nhóm tuổi',
+      groupsTitle: 'Cùng một thành phố, ba cách sống một mình',
+      groupsLead: 'Nhóm tuổi lấy từ tài liệu định vị của dự án.',
+      lifeKicker: 'Lối sống',
+      lifeTitle: 'Tám lát cắt của một đời sống độc lập',
+      lifeLead:
+        'Không phải chân dung nhân khẩu học trên slide. Đây là những cảnh có thật trong một tuần bình thường của khán giả lễ hội.',
+      caption: 'Hai bàn tay đeo vòng tay LED sắp chạm nhau — hình ảnh gốc của ý niệm kết nối.',
+      safetyKicker: 'Nguyên tắc',
+      safetyTitle: 'Kết nối có khuôn khổ',
+      safetyLead:
+        'Mọi hoạt động gặp gỡ đều có người điều phối, có quy tắc ứng xử và có quyền dừng. Không ai bị đẩy vào một cuộc trò chuyện họ không muốn, và không ai bị bỏ lại ở góc sân.',
+      safetyRules: [
+        'Người dẫn có mặt trong suốt hoạt động ở Trạm Gặp',
+        'Quy tắc ứng xử được công bố trước và nhắc lại tại chỗ',
+        'Nhân sự hỗ trợ và điểm trợ giúp ở mọi khu',
+        'Khách tham dự tự quyết định mức độ tham gia của mình',
+      ],
+      scale: 'Quy mô khán giả dự kiến:',
+      guideCta: 'Cẩm nang tham dự',
+    },
+
+    visitorGuide: {
+      metaTitle: 'Cẩm nang tham dự',
+      metaDescription:
+        'Chuẩn bị gì, đi lại thế nào, quy định thú cưng, hỗ trợ tiếp cận và an toàn tại ONE BEAT NIGHT.',
+      kicker: 'Chuẩn bị',
+      title: 'Cẩm nang tham dự',
+      lead:
+        'Mọi thứ cần biết trước khi tới: vào cổng, đi lại trong khu lễ hội, mang thú cưng, hỗ trợ tiếp cận và nguyên tắc ứng xử.',
+      dateLabel: 'Ngày:',
+      doorsLabel: 'Mở cổng:',
+      venueLabel: 'Địa điểm:',
+      sections: {
+        before: {
+          title: 'Trước khi đi',
+          items: [
+            'Vé điện tử nằm trong ví vé của webapp — không cần in ra giấy.',
+            'Lưu trước “Lịch của tôi” để biết mình muốn đi đâu, nhất là các hoạt động cần đăng ký.',
+            'Mặc đồ thoải mái: phần lớn hoạt động ban ngày diễn ra ngoài trời.',
+            'Ngày, giờ mở cổng và địa điểm cụ thể sẽ được cập nhật ngay trên trang này khi công bố.',
+          ],
+        },
+        arrive: {
+          title: 'Tới nơi và vào cổng',
+          items: [
+            'Quét mã QR trên vé tại cổng để check-in.',
+            'Nhận vòng tay LED tại cổng — vòng này dùng cho phần ánh sáng đồng bộ trong đêm nhạc.',
+            'Khách VIP và khách mời của đối tác có lối vào riêng.',
+            'Quầy thông tin đặt ngay sau cổng, có nhân sự hỗ trợ.',
+          ],
+        },
+        pets: {
+          title: 'Mang thú cưng',
+          items: [
+            'Khu thú cưng chia theo kích cỡ và tính cách: chó nhỏ, chó lớn, mèo, chó lớn tuổi.',
+            'Chủ nuôi chịu trách nhiệm trông giữ vật nuôi của mình trong suốt thời gian tham dự.',
+            'Có nước cho thú cưng, khu bóng mát và góc chụp ảnh.',
+            'Quy định cụ thể về giấy tiêm phòng và giống loài sẽ được công bố cùng thông tin sự kiện.',
+          ],
+        },
+        access: {
+          title: 'Tiếp cận',
+          items: [
+            'Lối đi chính không bậc, đủ rộng cho xe lăn và xe đẩy.',
+            'Khu xem đêm nhạc có vị trí dành cho khách cần hỗ trợ.',
+            'Nhân sự hỗ trợ có mặt tại mọi khu, dễ nhận ra bằng đồng phục.',
+            'Điểm sơ cứu và khu nghỉ yên tĩnh mở suốt thời gian sự kiện.',
+          ],
+        },
+        respect: {
+          title: 'Ứng xử và an toàn',
+          items: [
+            'Mọi hoạt động kết nối đều có người điều phối và quy tắc ứng xử rõ ràng.',
+            'Bạn có quyền rời khỏi bất kỳ hoạt động nào vào bất kỳ lúc nào, không cần giải thích.',
+            'Nếu thấy không thoải mái, báo ngay nhân sự tại khu — họ được hướng dẫn xử lý tình huống này.',
+            'Không chụp hoặc quay người khác khi họ chưa đồng ý.',
+          ],
+        },
+      },
+      servicesKicker: 'Dịch vụ tại chỗ',
+      servicesTitle: 'Ai giúp bạn khi cần',
+    },
+
+    contact: {
+      metaTitle: 'Liên hệ',
+      metaDescription:
+        'Các kênh làm việc với ban tổ chức ONE BEAT NIGHT: hợp tác thương hiệu, báo chí, khách tham dự.',
+      kicker: 'Liên hệ',
+      title: 'Kênh làm việc',
+      lead:
+        'Thông tin liên hệ chính thức sẽ được bổ sung khi ban tổ chức cung cấp. Biểu mẫu bên dưới đã dựng sẵn để nối vào hệ thống nhận thông tin.',
+      channels: {
+        partners: {
+          label: 'Hợp tác thương hiệu',
+          note: 'Tài trợ, hoạt động thương hiệu, tiếp khách doanh nghiệp, thương mại tại lễ hội.',
+          cta: 'Xem cơ hội hợp tác',
+        },
+        press: {
+          label: 'Báo chí & truyền thông',
+          note: 'Media kit, ảnh chính thức, phỏng vấn, đăng ký tác nghiệp.',
+          cta: 'Vào phòng báo chí',
+        },
+        visitors: {
+          label: 'Khách tham dự',
+          note: 'Vé, lịch trình, quy định tham dự, hỗ trợ tiếp cận.',
+          cta: 'Xem hỏi đáp',
+        },
+      },
+      infoKicker: 'Thông tin sự kiện',
+      cityLabel: 'Thành phố',
+      venueLabel: 'Địa điểm',
+      addressLabel: 'Địa chỉ',
+      dateLabel: 'Ngày tổ chức',
+      organizerLabel: 'Đơn vị tổ chức',
+    },
+
+    news: {
+      metaTitle: 'Chuyện & nội dung',
+      metaDescription:
+        'Hệ nội dung của lễ hội: WeMeet Podcast, nội dung do khách tạo, livestream, báo chí, OOH và phim tổng kết.',
+      kicker: 'Nội dung',
+      title: 'Câu chuyện chạy trước và chạy sau lễ hội',
+      lead:
+        'Lễ hội không chỉ diễn ra trong một ngày. Đây là các định dạng nội dung của dự án — chưa phải bài đã đăng, vì chiến dịch chưa khởi động.',
+      reelsKicker: 'Định dạng dọc',
+      reelsTitle: 'Reels từ trong lễ hội',
+      emptyKicker: 'Chưa có bài đăng',
+      emptyLead:
+        'Lễ hội chưa khởi động chiến dịch truyền thông, nên trang này chưa có thông cáo hay bài viết nào. Cấu trúc đã sẵn sàng: khi nội dung thật xuất hiện, nó sẽ nằm đúng ở đây.',
+      pressCta: 'Phòng báo chí',
+    },
+  },
+
   videos: {
     heroFilm: 'Phim giới thiệu ONE BEAT NIGHT',
     dayFestival: 'Một ngày ở Day Festival',

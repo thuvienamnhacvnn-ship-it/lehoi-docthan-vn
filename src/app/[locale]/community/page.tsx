@@ -7,22 +7,33 @@ import { SectionHeader } from '@/components/ui/Section';
 import { Pending } from '@/components/system/Pending';
 import { audienceGroups, lifestyleStories } from '@/data/community';
 
-export const metadata: Metadata = {
-  title: 'Cộng đồng',
-  description: 'Lễ hội này thuộc về ai: ba nhóm tuổi, tám lát cắt lối sống của người trưởng thành Việt Nam đang sống độc lập.',
-};
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
-export default function CommunityPage() {
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.community.metaTitle, description: t.pages.community.metaDescription };
+}
+
+
+export default async function CommunityPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.community;
+
   return (
     <>
       <PageHero
-        kicker="Con người"
+        kicker={c.kicker}
         title={
           <>
-            Lễ hội này <span className="t-outline">thuộc về ai</span>
+            {c.titleA} <span className="t-outline">{c.titleB}</span>
           </>
         }
-        lead="Không phải “người chưa tìm được ai”. Là những người trưởng thành đang sống độc lập — và coi đó là một lựa chọn chứ không phải một giai đoạn chờ."
+        lead={c.lead}
         assetId="kit-04-12-community-mixed-ages"
         focal="center 30%"
         env="day"
@@ -33,9 +44,9 @@ export default function CommunityPage() {
       <section data-env-zone="day" className="section" style={{ background: 'var(--env-bg)' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Ba nhóm tuổi"
-            title="Cùng một thành phố, ba cách sống một mình"
-            lead="Nhóm tuổi lấy từ tài liệu định vị của dự án."
+            kicker={c.groupsKicker}
+            title={c.groupsTitle}
+            lead={c.groupsLead}
             align="split"
           />
 
@@ -50,16 +61,16 @@ export default function CommunityPage() {
                     <p className="num-oversized text-[clamp(2.5rem,6vw,4.5rem)]" style={{ color: g.accent }}>
                       {g.range}
                     </p>
-                    <h3 className="font-display t-lg mt-3">{g.title}</h3>
-                    <p className="lede mt-4">{g.lead}</p>
+                    <h3 className="font-display t-lg mt-3">{t.audience[g.id].title}</h3>
+                    <p className="lede mt-4">{t.audience[g.id].lead}</p>
                     <ul className="mt-6 flex flex-wrap gap-2">
-                      {g.traits.map((t) => (
+                      {t.audience[g.id].traits.map((trait) => (
                         <li
-                          key={t}
+                          key={trait}
                           className="rounded-full border px-3.5 py-1.5 text-[0.76rem]"
                           style={{ borderColor: `${g.accent}55`, color: 'var(--env-muted)' }}
                         >
-                          {t}
+                          {trait}
                         </li>
                       ))}
                     </ul>
@@ -75,9 +86,9 @@ export default function CommunityPage() {
       <section data-env-zone="day" className="section pt-0" style={{ background: 'var(--env-bg)' }}>
         <div className="wrap">
           <SectionHeader
-            kicker="Lối sống"
-            title="Tám lát cắt của một đời sống độc lập"
-            lead="Không phải chân dung nhân khẩu học trên slide. Đây là những cảnh có thật trong một tuần bình thường của khán giả lễ hội."
+            kicker={c.lifeKicker}
+            title={c.lifeTitle}
+            lead={c.lifeLead}
             align="split"
           />
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -86,9 +97,9 @@ export default function CommunityPage() {
                 <figure className="group fx-c-zoom fx-c-shine relative overflow-hidden rounded-[var(--radius-md)]">
                   <AssetImage id={s.assetId} sizes="third" ratio="4 / 5" className="w-full" scrim="bottom" />
                   <figcaption className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="font-display fx-t-lift text-[1.05rem] text-white">{s.label}</p>
+                    <p className="font-display fx-t-lift text-[1.05rem] text-white">{t.lifestyle[s.id].label}</p>
                     <p className="mt-1 text-[0.76rem]" style={{ color: 'rgb(244 241 234 / 0.7)' }}>
-                      {s.note}
+                      {t.lifestyle[s.id].note}
                     </p>
                   </figcaption>
                 </figure>
@@ -110,27 +121,25 @@ export default function CommunityPage() {
               className="mt-3 rounded-[var(--radius-md)]"
             />
             <p className="mt-3 text-[0.78rem]" style={{ color: 'var(--env-faint)' }}>
-              Hai bàn tay đeo vòng tay LED sắp chạm nhau — hình ảnh gốc của ý niệm kết nối.
+              {c.caption}
             </p>
           </Reveal>
           <Reveal delay={100}>
-            <p className="kicker mb-4">Nguyên tắc</p>
-            <h2 className="font-display t-lg">Kết nối có khuôn khổ</h2>
+            <p className="kicker mb-4">{c.safetyKicker}</p>
+            <h2 className="font-display t-lg">{c.safetyTitle}</h2>
             <p className="lede mt-5">
-              Mọi hoạt động gặp gỡ đều có người điều phối, có quy tắc ứng xử và có quyền dừng. Không ai bị đẩy vào một
-              cuộc trò chuyện họ không muốn, và không ai bị bỏ lại ở góc sân.
+              {c.safetyLead}
             </p>
             <ul className="mt-7 space-y-3 text-[0.9rem]" style={{ color: 'var(--env-muted)' }}>
-              <li>— Người dẫn có mặt trong suốt hoạt động ở Trạm Gặp</li>
-              <li>— Quy tắc ứng xử được công bố trước và nhắc lại tại chỗ</li>
-              <li>— Nhân sự hỗ trợ và điểm trợ giúp ở mọi khu</li>
-              <li>— Khách tham dự tự quyết định mức độ tham gia của mình</li>
+              {c.safetyRules.map((rule) => (
+                <li key={rule}>— {rule}</li>
+              ))}
             </ul>
             <p className="mt-8 text-[0.82rem]" style={{ color: 'var(--env-faint)' }}>
-              Quy mô khán giả dự kiến: <Pending k="EXPECTED_ATTENDANCE" tone="quiet" />
+              {c.scale} <Pending k="EXPECTED_ATTENDANCE" tone="quiet" />
             </p>
             <L href="/visitor-guide" className="fx-t-arrow mt-6 inline-flex text-[0.88rem] font-semibold underline underline-offset-8">
-              Cẩm nang tham dự <span className="fx-arrow">→</span>
+              {c.guideCta} <span className="fx-arrow">→</span>
             </L>
           </Reveal>
         </div>

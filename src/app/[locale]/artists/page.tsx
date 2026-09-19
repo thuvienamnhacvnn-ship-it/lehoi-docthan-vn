@@ -7,22 +7,33 @@ import { SectionHeader } from '@/components/ui/Section';
 import { Pending } from '@/components/system/Pending';
 import { lineup } from '@/data/lineup';
 
-export const metadata: Metadata = {
-  title: 'Nghệ sĩ & MC',
-  description: 'Các vị trí biểu diễn trong kịch bản đêm nhạc One Beat Night. Danh sách nghệ sĩ sẽ công bố sau.',
-};
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
-export default function ArtistsPage() {
+type PageProps = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.artists.metaTitle, description: t.pages.artists.metaDescription };
+}
+
+
+export default async function ArtistsPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.artists;
+
   return (
     <>
       <PageHero
-        kicker="Line-up"
+        kicker={c.kicker}
         title={
           <>
-            Nghệ sĩ <span className="t-outline">&amp; MC</span>
+            {c.titleA} <span className="t-outline">{c.titleB}</span>
           </>
         }
-        lead="Danh sách nghệ sĩ chưa được công bố. Trang này mô tả các vị trí biểu diễn đã có trong kịch bản — khi ban tổ chức chốt tên, chỗ trống sẽ được thay bằng nghệ sĩ thật."
+        lead={c.lead}
         assetId="kit-03-01-live-band-wide"
         focal="center 22%"
         env="night"
@@ -50,10 +61,10 @@ export default function ArtistsPage() {
                       {slot.roleEn}
                     </p>
                     <h2 className="font-display mt-2 text-[1.25rem]" style={{ color: '#f4f1ea' }}>
-                      {slot.name ?? slot.role}
+                      {slot.name ?? t.lineup[slot.id].role}
                     </h2>
                     <p className="mt-3 flex-1 text-[0.86rem] leading-relaxed" style={{ color: 'rgb(244 241 234 / 0.62)' }}>
-                      {slot.bio ?? slot.description}
+                      {slot.bio ?? t.lineup[slot.id].description}
                     </p>
                     {!slot.name && (
                       <p className="mt-5">
@@ -74,14 +85,13 @@ export default function ArtistsPage() {
                 <AssetImage id="kit-01-08-performer-pov" sizes="third" ratio="3 / 4" className="w-full" scrim="bottom" />
                 <div className="flex flex-1 flex-col p-6">
                   <p className="kicker" style={{ color: 'var(--color-gold)' }}>
-                    Còn nữa
+                    {c.moreKicker}
                   </p>
                   <h2 className="font-display mt-2 text-[1.25rem]" style={{ color: '#f4f1ea' }}>
-                    Các vị trí khác
+                    {c.moreTitle}
                   </h2>
                   <p className="mt-3 flex-1 text-[0.86rem] leading-relaxed" style={{ color: 'rgb(244 241 234 / 0.62)' }}>
-                    Kịch bản đêm nhạc còn chỗ cho khách mời và tiết mục đặc biệt. Sẽ bổ sung vào đây khi ban tổ
-                    chức chốt.
+                    {c.moreBody}
                   </p>
                   <p className="mt-5">
                     <Pending k="HEADLINER" />
@@ -97,16 +107,16 @@ export default function ArtistsPage() {
               style={{ borderColor: 'rgb(245 185 66 / 0.35)', background: 'rgb(245 185 66 / 0.05)' }}
             >
               <SectionHeader
-                kicker="Vì sao chưa có tên"
-                title="Không đặt tên giả cho một sân khấu thật"
-                lead="Trang này chỉ hiển thị những gì đã được xác nhận trong tài liệu dự án. Line-up, ngày diễn và giá vé sẽ xuất hiện đúng lúc ban tổ chức công bố, không sớm hơn."
+                kicker={c.whyKicker}
+                title={c.whyTitle}
+                lead={c.whyLead}
               />
               <L
                 href="/press"
                 className="fx-t-arrow mt-6 inline-flex text-[0.88rem] font-semibold underline underline-offset-8"
                 style={{ color: '#f4f1ea' }}
               >
-                Đăng ký nhận thông tin báo chí <span className="fx-arrow">→</span>
+                {c.pressCta} <span className="fx-arrow">→</span>
               </L>
             </div>
           </Reveal>

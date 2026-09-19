@@ -2,23 +2,25 @@ import type { Metadata } from 'next';
 import { PageHero } from '@/components/ui/PageHero';
 import { AssetImage } from '@/components/media/AssetImage';
 import { AccountPanel } from '@/components/account/AccountPanel';
+import { getMessages } from '@/i18n/get-messages';
+import type { Locale } from '@/i18n/config';
 
-export const metadata: Metadata = {
-  title: 'Tài khoản',
-  description: 'Ví vé, lịch của tôi và danh sách yêu thích — kiến trúc tài khoản người tham dự.',
-};
+type PageProps = { params: Promise<{ locale: Locale }> };
 
-export default function AccountPage() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  return { title: t.pages.account.metaTitle, description: t.pages.account.metaDescription };
+}
+
+export default async function AccountPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getMessages(locale);
+  const c = t.pages.account;
+
   return (
     <>
-      <PageHero
-        kicker="Người tham dự"
-        title="Tài khoản của bạn"
-        lead="Ví vé, lịch cá nhân và danh sách yêu thích. Giai đoạn này mọi thứ lưu ngay trên máy bạn — chưa có tài khoản máy chủ, chưa có dữ liệu nào được gửi đi."
-        assetId="kit-01-18-app-phone-blank"
-        env="night"
-        height="short"
-      />
+      <PageHero kicker={c.kicker} title={c.title} lead={c.lead} assetId="kit-01-18-app-phone-blank" env="night" height="short" />
 
       <section data-env-zone="night" className="section relative overflow-hidden" style={{ background: '#050507' }}>
         <AssetImage id="kit-01-28-bg-bokeh" sizes="full" fill className="opacity-25" />

@@ -920,6 +920,361 @@ export const en: MessagesFor = {
       'the festival’s digital platform. Dates, venue, ticket prices, line-up and every figure appear on this site only once the organisers confirm them.',
   },
 
+  values: {
+    FREEDOM: 'Freedom',
+    'SELF-LOVE': 'Self-love',
+    COMMUNITY: 'Community',
+    CONNECTION: 'Connection',
+    HAPPINESS: 'Happiness',
+  },
+
+  isNotA: ['A dating event', 'A matchmaking programme', 'An app for finding a partner'],
+
+  home: {
+    heroLeadA:
+      'A day of freedom, community and music — where being single stops meaning being alone. Three stages:',
+    heroStageA: 'meet yourself',
+    heroStageB: 'meet others',
+    heroStageC: 'meet happiness',
+
+    movement: {
+      kicker: '01 — The movement',
+      titleA: 'Being single',
+      titleB: 'no longer means',
+      titleC: 'being alone',
+      lead:
+        'ONE BEAT NIGHT is not a matchmaking event. It is a festival for people living on their own by choice: free, self-aware, and open to meeting others when the moment feels right.',
+      body:
+        'Something may well begin here. But that is not the point, and not the measure of whether the day was good.',
+      notA: 'What it is not:',
+      captionMain: 'A red thread joining two people standing apart — the project’s original image.',
+      captionFreedom: 'The golden bird leaving the infinity loop — freedom',
+      captionConnection: 'Two hands wearing LED wristbands — connection',
+    },
+
+    audience: {
+      kicker: '02 — Who it is for',
+      titleA: 'Vietnamese adults',
+      titleB: 'living',
+      titleC: 'independently',
+      lead:
+        'Three age groups, three different ways of living alone — and one thing in common: none of them treats being single as a fault to be fixed.',
+      asideKicker: 'Three age groups',
+      note: 'Age groups taken from the project’s positioning documents. Expected audience size:',
+    },
+
+    day: {
+      kicker: '03 — Daytime',
+      lead:
+        'Before the concert begins there is a whole day of it: running, talking, eating together, walking the dog, seeing the exhibition, trying new things. Drag sideways to look.',
+    },
+
+    mega: {
+      kicker: '04 — Experiential commerce',
+      lead:
+        'Seven sectors inside one experiential marketplace. Visitors try real products, brands meet exactly the right people — and this is where most of the sponsorship activity happens.',
+      heroTitle: 'One marketplace, seven worlds',
+      heroLead: 'Stands are grouped by sector; one lap and you have touched all of them.',
+      allTitle: 'See the whole marketplace',
+      allLead: 'Seven sectors, timed offers, collection counter',
+      cta: 'See the whole Mega Zone',
+    },
+
+    community: {
+      kicker: '05 — Community',
+      title: 'This festival belongs to the people who come.',
+      lead:
+        'There is a podcast of its own, a content contest, livestreams from inside the venue, a recap film afterwards. The festival’s story is carried on by the people who were there.',
+      ctaPeople: 'Portrait of the community',
+      ctaContent: 'Content system',
+    },
+
+    night: {
+      kicker: '06 — The peak',
+      lead:
+        'When it gets dark, the whole site changes colour. Live music, the headliner, the singer × DJ format, the moments played between stage and crowd — and then thousands of LED wristbands lighting up on one beat.',
+      headliner: 'Headliner',
+      stage: 'Stage',
+      stageValue: 'Main Stage',
+      duration: 'Running time',
+      durationValue: 'The whole evening',
+      cta: 'Enter the concert',
+    },
+
+    final: {
+      kicker: 'Last word',
+      lead:
+        'The festival does not tell you to go and find someone. It invites you to meet yourself first, meet others after, and then share a day worth remembering.',
+      imagesNote: 'images across six KITs are running this site.',
+    },
+  },
+
+  contentKinds: {
+    podcast: 'Podcast',
+    ugc: 'Visitor-made',
+    media: 'Media',
+    ooh: 'Out-of-home',
+    social: 'Social',
+    recap: 'Recap',
+  },
+
+  pages: {
+    gallery: {
+      metaTitle: 'Image library',
+      metaDescription: 'The festival’s complete image library, arranged across six KITs.',
+      kicker: 'Imagery',
+      titleA: 'Festival',
+      titleB: 'library',
+      leadA: 'images across six KITs — all the visual content running this website. The architecture is open to',
+      leadB: 'images;',
+      leadC: 'slots are still empty, waiting for real photographs rather than filler.',
+    },
+    account: {
+      metaTitle: 'Account',
+      metaDescription: 'Ticket wallet, my schedule and favourites — the visitor account architecture.',
+      kicker: 'Visitor',
+      title: 'Your account',
+      lead:
+        'Ticket wallet, personal schedule and favourites. At this stage everything is stored on your own device — there is no server account and no data is sent anywhere.',
+    },
+    program: {
+      metaTitle: 'Programme',
+      metaDescription:
+        'The full festival programme by time block, stage, zone and activity — with a personal schedule.',
+      kicker: 'Programme',
+      titleA: 'Festival',
+      titleB: 'programme',
+      leadA: 'items across four blocks: morning, midday, golden hour and the concert. Add them to “My schedule” to keep what you plan to attend.',
+      dateLabel: 'Date:',
+      doorsLabel: 'Doors open:',
+    },
+    faq: {
+      metaTitle: 'FAQ',
+      metaDescription:
+        'Frequently asked questions about ONE BEAT NIGHT: what the festival is, tickets, line-up, pets, accessibility and safety.',
+      kicker: 'FAQ',
+      title: 'The questions we get most',
+      lead: 'Where an answer is still vague, it is because the organisers have not announced it — this page does not guess on their behalf.',
+      moreTitle: 'Not the question you had?',
+      moreLead: 'The visitor guide goes into more detail on getting there, pets, accessibility and safety.',
+      guideCta: 'Visitor guide',
+      contactCta: 'Contact',
+    },
+    map: {
+      metaTitle: 'Festival map',
+      metaDescription:
+        'The festival’s ten zones: Mega Zone, Connection Zone, pet zone, exhibition, food, Colour Run, stage, VIP and support.',
+      kicker: 'Orientation',
+      titleA: 'Festival',
+      titleB: 'map',
+      lead:
+        'Ten zones, each with its own rhythm. Tap a zone to see its activities, services and real photographs.',
+      closeKicker: 'Up close',
+      closeTitle: 'Each zone from above',
+      opsKicker: 'Operations',
+      opsTitle: 'Who keeps the site running',
+      opsLead:
+        'Information, medical, safety, accessible routes and the operations room — the part nobody notices while everything works.',
+    },
+    artists: {
+      metaTitle: 'Artists & hosts',
+      metaDescription:
+        'The performance roles in the One Beat Night concert. The artist line-up will be announced later.',
+      kicker: 'Line-up',
+      titleA: 'Artists',
+      titleB: '& hosts',
+      lead:
+        'The artist list has not been announced. This page describes the performance roles already set in the run of show — once the organisers confirm names, the placeholders become real artists.',
+      moreKicker: 'And more',
+      moreTitle: 'Other roles',
+      moreBody:
+        'The concert script still has room for guests and special segments. They will be added here once the organisers confirm them.',
+      whyKicker: 'Why there are no names yet',
+      whyTitle: 'No invented names for a real stage',
+      whyLead:
+        'This page shows only what is confirmed in the project documents. The line-up, the date and ticket prices will appear exactly when the organisers announce them, not before.',
+      pressCta: 'Sign up for press updates',
+    },
+    megaZone: {
+      metaTitle: 'Mega Zone',
+      metaDescription:
+        'The festival’s experiential marketplace: seven sectors, timed offers, and where most brand activity happens.',
+      kicker: 'Experiential commerce',
+      lead:
+        'Seven sectors in one marketplace. Visitors come to try new things, brands come to meet exactly the right people — and neither has to talk through a leaflet.',
+      sectorsKicker: 'Seven sectors',
+      sectorsTitle: 'One lap and you have touched all of them',
+      boxTitle: 'Multi-brand gift box',
+      boxNote: 'Products from several brands gathered into one box',
+      momentsKicker: 'How the commerce works',
+      momentsTitle: 'Four buying moments in a single day',
+      moments: {
+        sampling: {
+          title: 'Try first, decide later',
+          body: 'Visitors taste it, hold it, use it right at the counter. The real reaction happens there, not through an advert.',
+        },
+        'flash-sale': {
+          title: 'Offer windows',
+          body: 'MegaSale concentrates the crowd into one beat: several brands open offers at once and the whole marketplace moves with it.',
+        },
+        'happiness-box': {
+          title: 'Happiness Deals',
+          body: 'A gift box assembled from several labels — a very concrete reason to walk the whole commerce area.',
+        },
+        pickup: {
+          title: 'Order online, collect at the festival',
+          body: 'The collection counter connects a brand’s online channel to the crowd standing right there.',
+        },
+      },
+      sectorsFitKicker: 'Sectors that fit',
+      sectorsFitTitle: 'The kinds of brands this area suits',
+      sectorsFitLead: 'This describes categories, not a sponsor list. The festival has not announced any partners.',
+      cta: 'See the brand opportunities',
+    },
+
+    community: {
+      metaTitle: 'Community',
+      metaDescription:
+        'Who this festival belongs to: three age groups and eight slices of life from Vietnamese adults living independently.',
+      kicker: 'People',
+      titleA: 'Who this',
+      titleB: 'festival is for',
+      lead:
+        'Not “people who have not found anyone yet”. Adults living independently — and treating that as a choice rather than a waiting room.',
+      groupsKicker: 'Three age groups',
+      groupsTitle: 'One city, three ways of living alone',
+      groupsLead: 'Age groups taken from the project’s positioning documents.',
+      lifeKicker: 'Lifestyles',
+      lifeTitle: 'Eight slices of an independent life',
+      lifeLead:
+        'Not a demographic portrait on a slide. These are real scenes from an ordinary week in the life of the festival’s audience.',
+      caption: 'Two hands in LED wristbands about to touch — the original image of the idea of connection.',
+      safetyKicker: 'Principles',
+      safetyTitle: 'Connection within a frame',
+      safetyLead:
+        'Every meeting activity has a facilitator, a code of conduct and the right to stop. Nobody is pushed into a conversation they do not want, and nobody is left standing in a corner.',
+      safetyRules: [
+        'A host is present throughout every activity in the Connection Zone',
+        'The code of conduct is published in advance and repeated on site',
+        'Support staff and help points in every zone',
+        'Visitors decide for themselves how far they take part',
+      ],
+      scale: 'Expected audience size:',
+      guideCta: 'Visitor guide',
+    },
+
+    visitorGuide: {
+      metaTitle: 'Visitor guide',
+      metaDescription:
+        'What to bring, how to get there, the rules on pets, accessibility support and safety at ONE BEAT NIGHT.',
+      kicker: 'Preparation',
+      title: 'Visitor guide',
+      lead:
+        'Everything worth knowing before you arrive: getting in, moving around the site, bringing a pet, accessibility support and the code of conduct.',
+      dateLabel: 'Date:',
+      doorsLabel: 'Doors:',
+      venueLabel: 'Venue:',
+      sections: {
+        before: {
+          title: 'Before you go',
+          items: [
+            'Your digital ticket lives in the app’s wallet — nothing needs printing.',
+            'Save “My schedule” in advance so you know where you want to be, especially for activities that need a booking.',
+            'Dress comfortably: most daytime activities are outdoors.',
+            'The exact date, opening time and venue will be updated on this page the moment they are announced.',
+          ],
+        },
+        arrive: {
+          title: 'Arriving and getting in',
+          items: [
+            'Scan the QR code on your ticket at the gate to check in.',
+            'Collect your LED wristband at the gate — it is used for the synchronised light sequence during the concert.',
+            'VIP guests and partner invitees have their own entrance.',
+            'The information desk sits just past the gate, with staff on hand.',
+          ],
+        },
+        pets: {
+          title: 'Bringing a pet',
+          items: [
+            'The pet zone is divided by size and temperament: small dogs, large dogs, cats, senior dogs.',
+            'Owners are responsible for looking after their own animal throughout the visit.',
+            'There is water for pets, shaded areas and a photo spot.',
+            'The exact rules on vaccination records and species will be published alongside the event details.',
+          ],
+        },
+        access: {
+          title: 'Accessibility',
+          items: [
+            'The main routes are step-free and wide enough for wheelchairs and pushchairs.',
+            'The concert viewing area has positions for visitors who need support.',
+            'Support staff are present in every zone and easy to identify by their uniform.',
+            'The first aid point and a quiet rest area are open throughout the event.',
+          ],
+        },
+        respect: {
+          title: 'Conduct and safety',
+          items: [
+            'Every connection activity has a facilitator and a clear code of conduct.',
+            'You may leave any activity at any time, without explaining yourself.',
+            'If something feels wrong, tell the staff in that zone — they are briefed for exactly this.',
+            'Do not photograph or film other people without their agreement.',
+          ],
+        },
+      },
+      servicesKicker: 'On-site services',
+      servicesTitle: 'Who helps when you need it',
+    },
+
+    contact: {
+      metaTitle: 'Contact',
+      metaDescription:
+        'The working channels for ONE BEAT NIGHT: brand partnerships, press, and visitors.',
+      kicker: 'Contact',
+      title: 'Working channels',
+      lead:
+        'Official contact details will be added once the organisers provide them. The form below is already built and ready to connect to an intake system.',
+      channels: {
+        partners: {
+          label: 'Brand partnerships',
+          note: 'Sponsorship, brand activations, corporate hospitality, commerce at the festival.',
+          cta: 'See the partnership options',
+        },
+        press: {
+          label: 'Press & media',
+          note: 'Media kit, official photography, interviews, accreditation.',
+          cta: 'Go to the press room',
+        },
+        visitors: {
+          label: 'Visitors',
+          note: 'Tickets, programme, rules of attendance, accessibility support.',
+          cta: 'See the FAQ',
+        },
+      },
+      infoKicker: 'Event details',
+      cityLabel: 'City',
+      venueLabel: 'Venue',
+      addressLabel: 'Address',
+      dateLabel: 'Date',
+      organizerLabel: 'Organiser',
+    },
+
+    news: {
+      metaTitle: 'Stories & content',
+      metaDescription:
+        'The festival’s content system: WeMeet Podcast, user-generated content, livestreams, press, OOH and the recap film.',
+      kicker: 'Content',
+      title: 'The story runs before and after the festival',
+      lead:
+        'The festival is not only one day. These are the project’s content formats — not published posts, because the campaign has not started.',
+      reelsKicker: 'Vertical formats',
+      reelsTitle: 'Reels from inside the festival',
+      emptyKicker: 'Nothing published yet',
+      emptyLead:
+        'The festival has not launched its media campaign, so there are no releases or articles here yet. The structure is ready: when the real content arrives, this is exactly where it lands.',
+      pressCta: 'Press room',
+    },
+  },
+
   videos: {
     heroFilm: 'ONE BEAT NIGHT trailer',
     dayFestival: 'A day at the Day Festival',
