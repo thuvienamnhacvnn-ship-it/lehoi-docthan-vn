@@ -1,0 +1,714 @@
+/* =============================================================================
+   HỆ HIỆU ỨNG HOVER — ONE BEAT NIGHT
+   =============================================================================
+   Đây là MỘT HỆ, không phải một đống hiệu ứng rời (§16). Mọi thứ đều dựa trên
+   ngôn ngữ thị giác của lễ hội: tia sáng quét, dải vô cực, ánh vàng cao cấp,
+   và nhịp "một beat".
+
+   Luật chung cho mọi hiệu ứng ở file này:
+   - chỉ động vào `transform`, `opacity`, `clip-path`, `background-position` -> chạy trên GPU,
+     không gây tính lại bố cục;
+   - chưa hover thì phần tử phải trông đã hoàn chỉnh, hiệu ứng là phần thưởng thêm;
+   - tắt sạch khi người dùng chọn giảm chuyển động;
+   - chỉ bật trên thiết bị có con trỏ thật (`hover: hover`), không bám dính trên điện thoại.
+
+   Đặt tên: fx-<đối tượng>-<hành vi>.  Tiêu đề: fx-t-*  ·  Icon: fx-i-*  ·  Thẻ: fx-c-*
+   ============================================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  /* Con trỏ bàn tay cho MỌI thứ có hiệu ứng rê chuột — kể cả thẻ và tiêu đề không
+     phải là liên kết. Yêu cầu của dự án: đã có hiệu ứng thì phải báo cho người dùng
+     biết chỗ đó "động" được. */
+  [class*='fx-t-'],
+  [class*='fx-i-'],
+  [class*='fx-c-'],
+  [class*='fx-b-'],
+  .kt {
+    cursor: pointer;
+  }
+
+  /* ---------------------------------------------------------------------------
+     NHÓM 1 — TIÊU ĐỀ & CHỮ
+     --------------------------------------------------------------------------- */
+
+  /* 01. Gạch chân kéo từ trái sang */
+  .fx-t-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .fx-t-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.12em;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-reveal);
+  }
+  .fx-t-underline:hover::after,
+  a:hover .fx-t-underline::after,
+  .group:hover .fx-t-underline::after {
+    transform: scaleX(1);
+  }
+
+  /* 02. Gạch chân nở ra từ giữa */
+  .fx-t-underline-center {
+    position: relative;
+    display: inline-block;
+  }
+  .fx-t-underline-center::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -0.12em;
+    height: 1px;
+    width: 0;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    transition:
+      width var(--dur-base) var(--ease-reveal),
+      left var(--dur-base) var(--ease-reveal);
+  }
+  .fx-t-underline-center:hover::after,
+  .group:hover .fx-t-underline-center::after {
+    width: 100%;
+    left: 0;
+  }
+
+  /* 03. Tia sáng quét ngang chữ — chữ ký thị giác của lễ hội */
+  .fx-t-sweep {
+    background-image: linear-gradient(
+      100deg,
+      currentColor 0%,
+      currentColor 38%,
+      #fff 48%,
+      var(--color-gold) 54%,
+      currentColor 64%,
+      currentColor 100%
+    );
+    background-size: 280% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Phải dùng text-fill-color chứ KHÔNG dùng `color: transparent`:
+       gradient ở trên đọc `currentColor`, mà đặt color trong suốt thì chính chữ
+       cũng biến mất — đúng một lần đã làm mất hết tiêu đề section. */
+    -webkit-text-fill-color: transparent;
+    transition: background-position var(--dur-slow) var(--ease-reveal);
+  }
+  .fx-t-sweep:hover,
+  .group:hover .fx-t-sweep {
+    background-position: 0 0;
+  }
+
+  /* 03b. MÀU CHẠY — dải màu chạy từ ký tự đầu tới ký tự cuối rồi lặp lại.
+     Dùng cho tiêu đề lớn ở banner. Dải màu đặt trên chính thẻ tiêu đề nên nó chạy
+     liền mạch qua cả câu; các cụm con đang tô màu riêng (gold-text, t-neon) được
+     tắt nền trong lúc hover để dải màu của cha chạy xuyên qua luôn. */
+  .fx-t-run:hover {
+    background-image: linear-gradient(
+      100deg,
+      #f4f1ea 0%,
+      #f4f1ea 10%,
+      var(--color-gold) 22%,
+      var(--color-magenta) 34%,
+      var(--color-purple) 44%,
+      var(--color-blue) 52%,
+      var(--color-cyan) 62%,
+      var(--color-gold) 72%,
+      #f4f1ea 86%,
+      #f4f1ea 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: obn-color-run 1.9s linear infinite;
+  }
+
+  .fx-t-run:hover .gold-text,
+  .fx-t-run:hover .t-neon,
+  .fx-t-run:hover .t-outline {
+    background-image: none;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0;
+  }
+
+  /* 04. Đổ vàng dần từ dưới lên */
+  .fx-t-gold-rise {
+    background-image: linear-gradient(to top, var(--color-gold) 50%, currentColor 50%);
+    background-size: 100% 220%;
+    background-position: 0 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position var(--dur-base) var(--ease-reveal);
+  }
+  .fx-t-gold-rise:hover,
+  .group:hover .fx-t-gold-rise {
+    background-position: 0 100%;
+  }
+
+  /* 05. Giãn chữ — kiểu tạp chí, rất kín đáo */
+  .fx-t-track {
+    transition:
+      letter-spacing var(--dur-base) var(--ease-reveal),
+      color var(--dur-fast) linear;
+  }
+  .fx-t-track:hover,
+  .group:hover .fx-t-track {
+    letter-spacing: 0.06em;
+  }
+
+  /* 06. Nhãn nhỏ: giãn chữ + sáng lên + hiện gạch đầu dòng */
+  .fx-t-kicker {
+    position: relative;
+    transition:
+      letter-spacing var(--dur-base) var(--ease-reveal),
+      color var(--dur-fast) linear,
+      padding-left var(--dur-base) var(--ease-reveal);
+  }
+  .fx-t-kicker::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--color-gold);
+    opacity: 0;
+    transition:
+      width var(--dur-base) var(--ease-reveal),
+      opacity var(--dur-fast) linear;
+  }
+  .fx-t-kicker:hover,
+  .group:hover .fx-t-kicker {
+    color: var(--color-gold);
+    letter-spacing: 0.4em;
+    padding-left: 2.1rem;
+  }
+  .fx-t-kicker:hover::before,
+  .group:hover .fx-t-kicker::before {
+    width: 1.5rem;
+    opacity: 1;
+  }
+
+  /* 07. Thay chữ theo chiều dọc — bản gốc trượt lên, bản dưới thế chỗ */
+  .fx-t-roll {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+  .fx-t-roll > span {
+    display: block;
+    transition: transform var(--dur-base) var(--ease-travel);
+  }
+  .fx-t-roll > span:last-child {
+    position: absolute;
+    inset: 0;
+    transform: translateY(105%);
+    color: var(--color-gold);
+  }
+  .fx-t-roll:hover > span:first-child,
+  .group:hover .fx-t-roll > span:first-child {
+    transform: translateY(-105%);
+  }
+  .fx-t-roll:hover > span:last-child,
+  .group:hover .fx-t-roll > span:last-child {
+    transform: translateY(0);
+  }
+
+  /* 08. Mũi tên trượt theo */
+  .fx-t-arrow > .fx-arrow {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-reveal);
+  }
+  .fx-t-arrow:hover > .fx-arrow,
+  .group:hover .fx-t-arrow > .fx-arrow {
+    transform: translateX(0.4em);
+  }
+
+  /* 09. Ngoặc vuông mở ra hai bên — nhãn kiểu kỹ thuật */
+  .fx-t-bracket {
+    position: relative;
+    display: inline-block;
+  }
+  .fx-t-bracket::before,
+  .fx-t-bracket::after {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    color: var(--color-gold);
+    transition:
+      opacity var(--dur-fast) linear,
+      transform var(--dur-base) var(--ease-reveal);
+  }
+  .fx-t-bracket::before {
+    content: '[';
+    left: -0.2em;
+    transform: translateX(0.35em);
+  }
+  .fx-t-bracket::after {
+    content: ']';
+    right: -0.2em;
+    transform: translateX(-0.35em);
+  }
+  .fx-t-bracket:hover::before,
+  .group:hover .fx-t-bracket::before,
+  .fx-t-bracket:hover::after,
+  .group:hover .fx-t-bracket::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .fx-t-bracket:hover,
+  .group:hover .fx-t-bracket {
+    padding-inline: 0.55em;
+  }
+
+  /* 10. Nhấc nhẹ — dùng cho tiêu đề nằm trong thẻ bấm được */
+  .fx-t-lift {
+    transition: transform var(--dur-base) var(--ease-reveal);
+  }
+  .group:hover .fx-t-lift,
+  .fx-t-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* 11. Ánh sáng nền loang sau chữ, rất nhẹ */
+  .fx-t-halo {
+    position: relative;
+  }
+  .fx-t-halo::before {
+    content: '';
+    position: absolute;
+    inset: -0.5em -1em;
+    background: radial-gradient(ellipse at center, rgb(255 46 154 / 0.22), transparent 70%);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity var(--dur-base) var(--ease-reveal);
+  }
+  .fx-t-halo:hover::before,
+  .group:hover .fx-t-halo::before {
+    opacity: 1;
+  }
+
+  /* ---------------------------------------------------------------------------
+     NHÓM 2 — ICON, CHẤM, HUY HIỆU
+     --------------------------------------------------------------------------- */
+
+  /* 12. Vòng quỹ đạo quay quanh icon */
+  .fx-i-orbit {
+    position: relative;
+  }
+  .fx-i-orbit::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1px dashed currentColor;
+    border-radius: 999px;
+    opacity: 0;
+    transition: opacity var(--dur-fast) linear;
+  }
+  .fx-i-orbit:hover::after,
+  .group:hover .fx-i-orbit::after {
+    opacity: 0.55;
+    animation: obn-orbit 5s linear infinite;
+  }
+
+  /* 13. Vòng sóng lan ra */
+  .fx-i-ping {
+    position: relative;
+  }
+  .fx-i-ping::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0;
+  }
+  .fx-i-ping:hover::before,
+  .group:hover .fx-i-ping::before {
+    animation: obn-ping 1.4s var(--ease-reveal) infinite;
+  }
+
+  /* 14. Xoay chậm 90° */
+  .fx-i-turn {
+    transition: transform var(--dur-base) var(--ease-reveal);
+  }
+  .fx-i-turn:hover,
+  .group:hover .fx-i-turn {
+    transform: rotate(90deg);
+  }
+
+  /* 15. Nảy lên nhẹ */
+  .fx-i-bob {
+    transition: transform var(--dur-base) var(--ease-reveal);
+  }
+  .fx-i-bob:hover,
+  .group:hover .fx-i-bob {
+    transform: translateY(-3px) scale(1.06);
+  }
+
+  /* 16. Chấm nở to và đổi sang vàng */
+  .fx-i-dot {
+    transition:
+      transform var(--dur-base) var(--ease-reveal),
+      background-color var(--dur-fast) linear;
+  }
+  .group:hover .fx-i-dot {
+    transform: scale(1.9);
+  }
+
+  /* 17. Ánh vàng chạy qua icon (dùng cho biểu tượng nền trong suốt) */
+  .fx-i-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .fx-i-shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / 0.55) 50%, transparent 62%);
+    transform: translateX(-120%);
+    transition: transform var(--dur-slow) var(--ease-reveal);
+  }
+  .fx-i-shine:hover::after,
+  .group:hover .fx-i-shine::after {
+    transform: translateX(120%);
+  }
+
+  /* 18. Nhịp đập một lần — "one beat" */
+  .fx-i-beat:hover,
+  .group:hover .fx-i-beat {
+    animation: obn-beat 620ms var(--ease-pulse);
+  }
+
+  /* ---------------------------------------------------------------------------
+     NHÓM 3 — THẺ, BẢNG, KHỐI NỘI DUNG
+     --------------------------------------------------------------------------- */
+
+  /* 19. Nhấc thẻ + viền sáng lên */
+  .fx-c-lift {
+    transition:
+      transform var(--dur-base) var(--ease-reveal),
+      border-color var(--dur-base) linear,
+      box-shadow var(--dur-base) var(--ease-reveal);
+  }
+  .fx-c-lift:hover {
+    transform: translateY(-6px);
+    border-color: rgb(245 185 66 / 0.45);
+    box-shadow: 0 26px 60px -34px rgb(0 0 0 / 0.9);
+  }
+
+  /* 20. Vệt sáng chéo quét qua mặt thẻ */
+  .fx-c-shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .fx-c-shine::after {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    background: linear-gradient(112deg, transparent 42%, rgb(255 255 255 / 0.13) 50%, transparent 58%);
+    transform: translateX(-90%) rotate(4deg);
+    transition: transform 900ms var(--ease-reveal);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .fx-c-shine:hover::after {
+    transform: translateX(90%) rotate(4deg);
+  }
+
+  /* 21. Viền gradient chạy quanh mép thẻ */
+  .fx-c-rim {
+    position: relative;
+  }
+  .fx-c-rim::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from 0deg,
+      var(--color-magenta),
+      var(--color-purple),
+      var(--color-blue),
+      var(--color-cyan),
+      var(--color-gold),
+      var(--color-magenta)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-reveal);
+    pointer-events: none;
+  }
+  .fx-c-rim:hover::before {
+    opacity: 0.85;
+    animation: obn-orbit 6s linear infinite;
+  }
+
+  /* 22. Bốn góc vẽ vào — kiểu khung ngắm máy ảnh */
+  .fx-c-corners {
+    position: relative;
+  }
+  .fx-c-corners::before,
+  .fx-c-corners::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--color-gold);
+    opacity: 0;
+    transition:
+      opacity var(--dur-fast) linear,
+      transform var(--dur-base) var(--ease-reveal);
+    pointer-events: none;
+  }
+  .fx-c-corners::before {
+    top: 10px;
+    left: 10px;
+    border-right: 0;
+    border-bottom: 0;
+    transform: translate(6px, 6px);
+  }
+  .fx-c-corners::after {
+    right: 10px;
+    bottom: 10px;
+    border-left: 0;
+    border-top: 0;
+    transform: translate(-6px, -6px);
+  }
+  .fx-c-corners:hover::before,
+  .fx-c-corners:hover::after {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* 23. Ảnh bên trong phóng nhẹ, thẻ đứng yên */
+  .fx-c-zoom img {
+    transition: transform 900ms var(--ease-reveal);
+  }
+  .fx-c-zoom:hover img {
+    transform: scale(1.06);
+  }
+
+  /* 24. Ảnh trôi ngang chậm — dùng cho thẻ ngang */
+  .fx-c-pan img {
+    transition: transform 1100ms var(--ease-reveal);
+  }
+  .fx-c-pan:hover img {
+    transform: scale(1.08) translateX(-1.5%);
+  }
+
+  /* 25. Vạch sáng chạy dọc mép trái */
+  .fx-c-edge {
+    position: relative;
+  }
+  .fx-c-edge::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-magenta), var(--color-gold));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--dur-base) var(--ease-reveal);
+  }
+  .fx-c-edge:hover::before {
+    transform: scaleY(1);
+  }
+
+  /* 26. Nội dung ẩn trượt lên khi rê vào */
+  .fx-c-reveal .fx-hidden {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height var(--dur-base) var(--ease-reveal),
+      opacity var(--dur-base) var(--ease-reveal);
+  }
+  .fx-c-reveal:hover .fx-hidden {
+    max-height: 9rem;
+    opacity: 1;
+  }
+
+  /* 27. Vệt quét ngang như đèn sân khấu lướt qua bảng */
+  .fx-c-scan {
+    position: relative;
+    overflow: hidden;
+  }
+  .fx-c-scan::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 42%;
+    top: -42%;
+    background: linear-gradient(to bottom, transparent, rgb(0 209 255 / 0.1), transparent);
+    transition: top 950ms var(--ease-reveal);
+    pointer-events: none;
+  }
+  .fx-c-scan:hover::before {
+    top: 100%;
+  }
+
+  /* 28. Quầng sáng phía sau thẻ */
+  .fx-c-halo {
+    position: relative;
+  }
+  .fx-c-halo::after {
+    content: '';
+    position: absolute;
+    inset: -14%;
+    background: radial-gradient(ellipse at center, rgb(123 44 255 / 0.3), transparent 68%);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity var(--dur-base) var(--ease-reveal);
+    pointer-events: none;
+  }
+  .fx-c-halo:hover::after {
+    opacity: 1;
+  }
+
+  /* 29. Thẻ nghiêng theo con trỏ — cần JS đặt --mx/--my (useSpotlight) */
+  .fx-c-tilt {
+    transform: perspective(900px) rotateX(calc(var(--my, 0) * -5deg)) rotateY(calc(var(--mx, 0) * 5deg));
+    transition: transform 240ms var(--ease-reveal);
+    transform-style: preserve-3d;
+  }
+
+  /* 30. Đèn rọi bám con trỏ — cần JS đặt --px/--py (useSpotlight) */
+  .fx-c-spot {
+    position: relative;
+  }
+  .fx-c-spot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      340px circle at var(--px, 50%) var(--py, 50%),
+      rgb(245 185 66 / 0.16),
+      transparent 62%
+    );
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-reveal);
+    pointer-events: none;
+  }
+  .fx-c-spot:hover::after {
+    opacity: 1;
+  }
+
+  /* ---------------------------------------------------------------------------
+     NHÓM 4 — NÚT & VIÊN LỌC
+     --------------------------------------------------------------------------- */
+
+  /* 31. Màu đổ từ trái sang */
+  .fx-b-fill {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .fx-b-fill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-reveal);
+    z-index: -1;
+  }
+  .fx-b-fill:hover::before {
+    transform: scaleX(1);
+  }
+  .fx-b-fill:hover {
+    color: #16120a;
+    border-color: transparent;
+  }
+
+  /* 32. Nhấn nhẹ xuống rồi bật lên */
+  .fx-b-press {
+    transition: transform 180ms var(--ease-pulse);
+  }
+  .fx-b-press:hover {
+    transform: translateY(-2px);
+  }
+  .fx-b-press:active {
+    transform: translateY(1px) scale(0.985);
+  }
+}
+
+/* Vùng chạm cảm ứng: không có hover thì phần ẩn phải luôn hiện, không thì mất nội dung */
+@media not all and (hover: hover) {
+  .fx-c-reveal .fx-hidden {
+    max-height: none;
+    opacity: 1;
+  }
+}
+
+@keyframes obn-color-run {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+@keyframes obn-ping {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0.45;
+  }
+  100% {
+    box-shadow: 0 0 0 14px currentColor;
+    opacity: 0;
+  }
+}
+
+@keyframes obn-beat {
+  0% {
+    transform: scale(1);
+  }
+  28% {
+    transform: scale(1.16);
+  }
+  46% {
+    transform: scale(0.98);
+  }
+  68% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Người dùng tắt chuyển động -> tắt sạch, chỉ giữ đổi màu */
+@media (prefers-reduced-motion: reduce) {
+  [class*='fx-']::before,
+  [class*='fx-']::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  [class*='fx-'] {
+    animation: none !important;
+  }
+  .fx-c-reveal .fx-hidden {
+    max-height: none;
+    opacity: 1;
+  }
+}

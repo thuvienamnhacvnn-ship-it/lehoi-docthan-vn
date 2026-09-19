@@ -1,0 +1,822 @@
+/* Nhà của toàn bộ design token + motion token.
+   source("../") vì C:\Users\admin là git root — không ghim thì Tailwind quét cả home folder và treo. */
+@import 'tailwindcss' source('../');
+@import './hover.css';
+
+@theme {
+  /* Bảng màu lõi — §03 build prompt */
+  --color-ink: #050507;
+  --color-ink-2: #0b0912;
+  --color-purple: #7b2cff;
+  --color-magenta: #ff2e9a;
+  --color-blue: #2f6bff;
+  --color-cyan: #00d1ff;
+  --color-gold: #f5b942;
+  --color-bone: #f4f1ea;
+
+  --font-display: var(--font-archivo), 'Archivo', system-ui, sans-serif;
+  --font-sans: var(--font-bvp), 'Be Vietnam Pro', system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+:root {
+  /* ----- Môi trường (mặc định: ĐÊM) ----- */
+  --env-bg: #050507;
+  --env-bg-2: #0b0912;
+  --env-fg: #f4f1ea;
+  --env-muted: rgb(244 241 234 / 0.62);
+  --env-faint: rgb(244 241 234 / 0.38);
+  --env-line: rgb(244 241 234 / 0.14);
+  --env-card: rgb(255 255 255 / 0.045);
+  --env-card-line: rgb(255 255 255 / 0.1);
+  --env-accent: #ff2e9a;
+  --env-accent-2: #00d1ff;
+  --env-glow: 0.85;
+  --env-shadow: 0 30px 80px -40px rgb(0 0 0 / 0.9);
+
+  /* ----- Nhịp + chiều ----- */
+  --gutter: clamp(1.25rem, 4vw, 5.5rem);
+  --measure: 62ch;
+  --radius-xs: 4px;
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --nav-h: 72px;
+
+  /* ----- Motion token — §16 ----- */
+  --dur-micro: 160ms;
+  --dur-fast: 320ms;
+  --dur-base: 620ms;
+  --dur-slow: 1100ms;
+  --dur-cinematic: 1800ms;
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-travel: cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-pulse: cubic-bezier(0.4, 0, 0.2, 1);
+  --stagger: 90ms;
+
+  color-scheme: dark;
+}
+
+/* NGÀY — ảnh sáng tự nhiên, UI trắng/mờ, nhấn lễ hội nhẹ */
+[data-env='day'] {
+  --env-bg: #f4f1ea;
+  --env-bg-2: #ffffff;
+  --env-fg: #14101c;
+  --env-muted: rgb(20 16 28 / 0.68);
+  --env-faint: rgb(20 16 28 / 0.42);
+  --env-line: rgb(20 16 28 / 0.14);
+  --env-card: rgb(255 255 255 / 0.72);
+  --env-card-line: rgb(20 16 28 / 0.1);
+  --env-accent: #7b2cff;
+  --env-accent-2: #2f6bff;
+  --env-glow: 0.18;
+  --env-shadow: 0 30px 70px -45px rgb(20 16 28 / 0.45);
+  color-scheme: light;
+}
+
+/* GIỜ VÀNG — vàng ấm tràn vào giao diện */
+[data-env='golden'] {
+  --env-bg: #1b1208;
+  --env-bg-2: #2a1a0c;
+  --env-fg: #fdf6e7;
+  --env-muted: rgb(253 246 231 / 0.7);
+  --env-faint: rgb(253 246 231 / 0.44);
+  --env-line: rgb(245 185 66 / 0.22);
+  --env-card: rgb(245 185 66 / 0.07);
+  --env-card-line: rgb(245 185 66 / 0.2);
+  --env-accent: #f5b942;
+  --env-accent-2: #ff2e9a;
+  --env-glow: 0.5;
+  --env-shadow: 0 30px 80px -45px rgb(0 0 0 / 0.8);
+  color-scheme: dark;
+}
+
+/* Banner luôn là ảnh thật trên nền tối, kể cả ở trang "ban ngày".
+   Khối nào nằm trong banner cũng phải đọc token sáng, nếu không thì thẻ/nhãn lấy màu
+   chữ tối của môi trường ngày và biến mất trên nền tối. */
+.on-dark {
+  --env-fg: #f4f1ea;
+  --env-muted: rgb(244 241 234 / 0.74);
+  --env-faint: rgb(244 241 234 / 0.48);
+  --env-line: rgb(244 241 234 / 0.16);
+  --env-card: rgb(255 255 255 / 0.06);
+  --env-card-line: rgb(255 255 255 / 0.2);
+  --env-accent: #ff2e9a;
+  --env-accent-2: #00d1ff;
+  color: var(--env-fg);
+}
+
+* {
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--env-bg);
+  color: var(--env-fg);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  transition:
+    background-color var(--dur-slow) var(--ease-reveal),
+    color var(--dur-slow) var(--ease-reveal);
+}
+
+::selection {
+  background: var(--color-magenta);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Typography ---------- */
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  /* Tiếng Việt có dấu chồng (ộ, ẫ, ề) — dưới 0.96 là dấu chạm dòng trên. */
+  line-height: 0.96;
+  text-wrap: balance;
+}
+
+.t-mega {
+  font-size: clamp(2.75rem, 11vw, 10.5rem);
+}
+.t-xl {
+  font-size: clamp(2.1rem, 6.2vw, 5.4rem);
+}
+.t-lg {
+  font-size: clamp(1.7rem, 3.6vw, 3.1rem);
+}
+.t-md {
+  font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+}
+
+/* Nhãn nhỏ kiểu tạp chí */
+.kicker {
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--env-faint);
+}
+
+.lede {
+  font-size: clamp(1.02rem, 1.35vw, 1.24rem);
+  line-height: 1.62;
+  color: var(--env-muted);
+  max-width: var(--measure);
+}
+
+.num-oversized {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+}
+
+/* ---------- Bề mặt ---------- */
+
+.surface {
+  background: var(--env-card);
+  border: 1px solid var(--env-card-line);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(14px);
+}
+
+.rule {
+  height: 1px;
+  background: var(--env-line);
+  border: 0;
+}
+
+/* ---------- Bảng kiểu chữ cho tiêu đề ----------
+   Mỗi tiêu đề trộn hai kiểu: phần đặc + một cụm nhấn. Nhờ vậy các section không
+   bị đều tăm tắp mà vẫn cùng một hệ. Dùng -webkit-text-fill-color chứ không dùng
+   `color: transparent` — xem chú thích ở hover.css. */
+
+/* Chữ rỗng, chỉ còn viền — bề dày theo cỡ chữ nên tiêu đề lớn nhỏ đều cân */
+.t-outline {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.022em currentColor;
+  paint-order: stroke fill;
+}
+
+/* Chữ rỗng mảnh hơn, dùng cho tiêu đề cỡ vừa */
+.t-outline-thin {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.015em currentColor;
+}
+
+/* Dải neon magenta → cyan */
+.t-neon {
+  background-image: linear-gradient(104deg, #ff2e9a, #7b2cff 45%, #00d1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-text {
+  background-image: linear-gradient(96deg, #f5b942, #ffe9a8 38%, #d99a1f 62%, #f5b942);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.section {
+  padding-block: clamp(4.5rem, 11vh, 9.5rem);
+  position: relative;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1480px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.wrap-narrow {
+  width: 100%;
+  max-width: 980px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Lưới: luôn minmax(0,1fr) để hàng nút dài không đẩy tràn ngang */
+.grid-2 {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3.5rem);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 900px) {
+  .grid-2 {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.grid-3 {
+  display: grid;
+  gap: clamp(1rem, 2vw, 2rem);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 720px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Motion families (§16) ---------- */
+
+@keyframes obn-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+    clip-path: inset(0 0 12% 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes obn-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes obn-travel {
+  from {
+    stroke-dashoffset: var(--dash, 1200);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes obn-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes obn-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+/* ---------- Tiêu đề động: từng chữ trồi lên từ khung cắt ----------
+   Khung cắt phải nới trên dưới rồi kéo lại bằng margin âm, nếu không dấu tiếng Việt
+   (ộ, ẫ) và đuôi chữ g/y bị xén mất. */
+.kt-w {
+  display: inline-block;
+  vertical-align: baseline;
+  /* Không cắt gì cả. Bản trước dùng overflow để tạo hiệu ứng chữ trồi lên từ khung,
+     nhưng với chữ hoa cỡ lớn và dấu tiếng Việt, hộp dòng luôn nhỏ hơn thân chữ nên
+     chữ bị xén mất hoặc tụt xuống đè lên đoạn văn. Đổi sang trồi lên + hiện dần. */
+  white-space: nowrap;
+}
+
+.kt-i {
+  display: inline-block;
+  transform: translateY(38%) rotate(2deg);
+  opacity: 0;
+  transform-origin: left bottom;
+  transition:
+    transform 820ms var(--ease-travel),
+    opacity 420ms linear;
+  transition-delay: calc(var(--kt-delay, 0ms) + var(--kt-i, 0) * var(--kt-step, 52ms));
+}
+
+.kt-in .kt-i {
+  transform: none;
+  opacity: 1;
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.is-in {
+  animation: obn-reveal var(--dur-base) var(--ease-reveal) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* ---------- Biểu tượng trên banner: nhịp sáng–tối + ánh sao ---------- */
+
+.obn-emblem {
+  animation: obn-emblem-breathe 2.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 22px rgb(245 185 66 / 0.4)) drop-shadow(0 0 48px rgb(255 46 154 / 0.22));
+  will-change: filter, transform;
+}
+
+@keyframes obn-emblem-breathe {
+  0% {
+    transform: scale(0.985);
+    opacity: 0.72;
+    filter: drop-shadow(0 0 10px rgb(245 185 66 / 0.18)) drop-shadow(0 0 26px rgb(255 46 154 / 0.1))
+      brightness(0.72) saturate(0.85);
+  }
+  38% {
+    transform: scale(1.03);
+    opacity: 1;
+    filter: drop-shadow(0 0 52px rgb(245 185 66 / 0.85)) drop-shadow(0 0 110px rgb(255 46 154 / 0.55))
+      brightness(1.4) saturate(1.2);
+  }
+  52% {
+    transform: scale(1.012);
+    opacity: 0.92;
+    filter: drop-shadow(0 0 26px rgb(245 185 66 / 0.45)) drop-shadow(0 0 60px rgb(255 46 154 / 0.3))
+      brightness(1.05) saturate(1);
+  }
+  68% {
+    transform: scale(1.026);
+    opacity: 1;
+    filter: drop-shadow(0 0 46px rgb(245 185 66 / 0.78)) drop-shadow(0 0 96px rgb(255 46 154 / 0.5))
+      brightness(1.32) saturate(1.18);
+  }
+  100% {
+    transform: scale(0.985);
+    opacity: 0.72;
+    filter: drop-shadow(0 0 10px rgb(245 185 66 / 0.18)) drop-shadow(0 0 26px rgb(255 46 154 / 0.1))
+      brightness(0.72) saturate(0.85);
+  }
+}
+
+@keyframes obn-halo-breathe {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translate(-50%, -50%) scale(0.86);
+  }
+  38% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.14);
+  }
+  68% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+/* Một ánh sao = hai thanh sáng bắt chéo, nở ra rồi tắt */
+.obn-spark {
+  position: absolute;
+  width: var(--spark-size, 10px);
+  height: var(--spark-size, 10px);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  animation: obn-spark var(--spark-dur, 4s) ease-in-out infinite;
+  animation-delay: var(--spark-delay, 0ms);
+  pointer-events: none;
+}
+
+.obn-spark::before,
+.obn-spark::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: linear-gradient(to right, transparent, #fff 45%, #fff 55%, transparent);
+  border-radius: 999px;
+}
+
+.obn-spark::before {
+  width: 100%;
+  height: 12%;
+  transform: translate(-50%, -50%);
+}
+
+.obn-spark::after {
+  width: 12%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(to bottom, transparent, #fff 45%, #fff 55%, transparent);
+}
+
+@keyframes obn-spark {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  35% {
+    transform: translate(-50%, -50%) scale(1) rotate(28deg);
+    opacity: 1;
+  }
+  62% {
+    transform: translate(-50%, -50%) scale(0.45) rotate(52deg);
+    opacity: 0.4;
+  }
+}
+
+/* ---------- Tôn trọng prefers-reduced-motion (§21) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+  }
+  /* Biểu tượng vẫn hiện, chỉ đứng yên; ánh sao tắt hẳn */
+  .obn-emblem,
+  .obn-emblem-halo {
+    animation: none !important;
+  }
+  .obn-spark {
+    display: none;
+  }
+}
+
+/* Thanh cuộn ngang của rail: ẩn nhưng vẫn cuộn được bằng bàn phím/chuột */
+.rail {
+  display: flex;
+  gap: clamp(0.85rem, 1.6vw, 1.5rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail > * {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+/* ---------- Vùng chạm (WCAG 2.5.8) ----------
+   Đo ở 390px: các viên lọc rơi vào 30–32px và liên kết gạch chân đứng riêng một dòng
+   chỉ cao 19–22px. Nới ở một chỗ thay vì sửa padding rải rác trong từng component. */
+button.rounded-full,
+a.rounded-full {
+  min-height: 36px;
+}
+
+a.underline-offset-8,
+a.underline-offset-4 {
+  display: inline-block;
+  padding-block: 0.3rem;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 200;
+  transform: translateY(-160%);
+  background: var(--color-gold);
+  color: #12100a;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  transition: transform var(--dur-fast) var(--ease-reveal);
+}
+.skip-link:focus {
+  transform: none;
+}
+
+/* ==========================================================================
+   LỚP ỨNG DỤNG ĐIỆN THOẠI
+   Từ đây xuống là phần biến bản web thành app cầm tay: thanh tab dưới, thẻ mời
+   cài, và mấy chỉnh sửa nhỏ để thao tác bằng ngón cái không thấy "web".
+   ========================================================================== */
+
+:root {
+  /* Chiều cao thanh tab + vạch home của máy. Mọi chỗ cần chừa chỗ đều đọc biến này,
+     không ai được gõ số px riêng. */
+  --tabbar-h: 62px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --app-bottom: 0px;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --app-bottom: calc(var(--tabbar-h) + var(--safe-b));
+  }
+}
+
+/* Chân trang phải lùi lên, không thì thanh tab đè mất dòng cuối. */
+body {
+  padding-bottom: var(--app-bottom);
+  /* Kéo quá đầu/cuối trang không lộ nền trắng của trình duyệt, và không kích hoạt
+     "kéo xuống để tải lại" của Chrome Android — cử chỉ đó phá cảm giác app. */
+  overscroll-behavior-y: none;
+}
+
+/* Chạm vào không loé ô xám kiểu web. Hiệu ứng nhấn tự làm lấy ở dưới. */
+a,
+button,
+[role='button'] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Khi mở từ màn hình chính thì không còn thanh địa chỉ -> đầu trang phải tự chừa tai thỏ. */
+html[data-standalone='true'] header {
+  padding-top: env(safe-area-inset-top, 0px);
+  height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+}
+
+/* ---------- Thanh tab dưới ---------- */
+.app-tabbar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 95;
+  padding-bottom: var(--safe-b);
+  transition: transform 380ms var(--ease-reveal);
+}
+.app-tabbar[data-hidden] {
+  transform: translateY(calc(100% + 2px));
+}
+
+/* Lớp kính: tách riêng để làm mờ nền mà không làm mờ cả chữ trên thanh. */
+.app-tabbar__glass {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--env-bg) 76%, transparent);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border-top: 1px solid var(--env-line);
+}
+
+.app-tabbar__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: var(--tabbar-h);
+}
+
+.app-tabbar__marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 460ms var(--ease-reveal);
+}
+.app-tabbar__marker-bar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 26px;
+  height: 2px;
+  transform: translateX(-50%);
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(90deg, var(--color-purple), var(--color-gold), var(--color-magenta));
+}
+/* Quầng sáng hắt xuống từ vệt vàng — đúng chất sân khấu, và nó chỉ ra tab đang mở
+   rõ hơn là đổi mỗi màu chữ. */
+.app-tabbar__marker-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 72px;
+  height: 46px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at top, rgb(245 185 66 / 0.3), transparent 70%);
+}
+
+.app-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--env-fg);
+  opacity: 0.55;
+  transition:
+    opacity 260ms var(--ease-pulse),
+    transform 160ms var(--ease-pulse);
+}
+.app-tab[data-active] {
+  opacity: 1;
+}
+.app-tab:active {
+  transform: scale(0.93);
+}
+.app-tab__icon {
+  transition: transform 420ms var(--ease-reveal);
+}
+.app-tab[data-active] .app-tab__icon {
+  transform: translateY(-1px);
+  color: var(--color-gold);
+}
+.app-tab__label {
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.app-tab[data-active] .app-tab__label {
+  color: var(--color-gold);
+}
+
+/* ---------- Thẻ mời cài app ---------- */
+.app-install {
+  position: fixed;
+  z-index: 96;
+  left: 12px;
+  right: 12px;
+  bottom: calc(var(--app-bottom) + 12px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--env-card-line);
+  background: color-mix(in srgb, var(--env-bg-2) 88%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 18px 50px rgb(0 0 0 / 0.45);
+  animation: app-install-in 520ms var(--ease-reveal) both;
+}
+@keyframes app-install-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+.app-install__icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.app-install__text {
+  min-width: 0;
+  flex: 1;
+}
+.app-install__title {
+  font-weight: 700;
+  font-size: 0.86rem;
+  line-height: 1.2;
+  color: var(--env-fg);
+}
+.app-install__desc {
+  margin-top: 2px;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--env-fg) 62%, transparent);
+}
+.app-install__cta {
+  flex-shrink: 0;
+  border-radius: 999px;
+  padding: 0.5rem 1.05rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--color-gold);
+  color: #16120a;
+}
+.app-install__close {
+  flex-shrink: 0;
+  align-self: flex-start;
+  /* Dấu X chỉ 16px; phải nới ô bấm lên 28px cho đủ ngưỡng chạm (WCAG 2.5.8). */
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -4px -4px 0 0;
+  color: color-mix(in srgb, var(--env-fg) 55%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-tabbar,
+  .app-tabbar__marker,
+  .app-tab,
+  .app-tab__icon {
+    transition: none;
+  }
+  .app-install {
+    animation: none;
+  }
+}
+
+/* ---------- Khung cuộn ngang không được kéo rộng cả trang ----------
+   Chrome vẫn cộng bề rộng cuộn bên trong một khung `overflow-x: auto` vào scrollWidth
+   của mọi phần tử cha. Trang không cuộn ngang được (body đã `overflow-x: clip`), nhưng
+   những thứ `position: fixed; inset-inline: 0` — thanh đầu trang và thanh tab — lại ăn
+   theo con số đó và phình ra ngoài màn hình, đẩy nút Vé/MENU ra khỏi tầm nhìn.
+   Đo ở /tickets khổ 390px: trang báo rộng 512px vì bảng so sánh vé.
+   `contain: paint` cắt hẳn liên hệ đó mà vẫn cuộn ngang bình thường. */
+.overflow-x-auto {
+  contain: paint;
+}
+
+/* ---------- Bộ chữ cho tiếng Trung, Nhật, Hàn ----------
+   Archivo và Be Vietnam Pro không có chữ Hán, Kana hay Hangul. Nếu cứ để nguyên thì
+   trình duyệt tự rơi xuống một bộ chữ bất kỳ, mỗi máy một kiểu, và tiêu đề lớn trông vỡ.
+
+   Ở đây KHÔNG tải webfont CJK: một bộ Noto Sans SC/JP/KR nặng vài megabyte, tải về chỉ để
+   hiển thị một trang lễ hội là không đáng. Thay vào đó gọi thẳng bộ chữ hệ thống — máy
+   Trung, Nhật, Hàn đều có sẵn bộ chữ tốt, và chữ hiện ra ngay không phải chờ tải.
+   Archivo vẫn đứng đầu danh sách để phần chữ Latin (ONE BEAT NIGHT, VIP, DJ) giữ đúng
+   nhận diện; chỉ những ký tự nó không có mới rơi xuống bộ chữ phía sau. */
+html[data-script='cjk'] {
+  --font-display:
+    var(--font-archivo), 'Archivo', 'PingFang SC', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo',
+    'Malgun Gothic', 'Apple SD Gothic Neo', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans CJK JP',
+    'Noto Sans CJK KR', system-ui, sans-serif;
+  --font-sans:
+    var(--font-bvp), 'Be Vietnam Pro', 'PingFang SC', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo',
+    'Malgun Gothic', 'Apple SD Gothic Neo', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans CJK JP',
+    'Noto Sans CJK KR', system-ui, sans-serif;
+}
+
+/* Chữ CJK vuông và dày hơn chữ Latin, nên mấy chỗ giãn chữ rộng của bản tiếng Việt
+   (kicker, tiêu đề lớn) đọc rất rời rạc. Thu giãn cách lại và nới dòng ra một chút. */
+html[data-script='cjk'] .kicker {
+  letter-spacing: 0.08em;
+}
+html[data-script='cjk'] .t-mega,
+html[data-script='cjk'] .t-xl,
+html[data-script='cjk'] .t-lg {
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+html[data-script='cjk'] .lede {
+  line-height: 1.75;
+}
