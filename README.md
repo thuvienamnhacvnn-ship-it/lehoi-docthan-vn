@@ -252,3 +252,39 @@ node scripts/i18n-verify.mjs   # mở 68 trang bằng Chrome, đọc chữ THẬ
 ```
 
 Công cụ thứ nhất không thấy chữ lấy từ biến, nên **phải chạy cả hai**. Hiện cả hai đều 0 lỗi.
+
+## Đưa lên Vercel
+
+Vercel dựng thẳng từ repo. Hai điều từng làm bản deploy hỏng, nay đã xử lý trong mã nguồn:
+
+1. **Ảnh phải nằm trong repo.** `scripts/build-assets.mjs` đọc `E:\Works\Concert` — thư mục
+   chỉ có trên máy ở văn phòng, máy dựng của Vercel không với tới được. Vì thế 598 tệp WebP
+   nằm luôn trong `public/assets`. Đừng thêm lại vào `.gitignore`.
+2. **Tên miền lấy từ biến môi trường**, xem `src/lib/site-url.ts`. Vercel tự cấp
+   `VERCEL_PROJECT_PRODUCTION_URL` nên sitemap, hreflang và ảnh chia sẻ đúng ngay từ lần
+   deploy đầu. Khi có tên miền riêng thì đặt `NEXT_PUBLIC_SITE_URL` trong Settings →
+   Environment Variables, nó được ưu tiên.
+
+Không cần `vercel.json`: Next tự nhận. Cấu hình mặc định là đủ — Framework Next.js,
+build `next build`, không đổi Output Directory.
+
+**Quan trọng: hai biến trên chỉ có tác dụng LÚC DỰNG.** Sitemap và thẻ meta được sinh sẵn
+lúc build, nên sau khi đổi biến phải Redeploy mới thấy thay đổi.
+
+### Trước khi deploy
+
+```
+node scripts/check-case.mjs   # Windows không phân biệt hoa/thường, Linux thì có
+npm run build
+```
+
+`check-case.mjs` so từng đường dẫn import và từng đường dẫn ảnh với tên tệp thật trên đĩa.
+Một chữ hoa sai chỗ chạy ngon ở máy này nhưng cho "Module not found" trên Vercel.
+
+### Dựng lại đúng như Vercel
+
+```
+git clone <repo> /tmp/thu && cd /tmp/thu && npm ci && npx next build
+```
+
+Cách này bắt được mọi thứ thiếu trong repo — đây chính là cách tìm ra chuyện thiếu ảnh.
