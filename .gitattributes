@@ -1,0 +1,15 @@
+# Mã nguồn luôn lưu bằng LF trong repo, kể cả khi máy Windows dùng CRLF.
+# Không có dòng này thì mỗi lần commit Git lại cảnh báo một tràng "LF will be replaced
+# by CRLF", và máy dựng trên Linux (Vercel) nhận file lẫn lộn kiểu xuống dòng.
+* text=auto eol=lf
+
+# Ảnh và font là nhị phân: Git tuyệt đối không được đụng vào nội dung.
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.mp4 binary
+*.webm binary

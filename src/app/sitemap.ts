@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { LOCALES, LOCALE_INFO } from '@/i18n/config';
+import { siteUrl } from '@/lib/site-url';
 
 /** Trang tĩnh, không có nội dung sinh động -> liệt kê thẳng, không cần đọc CSDL. */
 const PATHS: { path: string; priority: number }[] = [
@@ -27,7 +28,7 @@ const PATHS: { path: string; priority: number }[] = [
  * năm trang trùng nội dung.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3045';
+  const base = siteUrl();
   const now = new Date();
 
   return LOCALES.flatMap((locale) =>

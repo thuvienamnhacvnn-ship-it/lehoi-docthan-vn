@@ -12,6 +12,7 @@ import { InstallPrompt } from '@/components/app/InstallPrompt';
 import { I18nProvider } from '@/i18n/I18nProvider';
 import { getMessages } from '@/i18n/get-messages';
 import { LOCALES, LOCALE_INFO, isLocale, type Locale } from '@/i18n/config';
+import { siteUrl } from '@/lib/site-url';
 
 const archivo = Archivo({
   subsets: ['latin', 'latin-ext', 'vietnamese'],
@@ -42,7 +43,7 @@ export async function generateMetadata({
   const t = await getMessages(locale);
   const info = LOCALE_INFO[locale];
 
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3045';
+  const base = siteUrl();
 
   return {
     metadataBase: new URL(base),
