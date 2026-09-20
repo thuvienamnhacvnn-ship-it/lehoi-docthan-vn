@@ -1,5 +1,9 @@
+'use client';
+
 import type { CSSProperties } from 'react';
 import { getAsset, SIZES } from '@/lib/assets';
+import { useI18n } from '@/i18n/I18nProvider';
+import { altFor } from '@/i18n/alt';
 
 type SizeKey = keyof typeof SIZES;
 
@@ -55,6 +59,7 @@ export function AssetImage({
   scrim = 'none',
   fill = false,
 }: Props) {
+  const { locale } = useI18n();
   const asset = getAsset(id);
   const fillStyle: CSSProperties = fill
     ? { position: 'absolute', inset: 0, width: '100%', height: '100%', aspectRatio: 'auto' }
@@ -72,7 +77,7 @@ export function AssetImage({
           ...style,
         }}
         role="img"
-        aria-label={alt ?? `Ảnh chưa có: ${id}`}
+        aria-label={alt ?? id}
       >
         <span className="kicker px-4">Ảnh chưa có · {id}</span>
       </div>
@@ -89,7 +94,7 @@ export function AssetImage({
       sizes={sizesAttr}
       width={asset.width}
       height={asset.height}
-      alt={alt ?? asset.alt}
+      alt={alt ?? altFor(locale, asset.id)}
       loading={eager ? 'eager' : 'lazy'}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       fetchPriority={eager ? 'high' : 'auto'}

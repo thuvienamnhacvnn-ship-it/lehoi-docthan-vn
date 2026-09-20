@@ -4,10 +4,12 @@ import { useMemo, useState } from 'react';
 import { AssetImage } from '@/components/media/AssetImage';
 import { zonesById } from '@/data/zones';
 import {
+  ACTIVATION_STEPS,
   opportunities,
   opportunityCategories,
   type OpportunityCategory,
 } from '@/data/sponsor';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * TƯƠNG TÁC CHỮ KÝ D — TRÌNH KHÁM PHÁ CƠ HỘI TÀI TRỢ (§05, §17-D).
@@ -17,6 +19,7 @@ import {
  * ở đây bán vai trò trong hệ sinh thái, không bán ô quảng cáo.
  */
 export function OpportunityExplorer() {
+  const { t } = useI18n();
   const [category, setCategory] = useState<OpportunityCategory | 'all'>('all');
   const list = useMemo(
     () => (category === 'all' ? opportunities : opportunities.filter((o) => o.category === category)),
@@ -36,16 +39,16 @@ export function OpportunityExplorer() {
 
   return (
     <div>
-      <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label="Lọc cơ hội theo nhóm">
+      <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label={t.ui.opportunity.filterAria}>
         <CatChip active={category === 'all'} onClick={() => setCategory('all')}>
-          Tất cả ({opportunities.length})
+          {t.common.all} ({opportunities.length})
         </CatChip>
         {(Object.keys(opportunityCategories) as OpportunityCategory[]).map((c) => {
           const n = opportunities.filter((o) => o.category === c).length;
           if (n === 0) return null;
           return (
             <CatChip key={c} active={category === c} onClick={() => setCategory(c)} color={opportunityCategories[c].color}>
-              {opportunityCategories[c].label} ({n})
+              {t.opportunityCategories[c]} ({n})
             </CatChip>
           );
         })}
@@ -53,7 +56,7 @@ export function OpportunityExplorer() {
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         {/* Danh sách cơ hội */}
-        <ul className="max-h-[560px] space-y-1.5 overflow-y-auto pr-1" role="listbox" aria-label="Danh sách cơ hội">
+        <ul className="max-h-[560px] space-y-1.5 overflow-y-auto pr-1" role="listbox" aria-label={t.ui.opportunity.listAria}>
           {list.map((o) => {
             const on = o.id === active.id;
             return (
@@ -81,9 +84,9 @@ export function OpportunityExplorer() {
                     <span className="kicker block" style={{ color: opportunityCategories[o.category].color }}>
                       {opportunityCategories[o.category].en}
                     </span>
-                    <span className="font-display fx-t-lift mt-1 block text-[1rem]">{o.name}</span>
+                    <span className="font-display fx-t-lift mt-1 block text-[1rem]">{t.opportunities[o.id].name}</span>
                     <span className="mt-0.5 block text-[0.78rem] leading-snug" style={{ color: 'var(--env-faint)' }}>
-                      {o.lead}
+                      {t.opportunities[o.id].lead}
                     </span>
                   </span>
                 </button>
@@ -98,29 +101,29 @@ export function OpportunityExplorer() {
 
           <div className="p-6 sm:p-8">
             <p className="kicker" style={{ color: cat.color }}>
-              {cat.label} · {cat.en}
+              {t.opportunityCategories[active.category]} · {cat.en}
             </p>
-            <h3 className="font-display t-lg mt-3">{active.name}</h3>
-            <p className="lede mt-4">{active.lead}</p>
+            <h3 className="font-display t-lg mt-3">{t.opportunities[active.id].name}</h3>
+            <p className="lede mt-4">{t.opportunities[active.id].lead}</p>
             <p className="mt-4 text-[0.9rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-              {active.body}
+              {t.opportunities[active.id].body}
             </p>
 
             {zone && (
               <p className="mt-5 text-[0.8rem]" style={{ color: 'var(--env-faint)' }}>
-                Vị trí đề xuất:{' '}
+                {t.ui.opportunity.suggestedZone}{' '}
                 <span style={{ color: zone.color }} className="font-semibold">
-                  {zone.name}
+                  {t.zones[zone.id].name}
                 </span>
               </p>
             )}
 
             {/* Bốn bước */}
             <div className="mt-8">
-              <div className="flex gap-1.5" role="tablist" aria-label="Các bước của hoạt động thương hiệu">
-                {active.journey.map((s, i) => (
+              <div className="flex gap-1.5" role="tablist" aria-label={t.ui.opportunity.stepsAria}>
+                {ACTIVATION_STEPS.map((stepName, i) => (
                   <button
-                    key={s.step}
+                    key={stepName}
                     type="button"
                     role="tab"
                     aria-selected={i === step}
@@ -131,7 +134,7 @@ export function OpportunityExplorer() {
                       color: i === step ? 'var(--env-fg)' : 'var(--env-faint)',
                     }}
                   >
-                    <span className="block text-[0.6rem] font-bold uppercase tracking-[0.16em]">{s.step}</span>
+                    <span className="block text-[0.6rem] font-bold uppercase tracking-[0.16em]">{stepName}</span>
                   </button>
                 ))}
               </div>
@@ -141,9 +144,9 @@ export function OpportunityExplorer() {
                 className="mt-5"
                 style={{ animation: 'obn-reveal 420ms var(--ease-reveal) both' }}
               >
-                <p className="font-display text-[1.15rem]">{active.journey[step].label}</p>
+                <p className="font-display text-[1.15rem]">{t.opportunities[active.id].journey[step].label}</p>
                 <p className="mt-2 text-[0.9rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-                  {active.journey[step].text}
+                  {t.opportunities[active.id].journey[step].text}
                 </p>
               </div>
 
@@ -155,19 +158,19 @@ export function OpportunityExplorer() {
                   className="rounded-full border px-4 py-2 text-[0.78rem] font-semibold disabled:opacity-35"
                   style={{ borderColor: 'var(--env-card-line)' }}
                 >
-                  Bước trước
+                  {t.ui.opportunity.prevStep}
                 </button>
                 <span className="kicker">
-                  {step + 1} / {active.journey.length}
+                  {step + 1} / {ACTIVATION_STEPS.length}
                 </span>
                 <button
                   type="button"
-                  onClick={() => setStep((s) => Math.min(active.journey.length - 1, s + 1))}
-                  disabled={step === active.journey.length - 1}
+                  onClick={() => setStep((s) => Math.min(ACTIVATION_STEPS.length - 1, s + 1))}
+                  disabled={step === ACTIVATION_STEPS.length - 1}
                   className="rounded-full px-4 py-2 text-[0.78rem] font-bold disabled:opacity-35"
                   style={{ background: cat.color, color: '#0b0912' }}
                 >
-                  Bước sau
+                  {t.ui.opportunity.nextStep}
                 </button>
               </div>
             </div>

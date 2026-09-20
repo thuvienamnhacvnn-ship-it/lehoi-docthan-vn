@@ -36,8 +36,8 @@ export function MovementSection() {
           </div>
           <ul className="mt-9 flex flex-wrap gap-2">
             {festival.values.map((v) => (
-              <li key={v.en}>
-                <Tag>{t.values[v.en]}</Tag>
+              <li key={v}>
+                <Tag>{t.values[v]}</Tag>
               </li>
             ))}
           </ul>

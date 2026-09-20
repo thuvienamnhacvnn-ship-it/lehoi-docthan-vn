@@ -23,15 +23,15 @@ export interface ScheduleEntry {
 }
 
 export const stages = [
-  { id: 'main-stage', label: 'Sân khấu chính', zoneId: 'concert' },
-  { id: 'talk-stage', label: 'Sân khấu Trạm Gặp', zoneId: 'tram-gap' },
-  { id: 'plaza', label: 'Quảng trường', zoneId: 'main-plaza' },
-  { id: 'mega', label: 'Mega Zone', zoneId: 'mega-zone' },
-  { id: 'pet-zone', label: 'Khu thú cưng', zoneId: 'pets' },
-  { id: 'art-zone', label: 'Khu triển lãm', zoneId: 'visual-art' },
-  { id: 'food-court', label: 'Khu ẩm thực', zoneId: 'food' },
-  { id: 'vip-lounge', label: 'Khu VIP', zoneId: 'vip' },
-];
+  { id: 'main-stage', zoneId: 'concert' },
+  { id: 'talk-stage', zoneId: 'tram-gap' },
+  { id: 'plaza', zoneId: 'main-plaza' },
+  { id: 'mega', zoneId: 'mega-zone' },
+  { id: 'pet-zone', zoneId: 'pets' },
+  { id: 'art-zone', zoneId: 'visual-art' },
+  { id: 'food-court', zoneId: 'food' },
+  { id: 'vip-lounge', zoneId: 'vip' },
+] as const;
 
 const stageFor: Record<string, string> = {
   'main-plaza': 'plaza',

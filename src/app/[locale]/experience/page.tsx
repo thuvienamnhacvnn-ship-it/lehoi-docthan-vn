@@ -6,7 +6,7 @@ import { VideoExperience } from '@/components/media/VideoExperience';
 import { ActivityRail } from '@/components/experience/ActivityRail';
 import { Reveal } from '@/components/system/Reveal';
 import { SectionHeader, Tag } from '@/components/ui/Section';
-import { activities, categoryLabels } from '@/data/activities';
+import { activities, CATEGORY_IDS } from '@/data/activities';
 import { dayPhases } from '@/data/zones';
 import { videos } from '@/data/videos';
 
@@ -54,7 +54,7 @@ export default async function ExperiencePage({ params }: PageProps) {
         env="day"
       >
         <div className="mt-8 flex flex-wrap gap-2">
-          {(Object.keys(categoryLabels) as (keyof typeof categoryLabels)[]).map((k) => {
+          {CATEGORY_IDS.map((k) => {
             const n = dayActivities.filter((a) => a.category === k).length;
             if (!n) return null;
             return <Tag key={k}>{`${t.categories[k]} · ${n}`}</Tag>;

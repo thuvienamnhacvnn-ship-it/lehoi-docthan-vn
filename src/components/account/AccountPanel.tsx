@@ -9,6 +9,7 @@ import { useStringSet, useWallet } from '@/hooks/useFestivalState';
 import { scheduleWithActivity, timeLabel, overlaps } from '@/data/program';
 import { getAsset } from '@/lib/assets';
 import { zonesById } from '@/data/zones';
+import { useI18n } from '@/i18n/I18nProvider';
 
 type Tab = 'wallet' | 'schedule' | 'favorites';
 
@@ -17,6 +18,7 @@ type Tab = 'wallet' | 'schedule' | 'favorites';
  * Ba mục: ví vé, lịch của tôi, yêu thích — tất cả đọc từ cùng một lớp lưu trữ.
  */
 export function AccountPanel() {
+  const { t } = useI18n();
   const [tab, setTab] = useState<Tab>('wallet');
   const wallet = useWallet();
   const schedule = useStringSet('schedule');
@@ -42,30 +44,30 @@ export function AccountPanel() {
   const favAssets = favorites.items.map((id) => getAsset(id)).filter((a): a is NonNullable<typeof a> => Boolean(a));
 
   const tabs: { id: Tab; label: string; count: number }[] = [
-    { id: 'wallet', label: 'Ví vé', count: wallet.tickets.length },
-    { id: 'schedule', label: 'Lịch của tôi', count: mine.length },
-    { id: 'favorites', label: 'Yêu thích', count: favAssets.length },
+    { id: 'wallet', label: t.ui.account.walletTab, count: wallet.tickets.length },
+    { id: 'schedule', label: t.ui.account.scheduleTab, count: mine.length },
+    { id: 'favorites', label: t.ui.account.favoritesTab, count: favAssets.length },
   ];
 
   return (
     <div>
-      <div className="mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Khu tài khoản">
-        {tabs.map((t) => (
+      <div className="mb-8 flex flex-wrap gap-2" role="tablist" aria-label={t.ui.account.tabsAria}>
+        {tabs.map((item) => (
           <button
-            key={t.id}
+            key={item.id}
             type="button"
             role="tab"
-            aria-selected={tab === t.id}
-            onClick={() => setTab(t.id)}
+            aria-selected={tab === item.id}
+            onClick={() => setTab(item.id)}
             className="rounded-full border px-5 py-2.5 text-[0.82rem] font-semibold transition-colors"
             style={{
-              borderColor: tab === t.id ? 'transparent' : 'var(--env-card-line)',
-              background: tab === t.id ? 'var(--env-fg)' : 'transparent',
-              color: tab === t.id ? 'var(--env-bg)' : 'var(--env-muted)',
+              borderColor: tab === item.id ? 'transparent' : 'var(--env-card-line)',
+              background: tab === item.id ? 'var(--env-fg)' : 'transparent',
+              color: tab === item.id ? 'var(--env-bg)' : 'var(--env-muted)',
             }}
           >
-            {t.label}
-            <span className="ml-2 tabular-nums opacity-60">{t.count}</span>
+            {item.label}
+            <span className="ml-2 tabular-nums opacity-60">{item.count}</span>
           </button>
         ))}
       </div>
@@ -74,44 +76,44 @@ export function AccountPanel() {
         <div>
           {wallet.tickets.length === 0 ? (
             <Empty
-              title="Ví vé đang trống"
-              body="Vé chưa mở bán. Bạn có thể chạy thử luồng đặt vé ở trang Vé để xem vé điện tử trông thế nào."
+              title={t.ui.account.walletEmptyTitle}
+              body={t.ui.account.walletEmptyBody}
               href="/tickets"
-              cta="Tới trang Vé"
+              cta={t.ui.account.walletEmptyCta}
               assetId="kit-01-19-ticket"
             />
           ) : (
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {wallet.tickets.map((t) => (
-                <li key={t.id} className="surface overflow-hidden">
+              {wallet.tickets.map((ticket) => (
+                <li key={ticket.id} className="surface overflow-hidden">
                   <div className="relative">
                     <AssetImage id="kit-01-19-ticket" sizes="third" ratio="16 / 9" className="w-full" scrim="soft" />
                     <span
                       className="absolute right-3 top-3 rounded-full px-2.5 py-1 text-[0.6rem] font-bold uppercase tracking-[0.16em]"
                       style={{ background: 'rgb(5 5 7 / 0.72)', color: 'var(--color-gold)' }}
                     >
-                      Vé demo
+                      {t.ui.account.demoTicket}
                     </span>
                   </div>
                   <div className="p-5">
-                    <p className="font-display text-[1.08rem]">{t.tierName}</p>
+                    <p className="font-display text-[1.08rem]">{ticket.tierName}</p>
                     <p className="mt-1 text-[0.82rem]" style={{ color: 'var(--env-faint)' }}>
-                      {t.holder}
+                      {ticket.holder}
                     </p>
                     <div className="mt-4 flex items-center gap-4">
-                      <QrPlaceholder seed={t.code} />
+                      <QrPlaceholder seed={ticket.code} />
                       <div>
-                        <p className="num-oversized text-[0.95rem] tracking-[0.06em]">{t.code}</p>
-                        <p className="kicker mt-1.5 text-[0.54rem]">Mã check-in mô phỏng</p>
+                        <p className="num-oversized text-[0.95rem] tracking-[0.06em]">{ticket.code}</p>
+                        <p className="kicker mt-1.5 text-[0.54rem]">{t.ui.account.mockCode}</p>
                       </div>
                     </div>
                     <button
                       type="button"
-                      onClick={() => wallet.remove(t.id)}
+                      onClick={() => wallet.remove(ticket.id)}
                       className="mt-4 text-[0.78rem] underline underline-offset-4"
                       style={{ color: 'var(--env-faint)' }}
                     >
-                      Xoá vé
+                      {t.ui.account.deleteTicket}
                     </button>
                   </div>
                 </li>
@@ -125,10 +127,10 @@ export function AccountPanel() {
         <div>
           {mine.length === 0 ? (
             <Empty
-              title="Lịch của bạn đang trống"
-              body="Vào trang Lịch trình và bấm dấu cộng ở những hoạt động bạn muốn đi."
+              title={t.ui.account.scheduleEmptyTitle}
+              body={t.ui.account.scheduleEmptyBody}
               href="/program"
-              cta="Mở lịch trình"
+              cta={t.ui.account.scheduleEmptyCta}
               assetId="kit-06-16-midday-festival-life"
             />
           ) : (
@@ -139,7 +141,7 @@ export function AccountPanel() {
                   style={{ borderColor: 'rgb(255 46 154 / 0.5)', color: 'var(--color-magenta)' }}
                   role="status"
                 >
-                  {conflicts.size} mục đang trùng khung giờ với nhau.
+                  {conflicts.size} {t.ui.account.clashSuffix}
                 </p>
               )}
               <ul className="space-y-2">
@@ -153,9 +155,9 @@ export function AccountPanel() {
                     >
                       <span className="num-oversized w-16 shrink-0 text-[1rem]">{timeLabel(e.offsetMin)}</span>
                       <span className="min-w-0 flex-1">
-                        <span className="block font-semibold">{e.activity.name}</span>
+                        <span className="block font-semibold">{t.activities[e.activity.id].name}</span>
                         <span className="mt-1 block truncate text-[0.78rem]" style={{ color: 'var(--env-faint)' }}>
-                          {zone?.name} · {e.durationMin} phút
+                          {zone ? t.zones[zone.id].name : null} · {e.durationMin} {t.ui.account.minutes}
                         </span>
                       </span>
                       <button
@@ -164,7 +166,7 @@ export function AccountPanel() {
                         className="shrink-0 rounded-full border px-3.5 py-1.5 text-[0.76rem]"
                         style={{ borderColor: 'var(--env-card-line)', color: 'var(--env-muted)' }}
                       >
-                        Bỏ
+                        {t.ui.account.remove}
                       </button>
                     </li>
                   );
@@ -176,7 +178,7 @@ export function AccountPanel() {
                 className="mt-6 text-[0.8rem] underline underline-offset-4"
                 style={{ color: 'var(--env-faint)' }}
               >
-                Xoá toàn bộ lịch
+                {t.ui.account.clearSchedule}
               </button>
             </>
           )}
@@ -187,10 +189,10 @@ export function AccountPanel() {
         <div>
           {favAssets.length === 0 ? (
             <Empty
-              title="Chưa có mục yêu thích"
-              body="Bấm dấu tim trên ảnh trong thư viện để lưu lại những khung hình bạn thích."
+              title={t.ui.account.favEmptyTitle}
+              body={t.ui.account.favEmptyBody}
               href="/gallery"
-              cta="Mở thư viện ảnh"
+              cta={t.ui.account.favEmptyCta}
               assetId="kit-01-28-bg-bokeh"
             />
           ) : (
@@ -208,7 +210,7 @@ export function AccountPanel() {
                       className="mt-1 text-[0.74rem] underline underline-offset-4"
                       style={{ color: 'var(--env-faint)' }}
                     >
-                      Bỏ thích
+                      {t.ui.misc.unlike}
                     </button>
                   </li>
                 ))}
@@ -221,7 +223,7 @@ export function AccountPanel() {
                   className="text-[0.8rem] underline underline-offset-4"
                   style={{ color: 'var(--env-faint)' }}
                 >
-                  Xoá tất cả
+                  {t.ui.misc.clearAll}
                 </button>
               </div>
             </>
@@ -230,8 +232,7 @@ export function AccountPanel() {
       )}
 
       <p className="mt-12 text-[0.76rem] leading-relaxed" style={{ color: 'var(--env-faint)' }}>
-        Dữ liệu ở trang này nằm trong trình duyệt của bạn, không được gửi lên máy chủ nào. Khi hệ thống tài khoản
-        chính thức chạy, phần lưu trữ sẽ chuyển sang máy chủ và những gì bạn lưu sẽ đi theo tài khoản.
+        {t.ui.misc.localOnly}
       </p>
     </div>
   );

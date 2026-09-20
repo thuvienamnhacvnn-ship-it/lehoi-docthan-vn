@@ -157,13 +157,13 @@ export default async function PartnersPage({ params }: PageProps) {
               <Reveal key={z.id} delay={i * 40}>
                 <div className="group fx-c-zoom fx-c-corners relative overflow-hidden rounded-[var(--radius-sm)]">
                   <AssetImage id={z.aerialAssetId} sizes="thumb" ratio="4 / 3" className="w-full" scrim="bottom" />
-                  <p className="absolute inset-x-0 bottom-0 p-3 text-[0.78rem] font-semibold text-white">{z.name}</p>
+                  <p className="absolute inset-x-0 bottom-0 p-3 text-[0.78rem] font-semibold text-white">{t.zones[z.id].name}</p>
                 </div>
               </Reveal>
             ))}
           </div>
           <L href="/map" className="fx-t-arrow mt-6 inline-flex text-[0.86rem] font-semibold underline underline-offset-8" style={{ color: '#f4f1ea' }}>
-            Mở bản đồ tương tác <span className="fx-arrow">→</span>
+            {t.ui.misc.openMap} <span className="fx-arrow">→</span>
           </L>
         </div>
       </section>
@@ -244,17 +244,17 @@ export default async function PartnersPage({ params }: PageProps) {
               lead={c.mediaLead}
             />
             <ul className="mt-8 grid gap-2 sm:grid-cols-2">
-              {contentFormats.map((c) => (
-                <li key={c.id} className="flex items-start gap-2.5 text-[0.84rem]" style={{ color: 'rgb(244 241 234 / 0.65)' }}>
+              {contentFormats.map((cf) => (
+                <li key={cf.id} className="flex items-start gap-2.5 text-[0.84rem]" style={{ color: 'rgb(244 241 234 / 0.65)' }}>
                   <span aria-hidden style={{ color: 'var(--color-magenta)' }}>
                     —
                   </span>
                   <span>
                     <strong className="font-semibold" style={{ color: '#f4f1ea' }}>
-                      {c.name}
+                      {t.contentFormats[cf.id].name}
                     </strong>
                     <span className="block text-[0.78rem]" style={{ color: 'rgb(244 241 234 / 0.5)' }}>
-                      {c.lead}
+                      {t.contentFormats[cf.id].lead}
                     </span>
                   </span>
                 </li>
@@ -316,7 +316,7 @@ export default async function PartnersPage({ params }: PageProps) {
               lead={c.hospitalityLead}
             />
             <ul className="mt-6 flex flex-wrap gap-2">
-              {['Lối vào riêng', 'Khu ngồi riêng', 'Phục vụ tại bàn', 'Hỗ trợ điều phối khách mời'].map((s) => (
+              {c.hospitalityTags.map((s) => (
                 <li key={s}>
                   <Tag>{s}</Tag>
                 </li>

@@ -212,3 +212,43 @@ npm run build              # phải tắt server trước, nếu không .next/BU
 node scripts/preflight.mjs # 17 trang: console, ảnh hỏng, alt, bậc tiêu đề, liên kết, tràn ngang, vùng chạm
 node scripts/asset-usage.mjs
 ```
+
+## Năm thứ tiếng
+
+Việt (gốc), Anh, Trung giản thể, Nhật, Hàn. Mọi đường dẫn mang mã ngôn ngữ (`/vi/...`,
+`/ja/tickets`); `/` do `src/middleware.ts` đưa về bản hợp với trình duyệt, và nhớ lựa chọn
+của người dùng bằng cookie `obn-locale`.
+
+| Thành phần | Ở đâu |
+| --- | --- |
+| Danh sách thứ tiếng, chọn theo Accept-Language | `src/i18n/config.ts` |
+| Bộ chữ (một tệp mỗi thứ tiếng) | `src/i18n/messages/{vi,en,zh,ja,ko}.ts` |
+| Mô tả ảnh cho 164 tấm | `src/i18n/alt/{vi,en,zh,ja,ko}.ts` |
+| Đưa chữ xuống component chạy ở trình duyệt | `src/i18n/I18nProvider.tsx` |
+| Lấy chữ ở phía máy chủ | `src/i18n/get-messages.ts` |
+| Liên kết tự gắn mã ngôn ngữ | `src/components/system/L.tsx` |
+| Nút đổi thứ tiếng | `src/components/shell/LanguageSwitcher.tsx` |
+
+**Bản tiếng Việt là khuôn.** `src/i18n/types.ts` lấy kiểu từ `messages/vi.ts`, nên thêm một
+câu ở bản gốc mà quên dịch là TypeScript báo lỗi ngay lúc build. Mô tả ảnh cũng vậy
+(`src/i18n/alt/types.ts`).
+
+**Dữ liệu không chứa chữ.** `src/data/*.ts` chỉ còn định danh, ảnh, màu, toạ độ, thời lượng.
+Mọi câu chữ nằm trong bộ chữ và tra theo định danh (`t.activities[a.id].name`). Đây là lý do
+không thể sót một câu: bỏ chữ khỏi dữ liệu thì mọi chỗ còn đọc chữ từ đó đều không biên dịch được.
+
+### Thêm một thứ tiếng
+
+1. Thêm mã vào `LOCALES` và `LOCALE_INFO` trong `src/i18n/config.ts`.
+2. Chép `messages/vi.ts` và `alt/vi.ts` thành tệp mới rồi dịch — TypeScript sẽ chỉ ra mục nào thiếu.
+3. Khai vào `get-messages.ts` và `alt/index.ts`.
+4. `npm run build` — Next tự dựng thêm 17 trang cho thứ tiếng đó.
+
+### Hai công cụ soát dịch
+
+```
+node scripts/i18n-audit.mjs    # dò chữ Việt còn viết thẳng trong mã nguồn
+node scripts/i18n-verify.mjs   # mở 68 trang bằng Chrome, đọc chữ THẬT (kể cả alt và aria-label)
+```
+
+Công cụ thứ nhất không thấy chữ lấy từ biến, nên **phải chạy cả hai**. Hiện cả hai đều 0 lỗi.

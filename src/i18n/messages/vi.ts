@@ -1351,6 +1351,7 @@ export const vi = {
       priceLabel: 'Giá vé',
       priceShort: 'Giá',
       onsaleLabel: 'Ngày mở bán',
+      tiersCountLabel: 'Số hạng vé',
       tiersCountA: 'hạng vé',
       chooseTitle: 'Chọn cách bạn muốn trải qua ngày hội',
       chooseLead:
@@ -1359,6 +1360,7 @@ export const vi = {
       compareKicker: 'Đối chiếu',
       compareTitle: 'Hạng nào có gì',
       compareCaption: 'Bảng so sánh quyền lợi các hạng vé',
+      benefitsCol: 'Quyền lợi',
       yes: 'Có',
       no: 'Không',
       flowKicker: 'Quy trình',
@@ -1467,6 +1469,7 @@ export const vi = {
       hospitalityTitle: 'Mời đối tác của bạn tới một buổi tối đáng nhớ',
       hospitalityLead:
         'Khu tiếp khách riêng, phục vụ tại bàn, tầm nhìn sân khấu, hỗ trợ đón tiếp. Quan hệ đối tác diễn ra dễ hơn ở đây so với một phòng họp.',
+      hospitalityTags: ['Lối vào riêng', 'Khu ngồi riêng', 'Phục vụ tại bàn', 'Hỗ trợ điều phối khách mời'],
       csrKicker: '09 — CSR / ESG',
       csrTitle: 'Happiness Fund',
       csrLead:
@@ -1505,6 +1508,230 @@ export const vi = {
         'Lễ hội chưa khởi động chiến dịch truyền thông, nên trang này chưa có thông cáo hay bài viết nào. Cấu trúc đã sẵn sàng: khi nội dung thật xuất hiện, nó sẽ nằm đúng ở đây.',
       pressCta: 'Phòng báo chí',
     },
+  },
+
+  ui: {
+    ticketFlow: {
+      chooseTier: 'Chọn hạng vé',
+      holderTitle: 'Thông tin người nhận vé',
+      holderName: 'Họ và tên',
+      holderPlaceholder: 'Nguyễn Văn A',
+      holderNote: 'Bản chạy thử này không gửi dữ liệu đi đâu cả — thông tin chỉ nằm trong trình duyệt của bạn.',
+      promoTitle: 'Mã ưu đãi',
+      promoLabel: 'Nhập mã nếu có',
+      promoPlaceholder: 'VÍ DỤ: OBN2026',
+      promoNote: 'Chưa có chương trình khuyến mãi nào được công bố, nên hệ thống chưa kiểm tra mã.',
+      summaryTitle: 'Xác nhận đơn',
+      rowTier: 'Hạng vé',
+      rowHolder: 'Người nhận',
+      rowPromo: 'Mã ưu đãi',
+      rowTotal: 'Tổng tiền',
+      notEntered: 'Chưa nhập',
+      none: 'Không có',
+      paymentTitle: 'Thanh toán',
+      paymentBadge: 'Lớp tích hợp còn trống',
+      paymentBody:
+        'Website chưa nối với bất kỳ nhà cung cấp thanh toán nào. Kiến trúc đã tách sẵn: khi ban tổ chức chọn cổng thanh toán, chỉ cần cắm vào đúng bước này, các bước còn lại giữ nguyên.',
+      issueDemo: 'Phát hành vé demo để xem ví vé',
+      walletTitle: 'Vé đã vào ví',
+      walletDone: 'Vé demo đã được tạo. Xem mã QR mô phỏng ở cột bên phải hoặc trong trang Tài khoản.',
+      walletEmptyFlow: 'Chưa có vé nào được phát hành trong phiên này.',
+      back: 'Quay lại',
+      next: 'Tiếp tục',
+      wallet: 'Ví vé',
+      walletEmpty: 'Chưa có vé nào. Đi hết luồng bên trái để xem vé điện tử trông thế nào trong ví.',
+      demoTicket: 'Vé demo',
+      mockCode: 'Mã check-in mô phỏng',
+      deleteTicket: 'Xoá vé này',
+      mockCodeAria: 'Mã mô phỏng',
+    },
+
+    leadForm: {
+      errCompany: 'Hãy cho biết tên doanh nghiệp',
+      errName: 'Hãy cho biết tên người liên hệ',
+      errEmail: 'Email chưa đúng định dạng',
+      doneBadge: 'Đã ghi nhận trong phiên này',
+      thanks: 'Cảm ơn',
+      doneBodyA: 'Website chưa nối với hệ thống nhận thông tin của ban tổ chức, nên nội dung bạn vừa điền',
+      doneBodyStrong: 'chưa được gửi đi đâu cả',
+      doneBodyB: '. Kiến trúc biểu mẫu đã sẵn sàng: khi có địa chỉ nhận, dữ liệu sẽ chạy thẳng về đó.',
+      again: 'Điền lại',
+      title: 'Gửi thông tin hợp tác',
+      lead: 'Cho biết thương hiệu của bạn quan tâm tới phần nào, đội ngũ lễ hội sẽ dựng đề xuất tương ứng.',
+      company: 'Doanh nghiệp',
+      contact: 'Người liên hệ',
+      phone: 'Điện thoại',
+      interest: 'Quan tâm tới',
+      choose: '— Chọn một hình thức —',
+      message: 'Nội dung',
+      submit: 'Gửi thông tin',
+      demoNote: 'Biểu mẫu đang ở chế độ chạy thử: dữ liệu không rời khỏi trình duyệt của bạn.',
+    },
+
+    impact: {
+      whatKicker: 'Đo cái gì',
+      waiting: 'chờ số liệu thật',
+      emptyNote:
+        'Mọi ô đang để trống vì lễ hội chưa có số liệu được kiểm chứng. Cấu trúc này nối thẳng được vào dữ liệu thật sau sự kiện — không có con số nào ở đây được đưa ra như một cam kết.',
+      estimateKicker: 'Tự ước lượng',
+      yourNumbers: 'Số do bạn nhập',
+      estimateLead:
+        'Nhập giả định của chính thương hiệu bạn để xem cấu trúc đo lường hoạt động thế nào. Lễ hội chưa công bố quy mô, nên phần mềm không tự điền bất kỳ con số nào.',
+      inAudience: 'Số khách bạn giả định có mặt',
+      unitPeople: 'người',
+      visitRate: 'Tỉ lệ ghé hoạt động của bạn',
+      touchpointsInput: 'Số điểm chạm trong hành trình',
+      unitPoints: 'điểm',
+      derivedVisits: 'Lượt ghé hoạt động',
+      derivedImpressions: 'Lượt nhìn thấy thương hiệu',
+      derivedLeads: 'Khoảng khách tiềm năng',
+      derivedTouchpoints: 'Điểm chạm mỗi khách',
+    },
+
+    account: {
+      tabsAria: 'Khu tài khoản',
+      walletTab: 'Ví vé',
+      scheduleTab: 'Lịch của tôi',
+      favoritesTab: 'Yêu thích',
+      walletEmptyTitle: 'Ví vé đang trống',
+      walletEmptyBody: 'Vé chưa mở bán. Bạn có thể chạy thử luồng đặt vé ở trang Vé để xem vé điện tử trông thế nào.',
+      walletEmptyCta: 'Tới trang Vé',
+      demoTicket: 'Vé demo',
+      mockCode: 'Mã check-in mô phỏng',
+      deleteTicket: 'Xoá vé',
+      scheduleEmptyTitle: 'Lịch của bạn đang trống',
+      scheduleEmptyBody: 'Vào trang Lịch trình và bấm dấu cộng ở những hoạt động bạn muốn đi.',
+      scheduleEmptyCta: 'Mở lịch trình',
+      clashSuffix: 'mục đang trùng khung giờ với nhau.',
+      minutes: 'phút',
+      remove: 'Bỏ',
+      clearSchedule: 'Xoá toàn bộ lịch',
+      favEmptyTitle: 'Chưa có mục yêu thích',
+      favEmptyBody: 'Bấm dấu tim trên ảnh trong thư viện để lưu lại những khung hình bạn thích.',
+      favEmptyCta: 'Mở thư viện ảnh',
+    },
+
+    map: {
+      allZones: 'Tất cả khu',
+      zoomOut: 'Thu nhỏ',
+      zoomIn: 'Phóng to',
+      reset: 'Về mặc định',
+      zonesAria: 'Các khu vực của lễ hội',
+      schematicNote:
+        'Sơ đồ thể hiện quan hệ giữa các khu. Mặt bằng đo đạc chính thức sẽ thay thế sơ đồ này khi ban tổ chức cung cấp.',
+      closeDetail: 'Đóng chi tiết khu',
+      servicesTitle: 'Dịch vụ tại khu',
+      accessTag: 'Lối đi tiếp cận',
+      activitiesTitle: 'Hoạt động',
+      pickKicker: 'Chọn một khu',
+      pickBody: 'Bấm vào một vùng màu trên bản đồ để xem hoạt động, dịch vụ và ảnh của khu đó.',
+    },
+
+    sponsorTeaser: {
+      kicker: '07 — Dành cho thương hiệu',
+      titleA: 'không phải',
+      titleB: 'một chỗ để',
+      titleC: 'treo logo',
+      lead:
+        'Đây là một hệ sinh thái thương hiệu có thể bước vào: một khu trải nghiệm, một khung giờ thương mại, một phần trong kịch bản sân khấu, hoặc tên gắn vào cả một khu.',
+      countSuffix: 'hình thức tham gia, chia theo tám nhóm giá trị.',
+      measureNote: 'Kèm kiến trúc đo lường để sau sự kiện nối vào dữ liệu thật. Liên hệ hợp tác:',
+      portalCta: 'Vào cổng đối tác',
+      ticketsTitleA: 'Ba cách',
+      ticketsTitleB: 'bước vào',
+      ticketsTitleC: 'lễ hội',
+      ticketsLead:
+        'Bảng giá và ngày mở bán sẽ công bố sau. Quyền lợi của từng hạng đã cố định theo trải nghiệm, không theo con số.',
+      priceLabel: 'Giá',
+      ticketsCta: 'Xem chi tiết vé, ví vé và vòng tay LED',
+    },
+
+    rail: {
+      filterAria: 'Lọc hoạt động theo nhóm',
+      prev: 'Lùi lại',
+      next: 'Tiến tới',
+      listAria: 'Các hoạt động của lễ hội',
+      needsSignup: 'Cần đăng ký',
+    },
+
+    opportunity: {
+      filterAria: 'Lọc cơ hội theo nhóm',
+      listAria: 'Danh sách cơ hội',
+      stepsAria: 'Các bước của hoạt động thương hiệu',
+      suggestedZone: 'Vị trí đề xuất:',
+      prevStep: 'Bước trước',
+      nextStep: 'Bước sau',
+    },
+
+    schedule: {
+      views: {
+        day: 'Theo khối giờ',
+        stage: 'Theo sân khấu',
+        zone: 'Theo khu vực',
+        activity: 'Theo hoạt động',
+        now: 'Lịch của tôi',
+      },
+      viewsAria: 'Cách xem lịch trình',
+      allActivities: 'Tất cả hoạt động',
+      relativeTimes: 'Khung giờ tương đối — giờ chính thức chưa công bố',
+      clashA: 'Có',
+      clashB: 'mục trùng khung giờ trong lịch của bạn — các mục trùng được đánh dấu bên dưới.',
+      emptyMine: 'Lịch của bạn đang trống. Bấm dấu cộng ở bất kỳ mục nào trong các cách xem khác để thêm vào đây.',
+      addTo: 'Thêm vào lịch của tôi',
+      removeFrom: 'Bỏ khỏi lịch của tôi',
+    },
+
+    video: {
+      captionsLabel: 'Tiếng Việt',
+      unmute: 'Bật tiếng',
+      mute: 'Tắt tiếng',
+      comingSoon: 'Video sẽ bổ sung',
+      srNote: 'video chưa được cung cấp, đang hiển thị ảnh đại diện.',
+    },
+
+    lightMoment: {
+      kicker: 'Khoảnh khắc chữ ký',
+      body:
+        'Hàng nghìn vòng tay LED sáng cùng một nhịp. Đây là lúc “một nhịp” trong tên lễ hội trở thành thứ nhìn thấy được — cả khán đài thành một làn sóng ánh sáng.',
+      pause: 'Tạm dừng hiệu ứng',
+      play: 'Chạy hiệu ứng',
+    },
+
+    gallery: {
+      kits: {
+        'KIT-01': 'Thương hiệu & Hero',
+        'KIT-02': 'Day Festival',
+        'KIT-03': 'Đêm nhạc',
+        'KIT-04': 'Cộng đồng & Truyền thông',
+        'KIT-05': 'Tài trợ & Thương mại',
+        'KIT-06': 'Hành trình & Vận hành',
+      },
+      all: 'Tất cả',
+      shapes: { all: 'Mọi khổ', landscape: 'Ngang', portrait: 'Dọc', square: 'Vuông' },
+      countSuffix: 'ảnh',
+      open: 'Mở',
+      like: 'Thêm vào yêu thích',
+      unlike: 'Bỏ khỏi yêu thích',
+      close: 'Đóng',
+    },
+
+    misc: {
+      unlike: 'Bỏ thích',
+      clearAll: 'Xoá tất cả',
+      localOnly:
+        'Dữ liệu ở trang này nằm trong trình duyệt của bạn, không được gửi lên máy chủ nào. Khi hệ thống tài khoản thật được dựng, phần này sẽ nối vào đó.',
+      estimateDisclaimer:
+        'Kết quả trên là phép nhân từ giả định bạn vừa nhập, không phải dự báo của ban tổ chức và không phải cam kết của lễ hội.',
+      openMap: 'Mở bản đồ tương tác',
+      heroAlt:
+        'Đêm nhạc ONE BEAT NIGHT: làn sóng ánh sáng từ hàng nghìn vòng tay LED chạy qua khán đài, sân khấu rực sáng phía xa',
+    },
+
+    mediaWall: { close: 'Đóng ảnh' },
+
+    partnerNav: { aria: 'Mục lục trang đối tác' },
+
+    journey: { stage: 'Chặng', progress: 'Hành trình · chặng' },
   },
 
   videos: {

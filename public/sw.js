@@ -15,7 +15,13 @@ const SHELL = `${VERSION}-shell`;
 const RUNTIME = `${VERSION}-runtime`;
 
 /** Mở app khi mất mạng thì ít nhất phải ra được mấy trang này. */
-const PRECACHE = ['/', '/offline', '/tickets', '/program', '/map', '/icons/icon-192.png'];
+const LOCALES = ['vi', 'en', 'zh', 'ja', 'ko'];
+/* Mỗi thứ tiếng là một bộ trang riêng, nên phải giữ sẵn cả năm — nếu chỉ giữ bản tiếng Việt
+   thì người đang đọc bản tiếng Hàn mất mạng sẽ thấy trang trắng. */
+const PRECACHE = [
+  '/icons/icon-192.png',
+  ...LOCALES.flatMap((l) => ['/' + l, '/' + l + '/offline', '/' + l + '/tickets', '/' + l + '/program', '/' + l + '/map']),
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -76,7 +82,7 @@ self.addEventListener('fetch', (event) => {
           caches.open(RUNTIME).then((c) => c.put(request, copy));
           return res;
         })
-        .catch(async () => (await caches.match(request)) ?? (await caches.match('/offline')) ?? Response.error()),
+        .catch(async () => (await caches.match(request)) ?? (await caches.match('/' + (new URL(request.url).pathname.split('/')[1] || 'vi') + '/offline')) ?? Response.error()),
     );
   }
 });

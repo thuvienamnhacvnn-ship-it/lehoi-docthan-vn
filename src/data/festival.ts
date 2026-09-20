@@ -10,24 +10,10 @@
  */
 
 export const festival = {
-  name: 'ONE BEAT NIGHT',
-  subtitle: 'LỄ HỘI ĐỘC THÂN',
-  slogan: 'Hạnh phúc trong từng khoảnh khắc',
-  city: 'Thành phố Hồ Chí Minh',
-  country: 'Việt Nam',
-  positioning:
-    'Lễ hội dành cho người độc thân hiện đại, đề cao sự tự do, kết nối, phát triển bản thân và hạnh phúc.',
   /** Năm không xuất hiện trong giao diện — chưa chốt ngày tổ chức. */
   showYear: false,
-  values: [
-    { en: 'FREEDOM', vi: 'Tự do' },
-    { en: 'SELF-LOVE', vi: 'Yêu mình' },
-    { en: 'COMMUNITY', vi: 'Cộng đồng' },
-    { en: 'CONNECTION', vi: 'Kết nối' },
-    { en: 'HAPPINESS', vi: 'Hạnh phúc' },
-  ],
-  /** Lễ hội KHÔNG phải sự kiện hẹn hò — luật định vị, xem style bible mục 1. */
-  isNotA: ['Sự kiện hẹn hò', 'Chương trình ghép đôi', 'Ứng dụng tìm người yêu'],
+  /** Mã của năm giá trị; chữ hiển thị nằm ở t.values. */
+  values: ['FREEDOM', 'SELF-LOVE', 'COMMUNITY', 'CONNECTION', 'HAPPINESS'],
 } as const;
 
 /**
@@ -51,44 +37,31 @@ export type PlaceholderKey =
 
 export interface Placeholder {
   key: PlaceholderKey;
-  label: string;
+  /** null = chưa xác nhận. Nhãn và ghi chú lấy theo thứ tiếng từ t.placeholders. */
   value: string | null;
-  note: string;
 }
 
 export const PLACEHOLDERS: Record<PlaceholderKey, Placeholder> = {
-  EVENT_DATE: { key: 'EVENT_DATE', label: 'Ngày tổ chức', value: null, note: 'Chưa chốt trong tài liệu dự án' },
-  EVENT_TIME: { key: 'EVENT_TIME', label: 'Giờ mở cổng', value: null, note: 'Chưa chốt' },
-  VENUE: { key: 'VENUE', label: 'Địa điểm', value: null, note: 'Mới xác nhận tới cấp thành phố: TP.HCM' },
-  VENUE_ADDRESS: { key: 'VENUE_ADDRESS', label: 'Địa chỉ', value: null, note: 'Chưa chốt' },
-  HEADLINER: { key: 'HEADLINER', label: 'Nghệ sĩ chính', value: null, note: 'Line-up chưa công bố' },
-  TICKET_PRICE: { key: 'TICKET_PRICE', label: 'Giá vé', value: null, note: 'Chưa chốt bảng giá' },
-  TICKET_ONSALE: { key: 'TICKET_ONSALE', label: 'Ngày mở bán', value: null, note: 'Chưa chốt' },
-  EXPECTED_ATTENDANCE: {
-    key: 'EXPECTED_ATTENDANCE',
-    label: 'Quy mô dự kiến',
-    value: null,
-    note: 'Không lấy con số từ bất kỳ nguồn nào chưa xác nhận',
-  },
-  MEDIA_REACH: { key: 'MEDIA_REACH', label: 'Độ phủ truyền thông', value: null, note: 'Chưa có số liệu kiểm chứng' },
-  ORGANIZER: { key: 'ORGANIZER', label: 'Đơn vị tổ chức', value: null, note: 'Chưa nhận thông tin pháp nhân' },
-  PRESS_EMAIL: { key: 'PRESS_EMAIL', label: 'Email báo chí', value: null, note: 'Chưa có' },
-  PARTNER_EMAIL: { key: 'PARTNER_EMAIL', label: 'Email hợp tác', value: null, note: 'Chưa có' },
-  HOTLINE: { key: 'HOTLINE', label: 'Hotline', value: null, note: 'Chưa có' },
+  EVENT_DATE: { key: 'EVENT_DATE', value: null },
+  EVENT_TIME: { key: 'EVENT_TIME', value: null },
+  VENUE: { key: 'VENUE', value: null },
+  VENUE_ADDRESS: { key: 'VENUE_ADDRESS', value: null },
+  HEADLINER: { key: 'HEADLINER', value: null },
+  TICKET_PRICE: { key: 'TICKET_PRICE', value: null },
+  TICKET_ONSALE: { key: 'TICKET_ONSALE', value: null },
+  EXPECTED_ATTENDANCE: { key: 'EXPECTED_ATTENDANCE', value: null },
+  MEDIA_REACH: { key: 'MEDIA_REACH', value: null },
+  ORGANIZER: { key: 'ORGANIZER', value: null },
+  PRESS_EMAIL: { key: 'PRESS_EMAIL', value: null },
+  PARTNER_EMAIL: { key: 'PARTNER_EMAIL', value: null },
+  HOTLINE: { key: 'HOTLINE', value: null },
 };
 
-/** Ba chặng của hành trình — §KIT-06, không được rút thành 3 thẻ thường. */
+/** Ba chặng của hành trình — §KIT-06. Chữ nằm ở t.journey, đây giữ ảnh và màu. */
 export const journey = [
   {
     id: 'gap-minh',
     index: 1,
-    title: 'GẶP MÌNH',
-    en: 'MEET YOURSELF',
-    lead: 'Độc thân không còn là một mình.',
-    body:
-      'Chặng mở đầu dành cho sự tĩnh lặng: nhìn lại mình, biết mình đang ở đâu, thích gì, cần gì. ' +
-      'Không ai bị thúc phải kết nối trước khi sẵn sàng.',
-    keywords: ['Nội tâm', 'Tự do', 'Tự nhận thức', 'Tự tin'],
     assetId: 'kit-06-01-gap-minh-reflection',
     portraitAssetId: 'kit-06-02-gap-minh-meditative-portrait',
     env: 'day',
@@ -97,13 +70,6 @@ export const journey = [
   {
     id: 'gap-nhau',
     index: 2,
-    title: 'GẶP NHAU',
-    en: 'MEET OTHERS',
-    lead: 'Một cuộc trò chuyện tử tế là đủ để bắt đầu.',
-    body:
-      'Chặng giữa là cộng đồng: những vòng tròn cà phê, những bàn ăn chung, những cuộc gặp có người dẫn. ' +
-      'Kết nối diễn ra trong khuôn khổ được tôn trọng và an toàn.',
-    keywords: ['Cộng đồng', 'Đối thoại', 'Trải nghiệm chung', 'Kết nối tôn trọng'],
     assetId: 'kit-06-03-gap-nhau-social-circle',
     portraitAssetId: 'kit-06-04-gap-nhau-first-smile',
     env: 'golden',
@@ -112,13 +78,6 @@ export const journey = [
   {
     id: 'gap-hanh-phuc',
     index: 3,
-    title: 'GẶP HẠNH PHÚC',
-    en: 'MEET HAPPINESS',
-    lead: 'Hạnh phúc trong từng khoảnh khắc.',
-    body:
-      'Chặng cuối là ăn mừng: âm nhạc, ánh sáng, hàng nghìn người cùng một nhịp. ' +
-      'Không phải vì ai đó tìm được một người — mà vì tất cả cùng có một đêm đáng nhớ.',
-    keywords: ['Ăn mừng', 'Âm nhạc', 'Tình bạn', 'Năng lượng tập thể'],
     assetId: 'kit-06-05-gap-hanh-phuc-celebration',
     portraitAssetId: 'kit-03-23-concert-dance-moment',
     env: 'night',

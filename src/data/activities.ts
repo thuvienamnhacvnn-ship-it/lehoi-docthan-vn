@@ -16,33 +16,54 @@ export type ActivityCategory =
   | 'commerce'
   | 'vip';
 
-export const categoryLabels: Record<ActivityCategory, string> = {
-  music: 'Âm nhạc',
-  community: 'Cộng đồng',
-  talk: 'Trò chuyện',
-  pets: 'Thú cưng',
-  food: 'Ẩm thực',
-  art: 'Nghệ thuật',
-  wellness: 'Sức khoẻ',
-  commerce: 'Mua sắm',
-  vip: 'VIP',
-};
+/** Danh sách mã nhóm — nhãn hiển thị nằm ở t.categories. */
+export const CATEGORY_IDS: ActivityCategory[] = [
+  'music',
+  'community',
+  'talk',
+  'pets',
+  'food',
+  'art',
+  'wellness',
+  'commerce',
+  'vip',
+];
 
 export type DayPhase = 'morning' | 'midday' | 'golden' | 'night';
 
-export const phaseLabels: Record<DayPhase, { label: string; en: string; env: 'day' | 'golden' | 'night' }> = {
-  morning: { label: 'Buổi sáng', en: 'MORNING', env: 'day' },
-  midday: { label: 'Giữa ngày', en: 'MIDDAY', env: 'day' },
-  golden: { label: 'Giờ vàng', en: 'GOLDEN HOUR', env: 'golden' },
-  night: { label: 'One Beat Night', en: 'NIGHT', env: 'night' },
+/** Bốn khối giờ và môi trường ánh sáng tương ứng. Nhãn nằm ở t.phases. */
+export const phaseEnv: Record<DayPhase, 'day' | 'golden' | 'night'> = {
+  morning: 'day',
+  midday: 'day',
+  golden: 'golden',
+  night: 'night',
 };
 
 export interface Activity {
-  id: string;
-  name: string;
+  id:
+    | 'flashmob'
+    | 'color-run'
+    | 'coffee-talk'
+    | 'coffee-circles'
+    | 'match-meet'
+    | 'happy-lunch'
+    | 'pets-meetup'
+    | 'walk-and-wag'
+    | 'mega-zone'
+    | 'happiness-deals'
+    | 'visual-art'
+    | 'creative-gallery'
+    | 'live-band'
+    | 'match-cam'
+    | 'happiness-toast'
+    | 'headliner'
+    | 'singer-dj'
+    | 'light-moment'
+    | 'finale'
+    | 'vip-hospitality'
+    | 'wellness'
+    | 'pet-photo';
   /** Câu mô tả ngắn — nội dung do web viết, ảnh không chứa chữ. */
-  summary: string;
-  detail: string;
   category: ActivityCategory;
   phase: DayPhase;
   zoneId: ZoneId;
@@ -59,11 +80,6 @@ export interface Activity {
 export const activities: Activity[] = [
   {
     id: 'flashmob',
-    name: 'Flashmob khai hội',
-    summary: 'Hàng trăm người cùng vào nhịp đầu tiên của ngày.',
-    detail:
-      'Màn đồng diễn mở màn ngay quảng trường trung tâm. Ai cũng tham gia được: động tác đơn giản, tập trước 15 phút, ' +
-      'và toàn bộ được quay lại làm tư liệu truyền thông của lễ hội.',
     category: 'community',
     phase: 'morning',
     zoneId: 'main-plaza',
@@ -75,10 +91,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'color-run',
-    name: 'Color Run',
-    summary: 'Đường chạy màu xuyên ba khu trải nghiệm.',
-    detail:
-      'Cung đường ngắn, không tính giờ, đi qua ba trạm màu. Về đích nhận huy hiệu đeo được — thứ để nhớ, không phải để thi đấu.',
     category: 'community',
     phase: 'morning',
     zoneId: 'color-run',
@@ -90,11 +102,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'coffee-talk',
-    name: 'Coffee Talk',
-    summary: 'Những cuộc nói chuyện ngắn về sống một mình mà không cô đơn.',
-    detail:
-      'Sân khấu nhỏ ngoài trời, khách ngồi gần, mỗi phiên một chủ đề: tự lập tài chính, sức khoẻ tinh thần, ' +
-      'làm bạn với chính mình. Hỏi đáp trực tiếp, không diễn.',
     category: 'talk',
     phase: 'morning',
     zoneId: 'tram-gap',
@@ -105,10 +112,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'coffee-circles',
-    name: 'Coffee Circles',
-    summary: 'Vòng tròn 8–10 người, một người dẫn, không ai bị bỏ lại.',
-    detail:
-      'Mỗi vòng có người điều phối để câu chuyện không rơi vào im lặng. Đổi vòng sau mỗi phiên, gặp nhóm mới.',
     category: 'community',
     phase: 'midday',
     zoneId: 'tram-gap',
@@ -120,11 +123,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'match-meet',
-    name: 'Match & Meet',
-    summary: 'Gặp một-một có khung giờ, có người dẫn, có quyền dừng.',
-    detail:
-      'Bàn đôi xếp trong khu kết nối, mỗi lượt vài phút rồi xoay vòng. Có quy tắc ứng xử rõ ràng và nhân sự hỗ trợ ' +
-      'luôn ở trong khu vực. Đây là gặp gỡ trong khuôn khổ tôn trọng, không phải sự kiện ghép đôi.',
     category: 'community',
     phase: 'midday',
     zoneId: 'tram-gap',
@@ -136,9 +134,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'happy-lunch',
-    name: 'Happy Lunch',
-    summary: 'Bàn ăn chung — cách dễ nhất để bắt chuyện.',
-    detail: 'Bàn dài, món chia phần, người lạ ngồi cạnh nhau. Không ai phải ăn một mình.',
     category: 'food',
     phase: 'midday',
     zoneId: 'food',
@@ -150,11 +145,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'pets-meetup',
-    name: 'Pets Meetup',
-    summary: 'Khu thú cưng chia theo nhóm: chó nhỏ, chó lớn, mèo, chó già.',
-    detail:
-      'Không gian có bóng mát, tách khu theo kích cỡ và tính cách để an toàn cho cả vật nuôi lẫn người. ' +
-      'Có buổi xã hội hoá cho chó con và góc riêng cho người nuôi mèo.',
     category: 'pets',
     phase: 'midday',
     zoneId: 'pets',
@@ -166,9 +156,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'walk-and-wag',
-    name: 'Walk & Wag Parade',
-    summary: 'Cuộc diễu hành nhỏ của những người nuôi thú cưng.',
-    detail: 'Đi một vòng đường nội bộ có người xem hai bên, tốc độ chậm, ưu tiên an toàn cho thú cưng.',
     category: 'pets',
     phase: 'golden',
     zoneId: 'pets',
@@ -179,11 +166,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'mega-zone',
-    name: 'Mega Zone',
-    summary: 'Khu chợ trải nghiệm: thời trang, làm đẹp, công nghệ, sức khoẻ, ẩm thực, du lịch, AI & startup.',
-    detail:
-      'Gian hàng dựng theo cụm ngành, khách đi thử sản phẩm thật chứ không chỉ nhận tờ rơi. ' +
-      'Đây cũng là nơi thương hiệu đối tác đặt hoạt động tương tác của mình.',
     category: 'commerce',
     phase: 'midday',
     zoneId: 'mega-zone',
@@ -194,9 +176,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'happiness-deals',
-    name: 'MegaSale & Happiness Deals',
-    summary: 'Khung giờ ưu đãi tập trung trong khu thương mại.',
-    detail: 'Các thương hiệu mở ưu đãi theo khung giờ; khách nhận hộp quà tổng hợp từ nhiều nhãn.',
     category: 'commerce',
     phase: 'golden',
     zoneId: 'mega-zone',
@@ -207,10 +186,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'visual-art',
-    name: 'Không gian trình diễn thị giác',
-    summary: 'Sắp đặt nghệ thuật lớn lấy cảm hứng từ sức sống của cây sen đá.',
-    detail:
-      'Một lối đi một chiều qua ba lớp không gian sáng, đi hết là hiểu hành trình của lễ hội mà không cần ai giải thích.',
     category: 'art',
     phase: 'midday',
     zoneId: 'visual-art',
@@ -222,10 +197,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'creative-gallery',
-    name: 'Không gian sáng tạo',
-    summary: 'Triển lãm tranh, ảnh, tác phẩm hỗn hợp và góc nhạc mộc.',
-    detail:
-      'Nghệ sĩ làm việc ngay tại chỗ, khách xem được toàn bộ quá trình và có thể tham gia phần cộng đồng của tác phẩm.',
     category: 'art',
     phase: 'golden',
     zoneId: 'visual-art',
@@ -237,9 +208,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'live-band',
-    name: 'Live band',
-    summary: 'Ban nhạc sống mở màn đêm nhạc.',
-    detail: 'Phần nhạc sống đầu đêm, ánh sáng bắt đầu chuyển sang tông magenta – xanh – vàng.',
     category: 'music',
     phase: 'night',
     zoneId: 'concert',
@@ -251,9 +219,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'match-cam',
-    name: 'Match Cam',
-    summary: 'Máy quay quét khán đài, những phản ứng thật lên màn hình lớn.',
-    detail: 'Một khoảnh khắc tương tác vui giữa đêm nhạc — người được chọn phản ứng tự nhiên, cả sân cùng cười.',
     category: 'community',
     phase: 'night',
     zoneId: 'concert',
@@ -265,9 +230,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'happiness-toast',
-    name: 'Happiness Toast',
-    summary: 'Cả lễ hội cùng nâng ly một lần trong đêm.',
-    detail: 'Một nhịp dừng ngắn: đèn hạ, nhạc nhỏ lại, tất cả cùng nâng ly cho một năm sống tử tế với chính mình.',
     category: 'community',
     phase: 'night',
     zoneId: 'concert',
@@ -279,9 +241,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'headliner',
-    name: 'Nghệ sĩ chính',
-    summary: 'Phần trình diễn cao trào của đêm.',
-    detail: 'Sân khấu mở rộng, dàn đèn chạy hết công suất, khán đài thành một dải ánh sáng chuyển động.',
     category: 'music',
     phase: 'night',
     zoneId: 'concert',
@@ -293,9 +252,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'singer-dj',
-    name: 'Ca sĩ × DJ',
-    summary: 'Định dạng kết hợp: giọng hát trên nền set điện tử.',
-    detail: 'Phần chuyển từ nhạc sống sang sàn nhảy, hai nghệ sĩ cùng chia sân khấu.',
     category: 'music',
     phase: 'night',
     zoneId: 'concert',
@@ -307,11 +263,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'light-moment',
-    name: 'One Beat Light Moment',
-    summary: 'Hàng nghìn vòng tay LED sáng cùng một nhịp.',
-    detail:
-      'Khoảnh khắc ký hiệu của lễ hội: toàn bộ khán đài trở thành một làn sóng ánh sáng chạy theo nhạc. ' +
-      'Đây là lúc “một nhịp” trong tên lễ hội trở thành thứ nhìn thấy được.',
     category: 'music',
     phase: 'night',
     zoneId: 'concert',
@@ -323,9 +274,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'finale',
-    name: 'Finale',
-    summary: 'Tất cả nghệ sĩ trở lại sân khấu.',
-    detail: 'Phần khép lại: pháo sáng, confetti, và câu cuối cùng của đêm — hẹn gặp lại.',
     category: 'music',
     phase: 'night',
     zoneId: 'concert',
@@ -337,9 +285,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'vip-hospitality',
-    name: 'VIP & Hospitality',
-    summary: 'Lối vào riêng, khu ngồi nhìn thẳng sân khấu, phục vụ tại bàn.',
-    detail: 'Dành cho khách VIP và khách mời của đối tác: check-in nhanh, khu nghỉ riêng, phục vụ đồ ăn uống tại bàn.',
     category: 'vip',
     phase: 'night',
     zoneId: 'vip',
@@ -351,9 +296,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'wellness',
-    name: 'Góc sức khoẻ & phục hồi',
-    summary: 'Chỗ để thở giữa một ngày dài.',
-    detail: 'Trải nghiệm thư giãn ngắn trong khu thương mại: giãn cơ, chăm sóc cơ bản, nước và chỗ ngồi yên tĩnh.',
     category: 'wellness',
     phase: 'midday',
     zoneId: 'mega-zone',
@@ -364,9 +306,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'pet-photo',
-    name: 'Pet Photo Booth',
-    summary: 'Chụp ảnh cùng thú cưng trong bối cảnh neon của lễ hội.',
-    detail: 'Góc chụp dựng theo nhận diện lễ hội, ảnh gửi thẳng về điện thoại.',
     category: 'pets',
     phase: 'golden',
     zoneId: 'pets',
@@ -381,40 +320,28 @@ export const activities: Activity[] = [
 export const megaZoneCategories = [
   {
     id: 'fashion-beauty',
-    name: 'Thời trang & Làm đẹp',
     assetId: 'kit-02-22-mega-zone-fashion-beauty',
-    note: 'Thử sản phẩm, phụ kiện, tư vấn tại quầy',
   },
   {
     id: 'technology',
-    name: 'Công nghệ',
     assetId: 'kit-02-23-mega-zone-tech-demo',
-    note: 'Thiết bị mới, màn hình tương tác, dùng thử',
   },
   {
     id: 'wellness',
-    name: 'Sức khoẻ & Phục hồi',
     assetId: 'kit-02-24-mega-zone-wellness',
-    note: 'Trải nghiệm thư giãn ngắn',
   },
   {
     id: 'food',
-    name: 'Ẩm thực & FMCG',
     assetId: 'kit-02-25-mega-zone-food-sampling',
-    note: 'Nếm thử, phản ứng thật tại quầy',
   },
-  { id: 'travel', name: 'Du lịch', assetId: 'kit-02-26-mega-zone-travel', note: 'Gian hàng trải nghiệm điểm đến' },
+  { id: 'travel', assetId: 'kit-02-26-mega-zone-travel' },
   {
     id: 'ai-startup',
-    name: 'AI & Startup',
     assetId: 'kit-02-27-mega-zone-ai-startup',
-    note: 'Khu sản phẩm mới, sắp đặt tương tác',
   },
   {
     id: 'deals',
-    name: 'Happiness Deals',
     assetId: 'kit-02-28-happiness-box-unboxing',
-    note: 'Ưu đãi theo khung giờ, hộp quà nhiều nhãn',
   },
 ] as const;
 

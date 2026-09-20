@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { partnerPortalModules } from '@/data/sponsor';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * Điều hướng phụ dính theo trang đối tác (§12).
@@ -12,7 +13,8 @@ import { partnerPortalModules } from '@/data/sponsor';
  * Trên mobile, viên đang xem được kéo vào tầm nhìn của dải cuộn ngang.
  */
 export function PartnerNav() {
-  const [active, setActive] = useState(partnerPortalModules[0].id);
+  const { t } = useI18n();
+  const [active, setActive] = useState<string>(partnerPortalModules[0].id);
   const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export function PartnerNav() {
 
   return (
     <nav
-      aria-label="Mục lục trang đối tác"
+      aria-label={t.ui.partnerNav.aria}
       className="sticky z-40 border-y backdrop-blur"
       style={{ top: 'var(--nav-h)', borderColor: 'var(--env-line)', background: 'rgb(5 5 7 / 0.72)' }}
     >
@@ -75,7 +77,7 @@ export function PartnerNav() {
                 }}
                 aria-current={active === m.id ? 'true' : undefined}
               >
-                {m.label}
+                {t.partnerPortal[m.id]}
               </a>
             </li>
           ))}

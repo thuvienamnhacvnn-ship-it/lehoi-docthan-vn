@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AssetImage } from '@/components/media/AssetImage';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * TƯƠNG TÁC CHỮ KÝ E — ONE BEAT LIGHT MOMENT (§17-E).
@@ -12,6 +13,7 @@ import { AssetImage } from '@/components/media/AssetImage';
  * phân tích âm thanh thật vào cùng chỗ đó.
  */
 export function LightMoment() {
+  const { t } = useI18n();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hostRef = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(true);
@@ -129,14 +131,13 @@ export function LightMoment() {
 
         <div className="wrap absolute inset-x-0 bottom-0 pb-14">
           <p className="kicker" style={{ color: 'rgb(244 241 234 / 0.5)' }}>
-            Khoảnh khắc chữ ký
+            {t.ui.lightMoment.kicker}
           </p>
           <h2 className="font-display t-xl mt-4 max-w-[18ch]" style={{ color: '#f4f1ea' }}>
             ONE BEAT <span className="gold-text">LIGHT MOMENT</span>
           </h2>
           <p className="lede mt-5" style={{ color: 'rgb(244 241 234 / 0.72)' }}>
-            Hàng nghìn vòng tay LED sáng cùng một nhịp. Đây là lúc “một nhịp” trong tên lễ hội trở thành thứ
-            nhìn thấy được — cả khán đài thành một làn sóng ánh sáng.
+            {t.ui.lightMoment.body}
           </p>
           {!reduced && (
             <button
@@ -145,7 +146,7 @@ export function LightMoment() {
               className="mt-6 rounded-full border px-5 py-2.5 text-[0.8rem] font-semibold"
               style={{ borderColor: 'rgb(244 241 234 / 0.3)', color: '#f4f1ea' }}
             >
-              {playing ? 'Tạm dừng hiệu ứng' : 'Chạy hiệu ứng'}
+              {playing ? t.ui.lightMoment.pause : t.ui.lightMoment.play}
             </button>
           )}
         </div>

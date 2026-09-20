@@ -22,11 +22,14 @@ const BASE = process.env.OBN_BASE ?? 'http://localhost:3045';
 const PORT = 9340;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const ROUTES = [
-  '/', '/experience', '/one-beat-night', '/program', '/map', '/artists',
+const LOCALES = ['vi', 'en', 'zh', 'ja', 'ko'];
+const PATHS = [
+  '', '/experience', '/one-beat-night', '/program', '/map', '/artists',
   '/mega-zone', '/community', '/news', '/tickets', '/partners', '/press',
   '/faq', '/visitor-guide', '/contact', '/account', '/gallery',
 ];
+/** Mọi trang, mọi thứ tiếng — 17 × 5. */
+const ROUTES = LOCALES.flatMap((l) => PATHS.map((p) => `/${l}${p}`));
 
 class Cdp {
   constructor(ws) {

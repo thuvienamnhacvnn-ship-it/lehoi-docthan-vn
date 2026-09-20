@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next';
+import { LOCALES, LOCALE_INFO } from '@/i18n/config';
 
 /** Trang tĩnh, không có nội dung sinh động -> liệt kê thẳng, không cần đọc CSDL. */
-const ROUTES: { path: string; priority: number }[] = [
-  { path: '/', priority: 1 },
+const PATHS: { path: string; priority: number }[] = [
+  { path: '', priority: 1 },
   { path: '/one-beat-night', priority: 0.8 },
   { path: '/experience', priority: 0.9 },
   { path: '/program', priority: 0.9 },
@@ -20,13 +21,27 @@ const ROUTES: { path: string; priority: number }[] = [
   { path: '/contact', priority: 0.6 },
 ];
 
+/**
+ * Mỗi trang xuất hiện năm lần, một lần cho mỗi thứ tiếng, và mỗi mục khai luôn bốn bản
+ * còn lại ở `alternates` — máy tìm kiếm cần biết đây là cùng một trang chứ không phải
+ * năm trang trùng nội dung.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3045';
   const now = new Date();
-  return ROUTES.map(({ path, priority }) => ({
-    url: `${base}${path}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority,
-  }));
+
+  return LOCALES.flatMap((locale) =>
+    PATHS.map(({ path, priority }) => ({
+      url: `${base}/${locale}${path}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority,
+      alternates: {
+        languages: Object.fromEntries([
+          ...LOCALES.map((l) => [LOCALE_INFO[l].html, `${base}/${l}${path}`]),
+          ['x-default', `${base}/vi${path}`],
+        ]),
+      },
+    })),
+  );
 }

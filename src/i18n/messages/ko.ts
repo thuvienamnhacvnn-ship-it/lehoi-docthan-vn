@@ -1330,6 +1330,7 @@ export const ko: MessagesFor = {
       priceLabel: '티켓 가격',
       priceShort: '가격',
       onsaleLabel: '판매 시작일',
+      tiersCountLabel: '등급 수',
       tiersCountA: '가지 등급',
       chooseTitle: '그날을 어떻게 보낼지 고르세요',
       chooseLead:
@@ -1338,6 +1339,7 @@ export const ko: MessagesFor = {
       compareKicker: '비교',
       compareTitle: '등급별로 무엇이 포함되나',
       compareCaption: '등급별 혜택 비교표',
+      benefitsCol: '혜택',
       yes: '있음',
       no: '없음',
       flowKicker: '흐름',
@@ -1441,6 +1443,7 @@ export const ko: MessagesFor = {
       hospitalityTitle: '파트너를 기억에 남을 하룻밤으로 초대하세요',
       hospitalityLead:
         '전용 접객 구역, 테이블 서비스, 무대가 보이는 시야, 영접 지원. 회의실보다 여기에서 관계가 더 잘 풀립니다.',
+      hospitalityTags: ['전용 입구', '지정 좌석', '테이블 서비스', '초청객 안내 지원'],
       csrKicker: '09 — CSR / ESG',
       csrTitle: 'Happiness Fund',
       csrLead:
@@ -1478,6 +1481,229 @@ export const ko: MessagesFor = {
         '페스티벌이 아직 홍보를 시작하지 않아 여기에는 보도자료나 기사가 없습니다. 틀은 준비되어 있습니다. 진짜 콘텐츠가 나오면 바로 이 자리에 놓입니다.',
       pressCta: '프레스룸',
     },
+  },
+
+  ui: {
+    ticketFlow: {
+      chooseTier: '등급 선택',
+      holderTitle: '티켓 수령인 정보',
+      holderName: '이름',
+      holderPlaceholder: '홍길동',
+      holderNote: '이 시험판은 어디로도 데이터를 보내지 않습니다 — 입력한 내용은 브라우저 안에만 남습니다.',
+      promoTitle: '프로모션 코드',
+      promoLabel: '있으면 입력하세요',
+      promoPlaceholder: '예: OBN2026',
+      promoNote: '아직 공개된 프로모션이 없어 코드 확인은 하지 않습니다.',
+      summaryTitle: '주문 확인',
+      rowTier: '등급',
+      rowHolder: '수령인',
+      rowPromo: '프로모션 코드',
+      rowTotal: '합계',
+      notEntered: '입력 안 함',
+      none: '없음',
+      paymentTitle: '결제',
+      paymentBadge: '연동 계층이 비어 있습니다',
+      paymentBody:
+        '사이트는 어떤 결제 사업자와도 연결되어 있지 않습니다. 구조는 이미 분리되어 있습니다. 주최 측이 결제 게이트웨이를 정하면 바로 이 단계에 꽂기만 하면 되고, 나머지 단계는 그대로입니다.',
+      issueDemo: '데모 티켓을 발행해 지갑 보기',
+      walletTitle: '티켓이 지갑에 들어갔습니다',
+      walletDone: '데모 티켓이 만들어졌습니다. 오른쪽 열이나 계정 페이지에서 모의 QR 코드를 볼 수 있습니다.',
+      walletEmptyFlow: '이번에는 아직 발행된 티켓이 없습니다.',
+      back: '뒤로',
+      next: '계속',
+      wallet: '티켓 지갑',
+      walletEmpty: '아직 티켓이 없습니다. 왼쪽 흐름을 끝까지 따라가면 전자 티켓이 어떻게 보이는지 알 수 있습니다.',
+      demoTicket: '데모 티켓',
+      mockCode: '모의 입장 코드',
+      deleteTicket: '이 티켓 삭제',
+      mockCodeAria: '모의 코드',
+    },
+
+    leadForm: {
+      errCompany: '회사명을 알려주세요',
+      errName: '담당자 이름을 알려주세요',
+      errEmail: '이메일 형식이 맞지 않는 것 같습니다',
+      doneBadge: '이번 세션에 기록되었습니다',
+      thanks: '감사합니다',
+      doneBodyA: '사이트가 주최 측의 접수 시스템과 연결되어 있지 않아, 방금 입력하신 내용은',
+      doneBodyStrong: '어디로도 보내지지 않았습니다',
+      doneBodyB: '. 양식 구조는 준비되어 있습니다. 받을 주소가 생기면 데이터는 곧장 그곳으로 갑니다.',
+      again: '다시 작성',
+      title: '제휴 정보 보내기',
+      lead: '브랜드가 어느 부분에 관심이 있는지 알려주시면, 페스티벌 팀이 그에 맞는 제안을 만들겠습니다.',
+      company: '회사',
+      contact: '담당자',
+      phone: '전화',
+      interest: '관심 분야',
+      choose: '— 형태를 고르세요 —',
+      message: '내용',
+      submit: '보내기',
+      demoNote: '양식은 시험 모드입니다: 데이터가 브라우저 밖으로 나가지 않습니다.',
+    },
+
+    impact: {
+      whatKicker: '무엇을 재는가',
+      waiting: '실제 수치를 기다리는 중',
+      emptyNote:
+        '모든 칸이 비어 있는 것은 페스티벌에 아직 검증된 수치가 없기 때문입니다. 이 구조는 행사 뒤 실제 데이터에 바로 연결됩니다 — 여기 있는 어떤 숫자도 약속으로 제시되지 않습니다.',
+      estimateKicker: '직접 추산해 보기',
+      yourNumbers: '직접 입력한 숫자',
+      estimateLead:
+        '브랜드 자체의 가정을 넣어 측정 구조가 어떻게 작동하는지 보세요. 페스티벌이 규모를 공개하지 않았으므로 프로그램이 알아서 숫자를 채우지는 않습니다.',
+      inAudience: '가정하는 참석 인원',
+      unitPeople: '명',
+      visitRate: '귀사 기획에 들르는 비율',
+      touchpointsInput: '동선 안의 접점 수',
+      unitPoints: '곳',
+      derivedVisits: '기획 방문 수',
+      derivedImpressions: '브랜드가 노출된 횟수',
+      derivedLeads: '잠재 고객 범위',
+      derivedTouchpoints: '1인당 접점',
+    },
+
+    account: {
+      tabsAria: '계정 영역',
+      walletTab: '티켓 지갑',
+      scheduleTab: '내 일정',
+      favoritesTab: '즐겨찾기',
+      walletEmptyTitle: '지갑이 비어 있습니다',
+      walletEmptyBody: '티켓은 아직 판매하지 않습니다. 티켓 페이지에서 구매 흐름을 시험해 보면 전자 티켓이 어떻게 보이는지 알 수 있습니다.',
+      walletEmptyCta: '티켓 페이지로',
+      demoTicket: '데모 티켓',
+      mockCode: '모의 입장 코드',
+      deleteTicket: '티켓 삭제',
+      scheduleEmptyTitle: '일정이 비어 있습니다',
+      scheduleEmptyBody: '타임테이블 페이지에서 가고 싶은 프로그램의 더하기를 누르세요.',
+      scheduleEmptyCta: '타임테이블 열기',
+      clashSuffix: '개 항목의 시간이 서로 겹칩니다.',
+      minutes: '분',
+      remove: '빼기',
+      clearSchedule: '일정 전체 비우기',
+      favEmptyTitle: '즐겨찾기가 아직 없습니다',
+      favEmptyBody: '라이브러리에서 이미지의 하트를 누르면 마음에 든 장면을 남길 수 있습니다.',
+      favEmptyCta: '이미지 라이브러리 열기',
+    },
+
+    map: {
+      allZones: '모든 구역',
+      zoomOut: '축소',
+      zoomIn: '확대',
+      reset: '기본으로',
+      zonesAria: '페스티벌의 구역들',
+      schematicNote:
+        '이 도면은 구역들 사이의 관계를 보여줍니다. 주최 측이 실측 도면을 제공하면 교체됩니다.',
+      closeDetail: '구역 상세 닫기',
+      servicesTitle: '이 구역의 시설',
+      accessTag: '무장애 동선',
+      activitiesTitle: '프로그램',
+      pickKicker: '구역을 고르세요',
+      pickBody: '지도의 색칠된 곳을 누르면 그 구역의 프로그램, 시설, 사진을 볼 수 있습니다.',
+    },
+
+    sponsorTeaser: {
+      kicker: '07 — 브랜드를 위해',
+      titleA: '는',
+      titleB: '로고를 거는',
+      titleC: '자리가 아닙니다',
+      lead:
+        '여기는 브랜드가 들어올 수 있는 생태계입니다. 체험 구역, 상업 시간대, 무대 대본 속의 한 대목, 혹은 구역 전체에 이름을 붙이는 일.',
+      countSuffix: '가지 참여 방식, 여덟 가지 가치 묶음으로 나뉩니다.',
+      measureNote: '행사 뒤 실제 데이터에 연결되는 측정 구조까지 함께. 제휴 문의:',
+      portalCta: '파트너 전용 페이지로',
+      ticketsTitleA: '페스티벌로',
+      ticketsTitleB: '들어오는',
+      ticketsTitleC: '세 가지 길',
+      ticketsLead: '가격과 판매 시작일은 이후에 공개됩니다. 등급별 혜택은 숫자가 아니라 경험에 따라 정해져 있습니다.',
+      priceLabel: '가격',
+      ticketsCta: '등급, 지갑, LED 팔찌 자세히 보기',
+    },
+
+    rail: {
+      filterAria: '프로그램을 분류로 거르기',
+      prev: '뒤로',
+      next: '앞으로',
+      listAria: '페스티벌 프로그램 목록',
+      needsSignup: '사전 신청 필요',
+    },
+
+    opportunity: {
+      filterAria: '기회를 분류로 거르기',
+      listAria: '기회 목록',
+      stepsAria: '브랜드 기획의 단계들',
+      suggestedZone: '추천 위치:',
+      prevStep: '이전 단계',
+      nextStep: '다음 단계',
+    },
+
+    schedule: {
+      views: {
+        day: '시간대별',
+        stage: '무대별',
+        zone: '구역별',
+        activity: '프로그램별',
+        now: '내 일정',
+      },
+      viewsAria: '타임테이블 보는 방식',
+      allActivities: '전체 프로그램',
+      relativeTimes: '상대 시간입니다 — 공식 시각은 아직 공개되지 않았습니다',
+      clashA: '',
+      clashB: '개 항목이 일정에서 시간이 겹칩니다 — 겹치는 항목은 아래에 표시했습니다.',
+      emptyMine: '일정이 비어 있습니다. 다른 보기에서 아무 항목의 더하기를 누르면 여기에 들어옵니다.',
+      addTo: '내 일정에 담기',
+      removeFrom: '내 일정에서 빼기',
+    },
+
+    video: {
+      captionsLabel: '한국어',
+      unmute: '소리 켜기',
+      mute: '음소거',
+      comingSoon: '영상은 추후에',
+      srNote: '영상이 아직 제공되지 않아 대표 이미지를 보여주고 있습니다.',
+    },
+
+    lightMoment: {
+      kicker: '상징적인 순간',
+      body:
+        '수천 개의 LED 팔찌가 같은 비트에 켜집니다. 이름 속의 "하나의 비트"가 눈에 보이는 것이 되는 순간이며, 객석 전체가 빛의 물결이 됩니다.',
+      pause: '효과 멈추기',
+      play: '효과 실행',
+    },
+
+    gallery: {
+      kits: {
+        'KIT-01': '브랜드와 히어로',
+        'KIT-02': 'Day Festival',
+        'KIT-03': '공연의 밤',
+        'KIT-04': '커뮤니티와 커뮤니케이션',
+        'KIT-05': '후원과 상업',
+        'KIT-06': '여정과 운영',
+      },
+      all: '전체',
+      shapes: { all: '모든 형태', landscape: '가로', portrait: '세로', square: '정사각' },
+      countSuffix: '장',
+      open: '열기',
+      like: '즐겨찾기에 추가',
+      unlike: '즐겨찾기에서 빼기',
+      close: '닫기',
+    },
+
+    misc: {
+      unlike: '즐겨찾기 해제',
+      clearAll: '전체 지우기',
+      localOnly:
+        '이 페이지의 데이터는 브라우저 안에만 있고 어떤 서버로도 보내지지 않습니다. 실제 계정 시스템이 만들어지면 이 부분이 거기에 연결됩니다.',
+      estimateDisclaimer:
+        '위 수치는 방금 입력한 가정을 곱해 나온 결과입니다. 주최 측의 예측도 아니고 페스티벌의 약속도 아닙니다.',
+      openMap: '인터랙티브 지도 열기',
+      heroAlt:
+        'ONE BEAT NIGHT 공연: 수천 개의 LED 팔찌가 만든 빛의 물결이 객석을 가로지르고, 멀리 무대가 환하게 빛난다',
+    },
+
+    mediaWall: { close: '이미지 닫기' },
+
+    partnerNav: { aria: '파트너 페이지 목차' },
+
+    journey: { stage: '구간', progress: '여정 · 구간' },
   },
 
   videos: {

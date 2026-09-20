@@ -5,6 +5,7 @@ import { AssetImage } from '@/components/media/AssetImage';
 import { Pending } from '@/components/system/Pending';
 import { useWallet } from '@/hooks/useFestivalState';
 import { checkoutSteps, ticketTiers } from '@/data/tickets';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * Luồng vé (§10 TICKETING).
@@ -14,6 +15,7 @@ import { checkoutSteps, ticketTiers } from '@/data/tickets';
  * dùng để chạy thử kiến trúc ví vé + mã check-in.
  */
 export function TicketFlow() {
+  const { t } = useI18n();
   const wallet = useWallet();
   const [tierId, setTierId] = useState(ticketTiers[1].id);
   const [holder, setHolder] = useState('');
@@ -27,8 +29,8 @@ export function TicketFlow() {
   const back = () => setStep((s) => Math.max(0, s - 1));
 
   const issue = () => {
-    const t = wallet.add(tier.id, tier.name, holder);
-    setIssued(t.id);
+    const created = wallet.add(tier.id, t.ticketTiers[tier.id].name, holder);
+    setIssued(created.id);
     setStep(checkoutSteps.length - 1);
   };
 
@@ -50,7 +52,7 @@ export function TicketFlow() {
                 {i + 1}
               </span>
               <span className="text-[0.74rem]" style={{ color: i === step ? 'var(--env-fg)' : 'var(--env-faint)' }}>
-                {s.label}
+                {t.checkout[s.id].label}
               </span>
               {i < checkoutSteps.length - 1 && (
                 <span className="mx-1 h-px w-4" style={{ background: 'var(--env-line)' }} aria-hidden />
@@ -61,29 +63,29 @@ export function TicketFlow() {
 
         {step === 0 && (
           <fieldset>
-            <legend className="font-display text-[1.2rem]">Chọn hạng vé</legend>
+            <legend className="font-display text-[1.2rem]">{t.ui.ticketFlow.chooseTier}</legend>
             <div className="mt-5 space-y-2.5">
-              {ticketTiers.map((t) => (
+              {ticketTiers.map((option) => (
                 <label
-                  key={t.id}
+                  key={option.id}
                   className="flex cursor-pointer items-start gap-4 rounded-[var(--radius-sm)] border p-4 transition-colors"
                   style={{
-                    borderColor: t.id === tierId ? t.accent : 'var(--env-card-line)',
-                    background: t.id === tierId ? 'var(--env-card)' : 'transparent',
+                    borderColor: option.id === tierId ? option.accent : 'var(--env-card-line)',
+                    background: option.id === tierId ? 'var(--env-card)' : 'transparent',
                   }}
                 >
                   <input
                     type="radio"
                     name="tier"
-                    value={t.id}
-                    checked={t.id === tierId}
-                    onChange={() => setTierId(t.id)}
+                    value={option.id}
+                    checked={option.id === tierId}
+                    onChange={() => setTierId(option.id)}
                     className="mt-1 accent-[var(--color-gold)]"
                   />
                   <span className="min-w-0">
-                    <span className="block font-semibold">{t.name}</span>
+                    <span className="block font-semibold">{t.ticketTiers[option.id].name}</span>
                     <span className="mt-1 block text-[0.82rem]" style={{ color: 'var(--env-faint)' }}>
-                      {t.lead}
+                      {t.ticketTiers[option.id].lead}
                     </span>
                     <span className="mt-2 block">
                       <Pending k="TICKET_PRICE" />
@@ -97,51 +99,51 @@ export function TicketFlow() {
 
         {step === 1 && (
           <div>
-            <p className="font-display text-[1.2rem]">Thông tin người nhận vé</p>
+            <p className="font-display text-[1.2rem]">{t.ui.ticketFlow.holderTitle}</p>
             <label className="mt-5 block">
-              <span className="kicker">Họ và tên</span>
+              <span className="kicker">{t.ui.ticketFlow.holderName}</span>
               <input
                 value={holder}
                 onChange={(e) => setHolder(e.target.value)}
-                placeholder="Nguyễn Văn A"
+                placeholder={t.ui.ticketFlow.holderPlaceholder}
                 className="mt-2 w-full rounded-[var(--radius-sm)] border bg-transparent px-4 py-3 text-[0.92rem]"
                 style={{ borderColor: 'var(--env-card-line)' }}
               />
             </label>
             <p className="mt-4 text-[0.78rem]" style={{ color: 'var(--env-faint)' }}>
-              Bản chạy thử này không gửi dữ liệu đi đâu cả — thông tin chỉ nằm trong trình duyệt của bạn.
+              {t.ui.ticketFlow.holderNote}
             </p>
           </div>
         )}
 
         {step === 2 && (
           <div>
-            <p className="font-display text-[1.2rem]">Mã ưu đãi</p>
+            <p className="font-display text-[1.2rem]">{t.ui.ticketFlow.promoTitle}</p>
             <label className="mt-5 block">
-              <span className="kicker">Nhập mã nếu có</span>
+              <span className="kicker">{t.ui.ticketFlow.promoLabel}</span>
               <input
                 value={promo}
                 onChange={(e) => setPromo(e.target.value.toUpperCase())}
-                placeholder="VÍ DỤ: OBN2026"
+                placeholder={t.ui.ticketFlow.promoPlaceholder}
                 className="mt-2 w-full rounded-[var(--radius-sm)] border bg-transparent px-4 py-3 text-[0.92rem] uppercase"
                 style={{ borderColor: 'var(--env-card-line)' }}
               />
             </label>
             <p className="mt-4 text-[0.78rem]" style={{ color: 'var(--env-faint)' }}>
-              Chưa có chương trình khuyến mãi nào được công bố, nên hệ thống chưa kiểm tra mã.
+              {t.ui.ticketFlow.promoNote}
             </p>
           </div>
         )}
 
         {step === 3 && (
           <div>
-            <p className="font-display text-[1.2rem]">Xác nhận đơn</p>
+            <p className="font-display text-[1.2rem]">{t.ui.ticketFlow.summaryTitle}</p>
             <dl className="mt-5 space-y-3 text-[0.9rem]">
-              <Row label="Hạng vé" value={tier.name} />
-              <Row label="Người nhận" value={holder.trim() || 'Chưa nhập'} />
-              <Row label="Mã ưu đãi" value={promo || 'Không có'} />
+              <Row label={t.ui.ticketFlow.rowTier} value={t.ticketTiers[tier.id].name} />
+              <Row label={t.ui.ticketFlow.rowHolder} value={holder.trim() || t.ui.ticketFlow.notEntered} />
+              <Row label={t.ui.ticketFlow.rowPromo} value={promo || t.ui.ticketFlow.none} />
               <div className="flex items-baseline justify-between gap-4 border-t pt-3" style={{ borderColor: 'var(--env-line)' }}>
-                <dt style={{ color: 'var(--env-faint)' }}>Tổng tiền</dt>
+                <dt style={{ color: 'var(--env-faint)' }}>{t.ui.ticketFlow.rowTotal}</dt>
                 <dd>
                   <Pending k="TICKET_PRICE" tone="gold" />
                 </dd>
@@ -152,17 +154,16 @@ export function TicketFlow() {
 
         {step === 4 && (
           <div>
-            <p className="font-display text-[1.2rem]">Thanh toán</p>
+            <p className="font-display text-[1.2rem]">{t.ui.ticketFlow.paymentTitle}</p>
             <div
               className="mt-5 rounded-[var(--radius-sm)] border border-dashed p-6"
               style={{ borderColor: 'rgb(245 185 66 / 0.45)' }}
             >
               <p className="kicker mb-3" style={{ color: 'var(--color-gold)' }}>
-                Lớp tích hợp còn trống
+                {t.ui.ticketFlow.paymentBadge}
               </p>
               <p className="text-[0.88rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-                Website chưa nối với bất kỳ nhà cung cấp thanh toán nào. Kiến trúc đã tách sẵn: khi ban tổ chức chọn
-                cổng thanh toán, chỉ cần cắm vào đúng bước này, các bước còn lại giữ nguyên.
+                {t.ui.ticketFlow.paymentBody}
               </p>
               <button
                 type="button"
@@ -170,7 +171,7 @@ export function TicketFlow() {
                 className="mt-6 rounded-full px-6 py-3 text-[0.86rem] font-bold"
                 style={{ background: 'var(--color-gold)', color: '#16120a' }}
               >
-                Phát hành vé demo để xem ví vé
+                {t.ui.ticketFlow.issueDemo}
               </button>
             </div>
           </div>
@@ -178,11 +179,11 @@ export function TicketFlow() {
 
         {step === 5 && (
           <div>
-            <p className="font-display text-[1.2rem]">Vé đã vào ví</p>
+            <p className="font-display text-[1.2rem]">{t.ui.ticketFlow.walletTitle}</p>
             <p className="mt-4 text-[0.9rem]" style={{ color: 'var(--env-muted)' }}>
               {issued
-                ? 'Vé demo đã được tạo. Xem mã QR mô phỏng ở cột bên phải hoặc trong trang Tài khoản.'
-                : 'Chưa có vé nào được phát hành trong phiên này.'}
+                ? t.ui.ticketFlow.walletDone
+                : t.ui.ticketFlow.walletEmptyFlow}
             </p>
           </div>
         )}
@@ -195,7 +196,7 @@ export function TicketFlow() {
             className="rounded-full border px-5 py-2.5 text-[0.8rem] font-semibold disabled:opacity-35"
             style={{ borderColor: 'var(--env-card-line)' }}
           >
-            Quay lại
+            {t.ui.ticketFlow.back}
           </button>
           <button
             type="button"
@@ -204,53 +205,53 @@ export function TicketFlow() {
             className="rounded-full px-5 py-2.5 text-[0.8rem] font-bold disabled:opacity-35"
             style={{ background: 'var(--env-fg)', color: 'var(--env-bg)' }}
           >
-            Tiếp tục
+            {t.ui.ticketFlow.next}
           </button>
         </div>
       </div>
 
       {/* Ví vé */}
       <aside>
-        <p className="kicker mb-4">Ví vé</p>
+        <p className="kicker mb-4">{t.ui.ticketFlow.wallet}</p>
         {!wallet.ready ? null : wallet.tickets.length === 0 ? (
           <div className="surface p-6">
             <AssetImage id="kit-01-19-ticket" sizes="third" ratio="16 / 9" className="rounded-[var(--radius-sm)]" />
             <p className="mt-5 text-[0.88rem]" style={{ color: 'var(--env-muted)' }}>
-              Chưa có vé nào. Đi hết luồng bên trái để xem vé điện tử trông thế nào trong ví.
+              {t.ui.ticketFlow.walletEmpty}
             </p>
           </div>
         ) : (
           <ul className="space-y-3">
-            {wallet.tickets.map((t) => (
-              <li key={t.id} className="surface overflow-hidden">
+            {wallet.tickets.map((ticket) => (
+              <li key={ticket.id} className="surface overflow-hidden">
                 <div className="relative">
                   <AssetImage id="kit-01-19-ticket" sizes="third" ratio="16 / 9" className="w-full" scrim="soft" />
                   <span
                     className="absolute right-3 top-3 rounded-full px-2.5 py-1 text-[0.6rem] font-bold uppercase tracking-[0.16em]"
                     style={{ background: 'rgb(5 5 7 / 0.7)', color: 'var(--color-gold)' }}
                   >
-                    Vé demo
+                    {t.ui.ticketFlow.demoTicket}
                   </span>
                 </div>
                 <div className="p-5">
-                  <p className="font-display text-[1.05rem]">{t.tierName}</p>
+                  <p className="font-display text-[1.05rem]">{ticket.tierName}</p>
                   <p className="mt-1 text-[0.82rem]" style={{ color: 'var(--env-faint)' }}>
-                    {t.holder}
+                    {ticket.holder}
                   </p>
                   <div className="mt-4 flex items-center gap-4">
-                    <QrPlaceholder seed={t.code} />
+                    <QrPlaceholder seed={ticket.code} />
                     <div>
-                      <p className="num-oversized text-[1rem] tracking-[0.06em]">{t.code}</p>
-                      <p className="kicker mt-1.5 text-[0.54rem]">Mã check-in mô phỏng</p>
+                      <p className="num-oversized text-[1rem] tracking-[0.06em]">{ticket.code}</p>
+                      <p className="kicker mt-1.5 text-[0.54rem]">{t.ui.ticketFlow.mockCode}</p>
                     </div>
                   </div>
                   <button
                     type="button"
-                    onClick={() => wallet.remove(t.id)}
+                    onClick={() => wallet.remove(ticket.id)}
                     className="mt-4 text-[0.78rem] underline underline-offset-4"
                     style={{ color: 'var(--env-faint)' }}
                   >
-                    Xoá vé này
+                    {t.ui.ticketFlow.deleteTicket}
                   </button>
                 </div>
               </li>

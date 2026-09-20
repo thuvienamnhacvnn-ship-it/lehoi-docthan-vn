@@ -4,26 +4,23 @@ import { useMemo, useState } from 'react';
 import { AssetImage } from '@/components/media/AssetImage';
 import { SampleFlag } from '@/components/system/Pending';
 import { Tag } from '@/components/ui/Section';
-import { categoryLabels, phaseLabels, type ActivityCategory, type DayPhase } from '@/data/activities';
+import { CATEGORY_IDS, type ActivityCategory, type DayPhase } from '@/data/activities';
 import { overlaps, scheduleWithActivity, stages, timeLabel, timesConfirmed } from '@/data/program';
 import { zonesById } from '@/data/zones';
 import { useStringSet } from '@/hooks/useFestivalState';
+import { useI18n } from '@/i18n/I18nProvider';
 
 type View = 'now' | 'day' | 'stage' | 'zone' | 'activity';
 
-const views: { id: View; label: string }[] = [
-  { id: 'day', label: 'Theo khối giờ' },
-  { id: 'stage', label: 'Theo sân khấu' },
-  { id: 'zone', label: 'Theo khu vực' },
-  { id: 'activity', label: 'Theo hoạt động' },
-  { id: 'now', label: 'Lịch của tôi' },
-];
+/** Năm cách xem; nhãn nằm ở t.ui.schedule.views. */
+const views: View[] = ['day', 'stage', 'zone', 'activity', 'now'];
 
 /**
  * HỆ LỊCH TRÌNH (§08): năm cách xem, bộ lọc theo nhóm, "Lịch của tôi" có cảnh báo trùng giờ.
  * Giờ đồng hồ chưa được chốt nên hiển thị theo mốc tương đối — xem chú thích ở data/program.ts.
  */
 export function ScheduleExplorer() {
+  const { t, locale } = useI18n();
   const [view, setView] = useState<View>('day');
   const [filter, setFilter] = useState<ActivityCategory | 'all'>('all');
   const mySchedule = useStringSet('schedule');
@@ -50,67 +47,78 @@ export function ScheduleExplorer() {
   }, [mine]);
 
   const groups = useMemo(() => {
-    if (view === 'now') return [{ key: 'mine', label: 'Lịch của tôi', items: mine }];
+    if (view === 'now') return [{ key: 'mine', label: t.ui.schedule.views.now, items: mine }];
     if (view === 'stage')
       return stages
-        .map((s) => ({ key: s.id, label: s.label, items: entries.filter((e) => e.stageId === s.id) }))
+        .map((s) => ({ key: s.id, label: t.stages[s.id], items: entries.filter((e) => e.stageId === s.id) }))
         .filter((g) => g.items.length > 0);
     if (view === 'zone') {
       const ids = Array.from(new Set(entries.map((e) => e.activity.zoneId)));
       return ids.map((z) => ({
         key: z,
-        label: zonesById.get(z)?.name ?? z,
+        label: t.zones[z].name,
         items: entries.filter((e) => e.activity.zoneId === z),
       }));
     }
     if (view === 'activity')
-      return [{ key: 'all', label: 'Tất cả hoạt động', items: entries.slice().sort((a, b) => a.activity.name.localeCompare(b.activity.name, 'vi')) }];
+      return [
+        {
+          key: 'all',
+          label: t.ui.schedule.allActivities,
+          items: entries
+            .slice()
+            // Sắp xếp theo đúng quy tắc chữ cái của thứ tiếng đang đọc, không phải của tiếng Việt.
+            .sort((a, b) =>
+              t.activities[a.activity.id].name.localeCompare(t.activities[b.activity.id].name, locale),
+            ),
+        },
+      ];
     return (['morning', 'midday', 'golden', 'night'] as DayPhase[])
-      .map((p) => ({ key: p, label: phaseLabels[p].label, items: entries.filter((e) => e.phase === p) }))
+      .map((p) => ({ key: p, label: t.phases[p], items: entries.filter((e) => e.phase === p) }))
       .filter((g) => g.items.length > 0);
-  }, [view, entries, mine]);
+  }, [view, entries, mine, t, locale]);
 
   return (
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Cách xem lịch trình">
+        <div className="flex flex-wrap gap-2" role="tablist" aria-label={t.ui.schedule.viewsAria}>
           {views.map((v) => (
             <button
-              key={v.id}
+              key={v}
               type="button"
               role="tab"
-              aria-selected={view === v.id}
-              onClick={() => setView(v.id)}
+              aria-selected={view === v}
+              onClick={() => setView(v)}
               className="rounded-full border px-4 py-2 text-[0.78rem] font-semibold transition-colors"
               style={{
-                borderColor: view === v.id ? 'transparent' : 'var(--env-card-line)',
-                background: view === v.id ? 'var(--env-fg)' : 'transparent',
-                color: view === v.id ? 'var(--env-bg)' : 'var(--env-muted)',
+                borderColor: view === v ? 'transparent' : 'var(--env-card-line)',
+                background: view === v ? 'var(--env-fg)' : 'transparent',
+                color: view === v ? 'var(--env-bg)' : 'var(--env-muted)',
               }}
             >
-              {v.label}
-              {v.id === 'now' && mine.length > 0 && (
-                <span className="ml-1.5 tabular-nums" style={{ color: view === v.id ? 'var(--env-bg)' : 'var(--color-gold)' }}>
+              {t.ui.schedule.views[v]}
+              {v === 'now' && mine.length > 0 && (
+                <span className="ml-1.5 tabular-nums" style={{ color: view === v ? 'var(--env-bg)' : 'var(--color-gold)' }}>
                   {mine.length}
                 </span>
               )}
             </button>
           ))}
         </div>
-        {!timesConfirmed && <SampleFlag>Khung giờ tương đối — giờ chính thức chưa công bố</SampleFlag>}
+        {!timesConfirmed && <SampleFlag>{t.ui.schedule.relativeTimes}</SampleFlag>}
       </div>
 
       {view !== 'now' && (
         <div className="mb-8 flex flex-wrap gap-2">
           <Chip active={filter === 'all'} onClick={() => setFilter('all')}>
-            Tất cả
+            {t.common.all}
           </Chip>
-          {(Object.keys(categoryLabels) as ActivityCategory[]).map((c) => {
+          {CATEGORY_IDS.map((c) => {
             const n = scheduleWithActivity.filter((e) => e.activity.category === c).length;
             if (!n) return null;
             return (
               <Chip key={c} active={filter === c} onClick={() => setFilter(c)}>
-                {categoryLabels[c]}
+                {t.categories[c]}
               </Chip>
             );
           })}
@@ -123,13 +131,13 @@ export function ScheduleExplorer() {
           style={{ borderColor: 'rgb(255 46 154 / 0.5)', color: 'var(--color-magenta)' }}
           role="status"
         >
-          Có {conflicts.size} mục trùng khung giờ trong lịch của bạn — các mục trùng được đánh dấu bên dưới.
+          {t.ui.schedule.clashA} {conflicts.size} {t.ui.schedule.clashB}
         </p>
       )}
 
       {view === 'now' && mine.length === 0 && (
         <p className="lede">
-          Lịch của bạn đang trống. Bấm dấu cộng ở bất kỳ mục nào trong các cách xem khác để thêm vào đây.
+          {t.ui.schedule.emptyMine}
         </p>
       )}
 
@@ -139,7 +147,9 @@ export function ScheduleExplorer() {
             <div className="mb-5 flex items-baseline gap-4">
               <h2 className="font-display t-md">{g.label}</h2>
               <span className="rule flex-1" />
-              <span className="kicker">{g.items.length} mục</span>
+              <span className="kicker">
+                {g.items.length} {t.common.items}
+              </span>
             </div>
 
             <ul className="space-y-2">
@@ -173,13 +183,13 @@ export function ScheduleExplorer() {
                         className="hidden h-16 w-16 shrink-0 rounded-[var(--radius-xs)] sm:block"
                       />
                       <div className="min-w-0">
-                        <p className="font-display fx-t-lift text-[1.02rem]">{e.activity.name}</p>
+                        <p className="font-display fx-t-lift text-[1.02rem]">{t.activities[e.activity.id].name}</p>
                         <p className="mt-1 truncate text-[0.8rem]" style={{ color: 'var(--env-faint)' }}>
-                          {e.activity.summary}
+                          {t.activities[e.activity.id].summary}
                         </p>
                         <p className="mt-2 flex flex-wrap items-center gap-2">
-                          <Tag color={zone?.color}>{zone?.name ?? e.activity.zoneId}</Tag>
-                          <Tag>{categoryLabels[e.activity.category]}</Tag>
+                          <Tag color={zone?.color}>{zone ? t.zones[zone.id].name : e.activity.zoneId}</Tag>
+                          <Tag>{t.categories[e.activity.category]}</Tag>
                           <span className="text-[0.72rem] sm:hidden" style={{ color: 'var(--env-faint)' }}>
                             {timeLabel(e.offsetMin)} · {e.durationMin}′
                           </span>
@@ -198,7 +208,7 @@ export function ScheduleExplorer() {
                       }}
                     >
                       <span className="sr-only">
-                        {inMine ? `Bỏ ${e.activity.name} khỏi lịch của tôi` : `Thêm ${e.activity.name} vào lịch của tôi`}
+                        {`${inMine ? t.ui.schedule.removeFrom : t.ui.schedule.addTo}: ${t.activities[e.activity.id].name}`}
                       </span>
                       {inMine ? '✓' : '+'}
                     </button>

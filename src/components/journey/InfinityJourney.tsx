@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AssetImage } from '@/components/media/AssetImage';
 import { journey } from '@/data/festival';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * TƯƠNG TÁC CHỮ KÝ A — HÀNH TRÌNH VÔ CỰC (§17-A, KIT-06).
@@ -13,6 +14,7 @@ import { journey } from '@/data/festival';
  * và nội dung đổi theo tiến độ. Tắt chuyển động -> hiện thẳng ba chặng xếp dọc.
  */
 export function InfinityJourney() {
+  const { t } = useI18n();
   const wrapRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [reduced, setReduced] = useState(false);
@@ -56,13 +58,15 @@ export function InfinityJourney() {
           {journey.map((s) => (
             <div key={s.id} className="grid-2 items-center">
               <div>
-                <p className="kicker mb-3">Chặng {s.index}</p>
+                <p className="kicker mb-3">
+                  {t.ui.journey.stage} {s.index}
+                </p>
                 <h3 className="font-display t-xl" style={{ color: s.accent }}>
-                  {s.title}
+                  {t.journey[s.id].title}
                 </h3>
-                <p className="lede mt-5">{s.lead}</p>
+                <p className="lede mt-5">{t.journey[s.id].lead}</p>
                 <p className="mt-4 text-[0.92rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-                  {s.body}
+                  {t.journey[s.id].body}
                 </p>
               </div>
               <AssetImage id={s.assetId} sizes="half" className="rounded-[var(--radius-md)]" />
@@ -146,26 +150,26 @@ export function InfinityJourney() {
         <div className="wrap relative grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <p className="kicker" style={{ color: 'rgb(244 241 234 / 0.55)' }}>
-              Hành trình · chặng {stage.index} / {journey.length}
+              {t.ui.journey.progress} {stage.index} / {journey.length}
             </p>
             <h2
               key={stage.id}
               className="font-display t-mega mt-4"
               style={{ color: '#f4f1ea', animation: 'obn-reveal 620ms var(--ease-reveal) both' }}
             >
-              {stage.title}
+              {t.journey[stage.id].title}
             </h2>
             <p className="font-display mt-2 text-[0.9rem] tracking-[0.34em]" style={{ color: stage.accent }}>
-              {stage.en}
+              {stage.id.toUpperCase()}
             </p>
             <p className="lede mt-7" style={{ color: 'rgb(244 241 234 / 0.82)' }}>
-              {stage.lead}
+              {t.journey[stage.id].lead}
             </p>
             <p className="mt-4 max-w-[52ch] text-[0.92rem] leading-relaxed" style={{ color: 'rgb(244 241 234 / 0.6)' }}>
-              {stage.body}
+              {t.journey[stage.id].body}
             </p>
             <ul className="mt-6 flex flex-wrap gap-2">
-              {stage.keywords.map((k) => (
+              {t.journey[stage.id].keywords.map((k: string) => (
                 <li
                   key={k}
                   className="rounded-full border px-3 py-1 text-[0.7rem] uppercase tracking-[0.16em]"

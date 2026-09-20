@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AssetImage } from '@/components/media/AssetImage';
+import { useI18n } from '@/i18n/I18nProvider';
+import type { MessagesFor } from '@/i18n/types';
 
 /**
  * HỆ VIDEO (§09).
@@ -19,8 +21,9 @@ export type VideoKind = 'hero' | 'background' | 'inline' | 'reel';
 
 export interface VideoConfig {
   id: string;
+  /** Khoá trong t.videos — tên phim hiển thị theo thứ tiếng đang đọc. */
+  key: keyof MessagesFor['videos'];
   kind: VideoKind;
-  title: string;
   /** null = chưa có file. Không tạo đường dẫn giả. */
   src: string | null;
   posterAssetId: string;
@@ -38,6 +41,7 @@ export function VideoExperience({
   ratio?: string;
   sizes?: string;
 }) {
+  const { t, locale } = useI18n();
   const videoRef = useRef<HTMLVideoElement>(null);
   const hostRef = useRef<HTMLDivElement>(null);
   const [muted, setMuted] = useState(true);
@@ -76,10 +80,10 @@ export function VideoExperience({
             loop
             preload="none"
             className="h-full w-full object-cover"
-            aria-label={config.title}
+            aria-label={t.videos[config.key]}
           >
             <source src={config.src} type="video/mp4" />
-            {config.captionsSrc && <track kind="captions" src={config.captionsSrc} srcLang="vi" label="Tiếng Việt" default />}
+            {config.captionsSrc && <track kind="captions" src={config.captionsSrc} srcLang={locale} label={t.ui.video.captionsLabel} default />}
           </video>
           <button
             type="button"
@@ -87,7 +91,7 @@ export function VideoExperience({
             className="absolute bottom-4 right-4 rounded-full border px-4 py-2 text-[0.76rem] font-semibold backdrop-blur"
             style={{ borderColor: 'rgb(244 241 234 / 0.3)', color: '#f4f1ea', background: 'rgb(5 5 7 / 0.4)' }}
           >
-            {muted ? 'Bật tiếng' : 'Tắt tiếng'}
+            {muted ? t.ui.video.unmute : t.ui.video.mute}
           </button>
         </>
       ) : (
@@ -113,9 +117,11 @@ export function VideoExperience({
             className="absolute bottom-4 left-4 rounded-full border px-3 py-1 text-[0.66rem] font-semibold uppercase tracking-[0.16em] backdrop-blur"
             style={{ borderColor: 'rgb(245 185 66 / 0.45)', color: '#f5b942', background: 'rgb(5 5 7 / 0.45)' }}
           >
-            Video sẽ bổ sung
+            {t.ui.video.comingSoon}
           </p>
-          <span className="sr-only">{config.title} — video chưa được cung cấp, đang hiển thị ảnh đại diện.</span>
+          <span className="sr-only">
+            {t.videos[config.key]} — {t.ui.video.srNote}
+          </span>
         </>
       )}
     </div>

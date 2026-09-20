@@ -1338,6 +1338,7 @@ export const ja: MessagesFor = {
       priceLabel: 'チケット価格',
       priceShort: '価格',
       onsaleLabel: '販売開始日',
+      tiersCountLabel: '券種の数',
       tiersCountA: '種類のチケット',
       chooseTitle: 'その一日をどう過ごすか選んでください',
       chooseLead:
@@ -1346,6 +1347,7 @@ export const ja: MessagesFor = {
       compareKicker: '比較',
       compareTitle: 'どの券種に何が付くか',
       compareCaption: '券種ごとの内容比較表',
+      benefitsCol: '内容',
       yes: 'あり',
       no: 'なし',
       flowKicker: '流れ',
@@ -1449,6 +1451,7 @@ export const ja: MessagesFor = {
       hospitalityTitle: 'パートナーを、記憶に残る一夜へ招待する',
       hospitalityLead:
         '専用の接待エリア、テーブルサービス、ステージの眺め、お迎えのサポート。会議室よりも、ここのほうが関係は進みます。',
+      hospitalityTags: ['専用入口', '確保された座席', 'テーブルサービス', '招待客のご案内サポート'],
       csrKicker: '09 — CSR / ESG',
       csrTitle: 'Happiness Fund',
       csrLead:
@@ -1486,6 +1489,230 @@ export const ja: MessagesFor = {
         'フェスはまだ広報キャンペーンを始めていないので、ここにリリースや記事はありません。器はできています。本物のコンテンツが出てきたら、ちょうどここに載ります。',
       pressCta: 'プレスルーム',
     },
+  },
+
+  ui: {
+    ticketFlow: {
+      chooseTier: '券種を選ぶ',
+      holderTitle: 'チケットをお受け取りになる方',
+      holderName: 'お名前',
+      holderPlaceholder: '山田 太郎',
+      holderNote: 'この試験版はどこにもデータを送りません。入力した内容はブラウザの中だけに残ります。',
+      promoTitle: 'プロモコード',
+      promoLabel: 'お持ちの場合は入力してください',
+      promoPlaceholder: '例：OBN2026',
+      promoNote: 'まだキャンペーンは発表していないため、コードの照合は行っていません。',
+      summaryTitle: '注文の確認',
+      rowTier: '券種',
+      rowHolder: 'お受け取り',
+      rowPromo: 'プロモコード',
+      rowTotal: '合計',
+      notEntered: '未入力',
+      none: 'なし',
+      paymentTitle: 'お支払い',
+      paymentBadge: '接続層は空のままです',
+      paymentBody:
+        'サイトはどの決済事業者ともつながっていません。設計は切り分けてあります。主催側がゲートウェイを決めたら、ちょうどこの段階に差し込むだけで、ほかの段階はそのままです。',
+      issueDemo: 'デモのチケットを発行してウォレットを見る',
+      walletTitle: 'チケットがウォレットに入りました',
+      walletDone: 'デモのチケットを作成しました。右の列、またはアカウントのページで疑似 QR コードを確認できます。',
+      walletEmptyFlow: 'この回ではまだチケットを発行していません。',
+      back: '戻る',
+      next: '次へ',
+      wallet: 'チケットウォレット',
+      walletEmpty: 'まだチケットがありません。左の流れを最後までたどると、電子チケットの見た目が分かります。',
+      demoTicket: 'デモチケット',
+      mockCode: '疑似入場コード',
+      deleteTicket: 'このチケットを削除',
+      mockCodeAria: '疑似コード',
+    },
+
+    leadForm: {
+      errCompany: '会社名をご記入ください',
+      errName: 'ご担当者のお名前をご記入ください',
+      errEmail: 'メールアドレスの形式が正しくないようです',
+      doneBadge: 'この回の内容として記録しました',
+      thanks: 'ありがとうございます',
+      doneBodyA: 'サイトは主催側の受付システムとつながっていないため、いま入力された内容は',
+      doneBodyStrong: 'どこにも送られていません',
+      doneBodyB: '。フォームの設計はできています。送り先が決まれば、データはそのままそこへ流れます。',
+      again: 'もう一度入力する',
+      title: '協業に関するご連絡',
+      lead: 'ブランドがどの部分に関心をお持ちかお知らせください。フェスのチームがそれに合わせた提案を組み立てます。',
+      company: '会社',
+      contact: 'ご担当者',
+      phone: '電話',
+      interest: '関心のある分野',
+      choose: '— 形式を選んでください —',
+      message: '内容',
+      submit: '送信',
+      demoNote: 'フォームは試験モードです。データはブラウザの外に出ません。',
+    },
+
+    impact: {
+      whatKicker: '何を測るか',
+      waiting: '本物の数字を待っています',
+      emptyNote:
+        'すべての欄が空なのは、フェスにまだ検証済みの数字がないからです。この構造は開催後、そのまま本物のデータにつながります。ここにある数字が約束として出されることはありません。',
+      estimateKicker: 'ご自身で見積もる',
+      yourNumbers: '入力された数字',
+      estimateLead:
+        'ご自分のブランドの前提を入れて、測定の構造がどう動くかご覧ください。フェスは規模を公表していないので、ソフトが勝手に数字を入れることはありません。',
+      inAudience: '想定する来場者数',
+      unitPeople: '人',
+      visitRate: '企画に立ち寄る割合',
+      touchpointsInput: '動線のなかの接点の数',
+      unitPoints: '箇所',
+      derivedVisits: '企画への立ち寄り',
+      derivedImpressions: 'ブランドが見られた回数',
+      derivedLeads: '見込み客のおおよその幅',
+      derivedTouchpoints: 'ひとりあたりの接点',
+    },
+
+    account: {
+      tabsAria: 'アカウントの各欄',
+      walletTab: 'チケットウォレット',
+      scheduleTab: 'マイスケジュール',
+      favoritesTab: 'お気に入り',
+      walletEmptyTitle: 'ウォレットは空です',
+      walletEmptyBody: 'チケットはまだ発売していません。チケットのページで購入の流れを試すと、電子チケットの見た目が分かります。',
+      walletEmptyCta: 'チケットのページへ',
+      demoTicket: 'デモチケット',
+      mockCode: '疑似入場コード',
+      deleteTicket: 'チケットを削除',
+      scheduleEmptyTitle: '予定はまだ空です',
+      scheduleEmptyBody: 'タイムテーブルのページで、行きたい企画のプラスを押してください。',
+      scheduleEmptyCta: 'タイムテーブルを開く',
+      clashSuffix: '件が時間で重なっています。',
+      minutes: '分',
+      remove: '外す',
+      clearSchedule: '予定をすべて消す',
+      favEmptyTitle: 'お気に入りはまだありません',
+      favEmptyBody: 'ライブラリの画像のハートを押すと、気に入った一枚を残しておけます。',
+      favEmptyCta: '画像ライブラリを開く',
+    },
+
+    map: {
+      allZones: 'すべてのエリア',
+      zoomOut: '縮小',
+      zoomIn: '拡大',
+      reset: '元に戻す',
+      zonesAria: 'フェスの各エリア',
+      schematicNote:
+        'この図はエリアどうしの関係を示すものです。主催側から実測の図面が出れば差し替えます。',
+      closeDetail: 'エリアの詳細を閉じる',
+      servicesTitle: 'このエリアの設備',
+      accessTag: 'バリアフリー動線',
+      activitiesTitle: '企画',
+      pickKicker: 'エリアを選んでください',
+      pickBody: '地図の色のついた場所を押すと、そのエリアの企画・設備・写真が見られます。',
+    },
+
+    sponsorTeaser: {
+      kicker: '07 — ブランドの方へ',
+      titleA: 'は',
+      titleB: 'ロゴを掛ける',
+      titleC: '場所ではありません',
+      lead:
+        'ここはブランドが入っていける生態系です。体験エリア、商業の時間帯、ステージ台本のなかの一場面、あるいはエリアそのものに名前を付けること。',
+      countSuffix: '通りの参加のかたち。八つの価値のグループに分かれます。',
+      measureNote: '開催後に本物のデータへつなげる測定の設計つき。協業のお問い合わせ：',
+      portalCta: 'パートナー向けページへ',
+      ticketsTitleA: 'フェスへの',
+      ticketsTitleB: '三つの',
+      ticketsTitleC: '入り方',
+      ticketsLead:
+        '価格と販売開始日は後日発表します。各券種の内容は数字ではなく体験に合わせて決まっています。',
+      priceLabel: '価格',
+      ticketsCta: '券種、ウォレット、LED リストバンドを見る',
+    },
+
+    rail: {
+      filterAria: '企画をカテゴリーで絞り込む',
+      prev: '戻る',
+      next: '進む',
+      listAria: 'フェスの企画一覧',
+      needsSignup: '申込が必要',
+    },
+
+    opportunity: {
+      filterAria: '機会をカテゴリーで絞り込む',
+      listAria: '機会の一覧',
+      stepsAria: 'ブランド企画の各ステップ',
+      suggestedZone: '推奨の場所：',
+      prevStep: '前のステップ',
+      nextStep: '次のステップ',
+    },
+
+    schedule: {
+      views: {
+        day: '時間帯で見る',
+        stage: 'ステージで見る',
+        zone: 'エリアで見る',
+        activity: '企画で見る',
+        now: 'マイスケジュール',
+      },
+      viewsAria: 'タイムテーブルの見かた',
+      allActivities: 'すべての企画',
+      relativeTimes: '相対的な時間です。正式な時刻はまだ発表されていません',
+      clashA: '',
+      clashB: '件が予定のなかで時間が重なっています。重なりは下に印を付けてあります。',
+      emptyMine: '予定はまだ空です。ほかの見かたで任意の企画のプラスを押すと、ここに追加されます。',
+      addTo: 'マイスケジュールに追加',
+      removeFrom: 'マイスケジュールから外す',
+    },
+
+    video: {
+      captionsLabel: '日本語',
+      unmute: '音を出す',
+      mute: '消音',
+      comingSoon: '映像は後日',
+      srNote: '映像はまだ提供されていないため、サムネイル画像を表示しています。',
+    },
+
+    lightMoment: {
+      kicker: '象徴的な瞬間',
+      body:
+        '何千もの LED リストバンドが、同じビートで光ります。名前にある「ひとつのビート」が目に見えるものになる瞬間で、客席全体が光の波になります。',
+      pause: '演出を止める',
+      play: '演出を動かす',
+    },
+
+    gallery: {
+      kits: {
+        'KIT-01': 'ブランドとヒーロー',
+        'KIT-02': 'Day Festival',
+        'KIT-03': 'ライブ',
+        'KIT-04': 'コミュニティと発信',
+        'KIT-05': '協賛と商業',
+        'KIT-06': '旅路と運営',
+      },
+      all: 'すべて',
+      shapes: { all: 'すべての形', landscape: '横長', portrait: '縦長', square: '正方形' },
+      countSuffix: '点',
+      open: '開く',
+      like: 'お気に入りに追加',
+      unlike: 'お気に入りから外す',
+      close: '閉じる',
+    },
+
+    misc: {
+      unlike: 'お気に入りを外す',
+      clearAll: 'すべて消す',
+      localOnly:
+        'このページの内容はブラウザの中だけにあり、どのサーバーにも送られません。本物のアカウントの仕組みができたら、ここがそこにつながります。',
+      estimateDisclaimer:
+        '上の数字は、いま入力された前提を掛け合わせたものです。主催側の予測ではなく、フェスの約束でもありません。',
+      openMap: 'インタラクティブな地図を開く',
+      heroAlt:
+        'ONE BEAT NIGHT のライブ：何千もの LED リストバンドがつくる光の波が客席を走り、遠くのステージが煌々と輝く',
+    },
+
+    mediaWall: { close: '画像を閉じる' },
+
+    partnerNav: { aria: 'パートナーページの目次' },
+
+    journey: { stage: '第', progress: '旅路 · 第' },
   },
 
   videos: {

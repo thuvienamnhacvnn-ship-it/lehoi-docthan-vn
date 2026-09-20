@@ -3,13 +3,15 @@
 import { useMemo, useRef, useState } from 'react';
 import { AssetImage } from '@/components/media/AssetImage';
 import { Tag } from '@/components/ui/Section';
-import { activities, categoryLabels, type ActivityCategory } from '@/data/activities';
+import { activities, CATEGORY_IDS, type ActivityCategory } from '@/data/activities';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * Dải hoạt động cuộn ngang (§KIT-02): kéo để khám phá, lọc theo nhóm,
  * thẻ nở ra khi trỏ tới. Không phải lưới thẻ tính năng buồn tẻ.
  */
 export function ActivityRail({ phase }: { phase?: 'day' | 'night' }) {
+  const { t } = useI18n();
   const railRef = useRef<HTMLDivElement>(null);
   const [filter, setFilter] = useState<ActivityCategory | 'all'>('all');
   const [active, setActive] = useState<string | null>(null);
@@ -53,21 +55,21 @@ export function ActivityRail({ phase }: { phase?: 'day' | 'night' }) {
   return (
     <div>
       <div className="wrap mb-7 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Lọc hoạt động theo nhóm">
+        <div className="flex flex-wrap gap-2" role="group" aria-label={t.ui.rail.filterAria}>
           <FilterChip active={filter === 'all'} onClick={() => setFilter('all')}>
-            Tất cả
+            {t.common.all}
           </FilterChip>
           {categories.map((c) => (
             <FilterChip key={c} active={filter === c} onClick={() => setFilter(c)}>
-              {categoryLabels[c]}
+              {t.categories[c]}
             </FilterChip>
           ))}
         </div>
         <div className="hidden gap-2 md:flex">
-          <RailButton onClick={() => nudge(-1)} label="Lùi lại">
+          <RailButton onClick={() => nudge(-1)} label={t.ui.rail.prev}>
             ←
           </RailButton>
-          <RailButton onClick={() => nudge(1)} label="Tiến tới">
+          <RailButton onClick={() => nudge(1)} label={t.ui.rail.next}>
             →
           </RailButton>
         </div>
@@ -82,7 +84,7 @@ export function ActivityRail({ phase }: { phase?: 'day' | 'night' }) {
         onPointerLeave={endDrag}
         tabIndex={0}
         role="list"
-        aria-label="Các hoạt động của lễ hội"
+        aria-label={t.ui.rail.listAria}
       >
         {list.map((a) => {
           const isActive = active === a.id;
@@ -120,10 +122,10 @@ export function ActivityRail({ phase }: { phase?: 'day' | 'night' }) {
                 />
               )}
               <div className="absolute inset-x-0 bottom-0 p-5">
-                <Tag>{categoryLabels[a.category]}</Tag>
-                <h3 className="font-display fx-t-lift mt-3 text-[1.35rem] text-white">{a.name}</h3>
+                <Tag>{t.categories[a.category]}</Tag>
+                <h3 className="font-display fx-t-lift mt-3 text-[1.35rem] text-white">{t.activities[a.id].name}</h3>
                 <p className="mt-2 text-[0.86rem] leading-snug" style={{ color: 'rgb(244 241 234 / 0.72)' }}>
-                  {a.summary}
+                  {t.activities[a.id].summary}
                 </p>
                 <p
                   className="mt-3 overflow-hidden text-[0.82rem] leading-relaxed transition-[max-height,opacity] duration-500"
@@ -133,11 +135,11 @@ export function ActivityRail({ phase }: { phase?: 'day' | 'night' }) {
                     opacity: isActive ? 1 : 0,
                   }}
                 >
-                  {a.detail}
+                  {t.activities[a.id].detail}
                 </p>
                 {a.needsSignup && (
                   <p className="kicker mt-3" style={{ color: 'var(--color-gold)' }}>
-                    Cần đăng ký
+                    {t.ui.rail.needsSignup}
                   </p>
                 )}
               </div>

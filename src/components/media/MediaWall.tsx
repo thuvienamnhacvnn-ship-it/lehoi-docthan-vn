@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { AssetImage } from '@/components/media/AssetImage';
 import { getAssets } from '@/lib/assets';
+import { altFor } from '@/i18n/alt';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * TƯƠNG TÁC CHỮ KÝ F — BỨC TƯỜNG HÌNH ẢNH TỪ TÍNH (§17-F).
@@ -11,6 +13,7 @@ import { getAssets } from '@/lib/assets';
  * Hiệu ứng từ tính chỉ bật trên thiết bị có chuột thật và khi người dùng không tắt chuyển động.
  */
 export function MediaWall({ ids, columns = 4 }: { ids: string[]; columns?: number }) {
+  const { t, locale } = useI18n();
   const assets = getAssets(ids);
   const [open, setOpen] = useState<string | null>(null);
   const [magnetic, setMagnetic] = useState(false);
@@ -60,17 +63,17 @@ export function MediaWall({ ids, columns = 4 }: { ids: string[]; columns?: numbe
           style={{ background: 'rgb(5 5 7 / 0.93)', animation: 'obn-reveal 320ms var(--ease-reveal) both' }}
           role="dialog"
           aria-modal="true"
-          aria-label={openAsset.purpose}
+          aria-label={altFor(locale, openAsset.id)}
           onClick={() => setOpen(null)}
         >
           <figure className="max-h-full w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
             <AssetImage id={openAsset.id} sizes="full" className="rounded-[var(--radius-md)]" priority />
             <figcaption className="mt-4 flex flex-wrap items-baseline justify-between gap-3">
               <span className="text-[0.88rem]" style={{ color: 'rgb(244 241 234 / 0.8)' }}>
-                {openAsset.purpose}
+                {altFor(locale, openAsset.id)}
               </span>
               <span className="kicker" style={{ color: 'rgb(244 241 234 / 0.4)' }}>
-                {openAsset.kit} · {openAsset.section}
+                {openAsset.kit}
               </span>
             </figcaption>
           </figure>
@@ -79,7 +82,7 @@ export function MediaWall({ ids, columns = 4 }: { ids: string[]; columns?: numbe
             onClick={() => setOpen(null)}
             className="fixed right-5 top-5 grid h-11 w-11 place-items-center rounded-full border text-xl"
             style={{ borderColor: 'rgb(244 241 234 / 0.3)', color: '#f4f1ea' }}
-            aria-label="Đóng ảnh"
+            aria-label={t.ui.mediaWall.close}
           >
             ×
           </button>

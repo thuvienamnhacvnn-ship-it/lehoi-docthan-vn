@@ -4,7 +4,8 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { AssetImage } from '@/components/media/AssetImage';
 import { Tag } from '@/components/ui/Section';
 import { zones } from '@/data/zones';
-import { activities, categoryLabels } from '@/data/activities';
+import { activities } from '@/data/activities';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * BẢN ĐỒ LỄ HỘI (§07, §17-C).
@@ -16,6 +17,7 @@ import { activities, categoryLabels } from '@/data/activities';
  * là bản đồ chạy với mặt bằng chính thức, không phải sửa component.
  */
 export function FestivalMap() {
+  const { t } = useI18n();
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [hover, setHover] = useState<string | null>(null);
@@ -69,22 +71,22 @@ export function FestivalMap() {
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             <MapChip active={filter === 'all'} onClick={() => setFilter('all')}>
-              Tất cả khu
+              {t.ui.map.allZones}
             </MapChip>
             {(['community', 'pets', 'commerce', 'art', 'food', 'music'] as const).map((c) => (
               <MapChip key={c} active={filter === c} onClick={() => setFilter(c)}>
-                {categoryLabels[c]}
+                {t.categories[c]}
               </MapChip>
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <MapButton onClick={() => changeZoom(-0.3)} label="Thu nhỏ">
+            <MapButton onClick={() => changeZoom(-0.3)} label={t.ui.map.zoomOut}>
               −
             </MapButton>
             <span className="w-12 text-center text-[0.76rem] tabular-nums" style={{ color: 'var(--env-faint)' }}>
               {Math.round(zoom * 100)}%
             </span>
-            <MapButton onClick={() => changeZoom(0.3)} label="Phóng to">
+            <MapButton onClick={() => changeZoom(0.3)} label={t.ui.map.zoomIn}>
               +
             </MapButton>
             <MapButton
@@ -92,7 +94,7 @@ export function FestivalMap() {
                 setZoom(1);
                 setPan({ x: 0, y: 0 });
               }}
-              label="Về mặc định"
+              label={t.ui.map.reset}
             >
               ⤾
             </MapButton>
@@ -117,7 +119,7 @@ export function FestivalMap() {
               preserveAspectRatio="none"
               className="absolute inset-0 h-full w-full"
               role="group"
-              aria-label="Các khu vực của lễ hội"
+              aria-label={t.ui.map.zonesAria}
             >
               {visible.map((z) => {
                 const isOn = hover === z.id || selected === z.id;
@@ -136,7 +138,7 @@ export function FestivalMap() {
                       onClick={() => setSelected(z.id)}
                       tabIndex={0}
                       role="button"
-                      aria-label={`${z.name} — ${z.short}`}
+                      aria-label={`${t.zones[z.id].name} — ${t.zones[z.id].short}`}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                           e.preventDefault();
@@ -173,7 +175,7 @@ export function FestivalMap() {
         </div>
 
         <p className="mt-3 text-[0.74rem]" style={{ color: 'var(--env-faint)' }}>
-          Sơ đồ thể hiện quan hệ giữa các khu. Mặt bằng đo đạc chính thức sẽ thay thế sơ đồ này khi ban tổ chức cung cấp.
+          {t.ui.map.schematicNote}
         </p>
       </div>
 
@@ -192,14 +194,14 @@ export function FestivalMap() {
                 <p className="kicker mb-2" style={{ color: zone.color }}>
                   {zone.en}
                 </p>
-                <h3 className="font-display text-[1.15rem]">{zone.name}</h3>
+                <h3 className="font-display text-[1.15rem]">{t.zones[zone.id].name}</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setSelected(null)}
                 className="grid h-9 w-9 shrink-0 place-items-center rounded-full border"
                 style={{ borderColor: 'var(--env-card-line)' }}
-                aria-label="Đóng chi tiết khu"
+                aria-label={t.ui.map.closeDetail}
               >
                 ×
               </button>
@@ -219,22 +221,24 @@ export function FestivalMap() {
             )}
 
             <p className="mt-3.5 text-[0.82rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-              {zone.description}
+              {t.zones[zone.id].description}
             </p>
 
-            <p className="kicker mt-5 mb-2.5">Dịch vụ tại khu</p>
+            <p className="kicker mt-5 mb-2.5">{t.ui.map.servicesTitle}</p>
             <ul className="flex flex-wrap gap-2">
-              {zone.services.map((s) => (
+              {t.zones[zone.id].services.map((s) => (
                 <li key={s}>
                   <Tag>{s}</Tag>
                 </li>
               ))}
-              {zone.accessible && <Tag color="#00d1ff">Lối đi tiếp cận</Tag>}
+              {zone.accessible && <Tag color="#00d1ff">{t.ui.map.accessTag}</Tag>}
             </ul>
 
             {zoneActivities.length > 0 && (
               <>
-                <p className="kicker mt-5 mb-2.5">Hoạt động ({zoneActivities.length})</p>
+                <p className="kicker mt-5 mb-2.5">
+                  {t.ui.map.activitiesTitle} ({zoneActivities.length})
+                </p>
                 <ul className="space-y-2">
                   {zoneActivities.map((a) => (
                     <li key={a.id} className="flex gap-3">
@@ -244,9 +248,9 @@ export function FestivalMap() {
                         aria-hidden
                       />
                       <span>
-                        <span className="block text-[0.82rem] font-semibold">{a.name}</span>
+                        <span className="block text-[0.82rem] font-semibold">{t.activities[a.id].name}</span>
                         <span className="block text-[0.74rem] leading-snug" style={{ color: 'var(--env-faint)' }}>
-                          {a.summary}
+                          {t.activities[a.id].summary}
                         </span>
                       </span>
                     </li>
@@ -257,9 +261,9 @@ export function FestivalMap() {
           </div>
         ) : (
           <div>
-            <p className="kicker mb-3">Chọn một khu</p>
+            <p className="kicker mb-3">{t.ui.map.pickKicker}</p>
             <p className="text-[0.82rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-              Bấm vào một vùng màu trên bản đồ để xem hoạt động, dịch vụ và ảnh của khu đó.
+              {t.ui.map.pickBody}
             </p>
             <ul className="mt-5 space-y-0.5">
               {zones.map((z) => (
@@ -274,9 +278,9 @@ export function FestivalMap() {
                   >
                     <span className="fx-i-dot h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: z.color }} aria-hidden />
                     <span className="min-w-0">
-                      <span className="block text-[0.82rem] font-semibold">{z.name}</span>
+                      <span className="block text-[0.82rem] font-semibold">{t.zones[z.id].name}</span>
                       <span className="block truncate text-[0.72rem]" style={{ color: 'var(--env-faint)' }}>
-                        {z.short}
+                        {t.zones[z.id].short}
                       </span>
                     </span>
                   </button>

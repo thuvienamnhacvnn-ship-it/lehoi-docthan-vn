@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { opportunities, opportunityCategories } from '@/data/sponsor';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * Biểu mẫu quan tâm hợp tác (§12).
@@ -9,6 +10,7 @@ import { opportunities, opportunityCategories } from '@/data/sponsor';
  * chưa được gửi đi đâu. Khi có endpoint thật, thay phần `submit` là xong.
  */
 export function PartnerLeadForm() {
+  const { t } = useI18n();
   const [form, setForm] = useState({ company: '', name: '', email: '', phone: '', interest: '', message: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [done, setDone] = useState(false);
@@ -19,9 +21,9 @@ export function PartnerLeadForm() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const next: Record<string, string> = {};
-    if (!form.company.trim()) next.company = 'Hãy cho biết tên doanh nghiệp';
-    if (!form.name.trim()) next.name = 'Hãy cho biết tên người liên hệ';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = 'Email chưa đúng định dạng';
+    if (!form.company.trim()) next.company = t.ui.leadForm.errCompany;
+    if (!form.name.trim()) next.name = t.ui.leadForm.errName;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = t.ui.leadForm.errEmail;
     setErrors(next);
     if (Object.keys(next).length === 0) setDone(true);
   };
@@ -30,13 +32,15 @@ export function PartnerLeadForm() {
     return (
       <div className="surface p-8" role="status">
         <p className="kicker mb-3" style={{ color: 'var(--color-gold)' }}>
-          Đã ghi nhận trong phiên này
+          {t.ui.leadForm.doneBadge}
         </p>
-        <p className="font-display text-[1.3rem]">Cảm ơn {form.name.trim()}.</p>
+        <p className="font-display text-[1.3rem]">
+          {t.ui.leadForm.thanks} {form.name.trim()}.
+        </p>
         <p className="mt-3 text-[0.9rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-          Website chưa nối với hệ thống nhận thông tin của ban tổ chức, nên nội dung bạn vừa điền{' '}
-          <strong>chưa được gửi đi đâu cả</strong>. Kiến trúc biểu mẫu đã sẵn sàng: khi có địa chỉ nhận, dữ liệu sẽ
-          chạy thẳng về đó.
+          {t.ui.leadForm.doneBodyA}{' '}
+          <strong>{t.ui.leadForm.doneBodyStrong}</strong>
+          {t.ui.leadForm.doneBodyB}
         </p>
         <button
           type="button"
@@ -44,7 +48,7 @@ export function PartnerLeadForm() {
           className="mt-6 rounded-full border px-5 py-2.5 text-[0.82rem] font-semibold"
           style={{ borderColor: 'var(--env-card-line)' }}
         >
-          Điền lại
+          {t.ui.leadForm.again}
         </button>
       </div>
     );
@@ -52,20 +56,20 @@ export function PartnerLeadForm() {
 
   return (
     <form onSubmit={submit} className="surface p-6 sm:p-8" noValidate>
-      <p className="font-display text-[1.3rem]">Gửi thông tin hợp tác</p>
+      <p className="font-display text-[1.3rem]">{t.ui.leadForm.title}</p>
       <p className="mt-2 text-[0.85rem]" style={{ color: 'var(--env-faint)' }}>
-        Cho biết thương hiệu của bạn quan tâm tới phần nào, đội ngũ lễ hội sẽ dựng đề xuất tương ứng.
+        {t.ui.leadForm.lead}
       </p>
 
       <div className="mt-7 grid gap-5 sm:grid-cols-2">
-        <Field id="company" label="Doanh nghiệp" value={form.company} onChange={set('company')} error={errors.company} />
-        <Field id="name" label="Người liên hệ" value={form.name} onChange={set('name')} error={errors.name} />
+        <Field id="company" label={t.ui.leadForm.company} value={form.company} onChange={set('company')} error={errors.company} />
+        <Field id="name" label={t.ui.leadForm.contact} value={form.name} onChange={set('name')} error={errors.name} />
         <Field id="email" label="Email" type="email" value={form.email} onChange={set('email')} error={errors.email} />
-        <Field id="phone" label="Điện thoại" type="tel" value={form.phone} onChange={set('phone')} />
+        <Field id="phone" label={t.ui.leadForm.phone} type="tel" value={form.phone} onChange={set('phone')} />
       </div>
 
       <label htmlFor="interest" className="mt-5 block">
-        <span className="kicker">Quan tâm tới</span>
+        <span className="kicker">{t.ui.leadForm.interest}</span>
         <select
           id="interest"
           value={form.interest}
@@ -73,17 +77,17 @@ export function PartnerLeadForm() {
           className="mt-2 w-full rounded-[var(--radius-sm)] border bg-transparent px-4 py-3 text-[0.9rem]"
           style={{ borderColor: 'var(--env-card-line)', color: 'var(--env-fg)' }}
         >
-          <option value="">— Chọn một hình thức —</option>
+          <option value="">{t.ui.leadForm.choose}</option>
           {opportunities.map((o) => (
             <option key={o.id} value={o.id} style={{ background: '#0b0912' }}>
-              {opportunityCategories[o.category].label} · {o.name}
+              {t.opportunityCategories[o.category]} · {t.opportunities[o.id].name}
             </option>
           ))}
         </select>
       </label>
 
       <label htmlFor="message" className="mt-5 block">
-        <span className="kicker">Nội dung</span>
+        <span className="kicker">{t.ui.leadForm.message}</span>
         <textarea
           id="message"
           rows={4}
@@ -99,10 +103,10 @@ export function PartnerLeadForm() {
         className="mt-7 w-full rounded-full px-6 py-3.5 text-[0.88rem] font-bold sm:w-auto"
         style={{ background: 'var(--color-gold)', color: '#16120a' }}
       >
-        Gửi thông tin
+        {t.ui.leadForm.submit}
       </button>
       <p className="mt-4 text-[0.74rem]" style={{ color: 'var(--env-faint)' }}>
-        Biểu mẫu đang ở chế độ chạy thử: dữ liệu không rời khỏi trình duyệt của bạn.
+        {t.ui.leadForm.demoNote}
       </p>
     </form>
   );

@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 const _unusedMetadata = {
   title: 'Vé',
-  description: 'Ba hạng vé của lễ hội, ví vé điện tử, quy trình check-in và vòng tay LED. Giá và ngày mở bán sẽ công bố sau.',
+
 };
 
 /**
@@ -65,7 +65,7 @@ export default async function TicketsPage({ params }: PageProps) {
         <dl className="mt-8 flex flex-wrap items-start gap-x-12 gap-y-5">
           <div>
             <dt className="kicker mb-2" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-              Giá vé
+              {c.priceLabel}
             </dt>
             <dd>
               <Pending k="TICKET_PRICE" />
@@ -73,7 +73,7 @@ export default async function TicketsPage({ params }: PageProps) {
           </div>
           <div>
             <dt className="kicker mb-2" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-              Ngày mở bán
+              {c.onsaleLabel}
             </dt>
             <dd>
               <Pending k="TICKET_ONSALE" />
@@ -81,7 +81,7 @@ export default async function TicketsPage({ params }: PageProps) {
           </div>
           <div>
             <dt className="kicker mb-2" style={{ color: 'rgb(244 241 234 / 0.42)' }}>
-              Số hạng vé
+              {c.tiersCountLabel}
             </dt>
             <dd className="num-oversized text-[1.4rem]" style={{ color: 'var(--color-gold)' }}>
               {ticketTiers.length}
@@ -94,7 +94,7 @@ export default async function TicketsPage({ params }: PageProps) {
       <section data-env-zone="night" className="section" style={{ background: '#050507' }}>
         <div className="wrap">
           <SectionHeader
-            kicker={`${ticketTiers.length} hạng vé`}
+            kicker={`${ticketTiers.length} ${c.tiersCountA}`}
             title={c.chooseTitle}
             lead={c.chooseLead}
             align="wide"
@@ -111,7 +111,7 @@ export default async function TicketsPage({ params }: PageProps) {
                   className="absolute right-5 top-5 z-10 rounded-full px-3.5 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.2em]"
                   style={{ background: 'var(--color-gold)', color: '#16120a' }}
                 >
-                  Được chọn nhiều
+                  {t.common.mostChosen}
                 </span>
                 <AssetImage id={featured.assetId} sizes="half" ratio="16 / 9" className="w-full" scrim="bottom" />
                 {/* Vân vàng chạy mảnh dưới ảnh — chất liệu dành riêng cho hạng VIP */}
@@ -121,14 +121,14 @@ export default async function TicketsPage({ params }: PageProps) {
                     {featured.en}
                   </p>
                   <h2 className="font-display fx-t-gold-rise mt-2 text-[clamp(1.6rem,3vw,2.4rem)]" style={{ color: '#f4f1ea' }}>
-                    {featured.name}
+                    {t.ticketTiers[featured.id].name}
                   </h2>
                   <p className="lede mt-3" style={{ color: 'rgb(244 241 234 / 0.72)' }}>
-                    {featured.lead}
+                    {t.ticketTiers[featured.id].lead}
                   </p>
 
                   <ul className="mt-7 grid flex-1 gap-2.5 sm:grid-cols-2">
-                    {featured.benefits.map((b) => (
+                    {t.ticketTiers[featured.id].benefits.map((b) => (
                       <li
                         key={b}
                         className="flex gap-2.5 text-[0.86rem] leading-snug"
@@ -231,24 +231,24 @@ export default async function TicketsPage({ params }: PageProps) {
                       className="kicker w-[34%] border-b py-4 pr-4 align-bottom"
                       style={{ borderColor: 'rgb(244 241 234 / 0.16)' }}
                     >
-                      Quyền lợi
+                      {c.benefitsCol}
                     </th>
-                    {ticketTiers.map((t) => (
+                    {ticketTiers.map((tier) => (
                       <th
-                        key={t.id}
+                        key={tier.id}
                         scope="col"
                         className="border-b py-4 pl-4 align-bottom"
                         style={{ borderColor: 'rgb(244 241 234 / 0.16)' }}
                       >
-                        <span className="kicker block text-[0.56rem]" style={{ color: t.accent }}>
-                          {t.en}
+                        <span className="kicker block text-[0.56rem]" style={{ color: tier.accent }}>
+                          {tier.en}
                         </span>
                         <span className="font-display mt-1.5 block text-[1rem]" style={{ color: '#f4f1ea' }}>
-                          {t.name}
+                          {t.ticketTiers[tier.id].name}
                         </span>
-                        {t.proposed && (
+                        {tier.proposed && (
                           <span className="mt-1 block text-[0.6rem] uppercase tracking-[0.14em]" style={{ color: 'rgb(244 241 234 / 0.4)' }}>
-                            đề xuất
+                            {t.common.proposed}
                           </span>
                         )}
                       </th>
@@ -265,16 +265,16 @@ export default async function TicketsPage({ params }: PageProps) {
                       >
                         {benefit}
                       </th>
-                      {ticketTiers.map((t) => {
-                        const has = t.benefits.includes(benefit);
+                      {ticketTiers.map((tier) => {
+                        const has = t.ticketTiers[tier.id].benefits.includes(benefit);
                         return (
                           <td
-                            key={t.id}
+                            key={tier.id}
                             className="border-b py-3.5 pl-4"
                             style={{ borderColor: 'rgb(244 241 234 / 0.08)' }}
                           >
                             {has ? (
-                              <span className="fx-i-beat inline-block text-[0.95rem]" style={{ color: t.accent }}>
+                              <span className="fx-i-beat inline-block text-[0.95rem]" style={{ color: tier.accent }}>
                                 ✓<span className="sr-only">{c.yes}</span>
                               </span>
                             ) : (
@@ -289,11 +289,11 @@ export default async function TicketsPage({ params }: PageProps) {
                   ))}
                   <tr>
                     <th scope="row" className="kicker py-5 pr-4">
-                      Giá vé
+                      {c.priceLabel}
                     </th>
-                    {ticketTiers.map((t) => (
-                      <td key={t.id} className="py-5 pl-4">
-                        <Pending k="TICKET_PRICE" tone={t.featured ? 'gold' : 'quiet'} />
+                    {ticketTiers.map((tier) => (
+                      <td key={tier.id} className="py-5 pl-4">
+                        <Pending k="TICKET_PRICE" tone={tier.featured ? 'gold' : 'quiet'} />
                       </td>
                     ))}
                   </tr>
@@ -345,10 +345,10 @@ export default async function TicketsPage({ params }: PageProps) {
                       {String(i + 1).padStart(2, '0')}
                     </p>
                     <p className="font-display fx-t-lift mt-1 text-[1.02rem]" style={{ color: '#f4f1ea' }}>
-                      {s.label}
+                      {t.wristband[s.id === 'wristband' ? 'wristbandStep' : s.id].label}
                     </p>
                     <p className="mt-1.5 text-[0.78rem]" style={{ color: 'rgb(244 241 234 / 0.6)' }}>
-                      {s.note}
+                      {t.wristband[s.id === 'wristband' ? 'wristbandStep' : s.id].note}
                     </p>
                   </div>
                 </li>

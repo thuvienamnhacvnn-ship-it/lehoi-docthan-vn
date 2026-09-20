@@ -1346,6 +1346,7 @@ export const en: MessagesFor = {
       priceLabel: 'Ticket price',
       priceShort: 'Price',
       onsaleLabel: 'On sale from',
+      tiersCountLabel: 'Number of tiers',
       tiersCountA: 'ticket tiers',
       chooseTitle: 'Choose how you want to spend the day',
       chooseLead:
@@ -1354,6 +1355,7 @@ export const en: MessagesFor = {
       compareKicker: 'Side by side',
       compareTitle: 'What each tier includes',
       compareCaption: 'Comparison of what each ticket tier includes',
+      benefitsCol: 'Included',
       yes: 'Yes',
       no: 'No',
       flowKicker: 'The flow',
@@ -1462,6 +1464,7 @@ export const en: MessagesFor = {
       hospitalityTitle: 'Invite your partners to an evening worth remembering',
       hospitalityLead:
         'A private hosting area, table service, a view of the stage, support with welcoming guests. Partnerships come along more easily here than in a meeting room.',
+      hospitalityTags: ['Private entrance', 'Reserved seating', 'Table service', 'Guest coordination support'],
       csrKicker: '09 — CSR / ESG',
       csrTitle: 'Happiness Fund',
       csrLead:
@@ -1500,6 +1503,230 @@ export const en: MessagesFor = {
         'The festival has not launched its media campaign, so there are no releases or articles here yet. The structure is ready: when the real content arrives, this is exactly where it lands.',
       pressCta: 'Press room',
     },
+  },
+
+  ui: {
+    ticketFlow: {
+      chooseTier: 'Choose a tier',
+      holderTitle: 'Ticket holder details',
+      holderName: 'Full name',
+      holderPlaceholder: 'Alex Nguyen',
+      holderNote: 'This trial run sends nothing anywhere — what you type stays inside your browser.',
+      promoTitle: 'Promo code',
+      promoLabel: 'Enter a code if you have one',
+      promoPlaceholder: 'FOR EXAMPLE: OBN2026',
+      promoNote: 'No promotion has been announced yet, so the system does not check codes.',
+      summaryTitle: 'Confirm the order',
+      rowTier: 'Tier',
+      rowHolder: 'Holder',
+      rowPromo: 'Promo code',
+      rowTotal: 'Total',
+      notEntered: 'Not entered',
+      none: 'None',
+      paymentTitle: 'Payment',
+      paymentBadge: 'Integration layer empty',
+      paymentBody:
+        'The site is not connected to any payment provider. The architecture is already separated: once the organisers choose a gateway, it plugs into exactly this step and the rest stays as it is.',
+      issueDemo: 'Issue a demo ticket to see the wallet',
+      walletTitle: 'The ticket is in your wallet',
+      walletDone: 'A demo ticket has been created. See the mock QR code in the right-hand column or on the Account page.',
+      walletEmptyFlow: 'No ticket has been issued in this session.',
+      back: 'Back',
+      next: 'Continue',
+      wallet: 'Ticket wallet',
+      walletEmpty: 'No tickets yet. Walk through the flow on the left to see what a digital ticket looks like in the wallet.',
+      demoTicket: 'Demo ticket',
+      mockCode: 'Mock check-in code',
+      deleteTicket: 'Delete this ticket',
+      mockCodeAria: 'Mock code',
+    },
+
+    leadForm: {
+      errCompany: 'Please tell us the company name',
+      errName: 'Please tell us the contact name',
+      errEmail: 'That email address does not look right',
+      doneBadge: 'Recorded in this session',
+      thanks: 'Thank you',
+      doneBodyA: 'The site is not connected to the organisers’ intake system, so what you just filled in',
+      doneBodyStrong: 'has not been sent anywhere',
+      doneBodyB: '. The form architecture is ready: once there is an address to send to, the data goes straight there.',
+      again: 'Fill it in again',
+      title: 'Send us your partnership details',
+      lead: 'Tell us which part your brand is interested in and the festival team will build the matching proposal.',
+      company: 'Company',
+      contact: 'Contact person',
+      phone: 'Phone',
+      interest: 'Interested in',
+      choose: '— Choose a format —',
+      message: 'Message',
+      submit: 'Send',
+      demoNote: 'The form is in trial mode: nothing leaves your browser.',
+    },
+
+    impact: {
+      whatKicker: 'What gets measured',
+      waiting: 'awaiting real figures',
+      emptyNote:
+        'Every field is empty because the festival has no verified figures yet. This structure plugs straight into real data after the event — no number here is offered as a promise.',
+      estimateKicker: 'Estimate it yourself',
+      yourNumbers: 'Numbers you entered',
+      estimateLead:
+        'Enter your own brand’s assumptions to see how the measurement structure works. The festival has not published a scale, so the software fills in nothing by itself.',
+      inAudience: 'Attendance you are assuming',
+      unitPeople: 'people',
+      visitRate: 'Share who visit your activation',
+      touchpointsInput: 'Touchpoints along the journey',
+      unitPoints: 'points',
+      derivedVisits: 'Visits to the activation',
+      derivedImpressions: 'Brand impressions',
+      derivedLeads: 'Lead range',
+      derivedTouchpoints: 'Touchpoints per visitor',
+    },
+
+    account: {
+      tabsAria: 'Account sections',
+      walletTab: 'Ticket wallet',
+      scheduleTab: 'My schedule',
+      favoritesTab: 'Favourites',
+      walletEmptyTitle: 'Your wallet is empty',
+      walletEmptyBody: 'Tickets are not on sale yet. You can walk through the booking flow on the Tickets page to see what a digital ticket looks like.',
+      walletEmptyCta: 'Go to Tickets',
+      demoTicket: 'Demo ticket',
+      mockCode: 'Mock check-in code',
+      deleteTicket: 'Delete ticket',
+      scheduleEmptyTitle: 'Your schedule is empty',
+      scheduleEmptyBody: 'Go to the Programme page and tap the plus on the activities you want to attend.',
+      scheduleEmptyCta: 'Open the programme',
+      clashSuffix: 'items clash with each other.',
+      minutes: 'min',
+      remove: 'Remove',
+      clearSchedule: 'Clear the whole schedule',
+      favEmptyTitle: 'No favourites yet',
+      favEmptyBody: 'Tap the heart on an image in the library to keep the frames you like.',
+      favEmptyCta: 'Open the image library',
+    },
+
+    map: {
+      allZones: 'All zones',
+      zoomOut: 'Zoom out',
+      zoomIn: 'Zoom in',
+      reset: 'Reset view',
+      zonesAria: 'The festival zones',
+      schematicNote:
+        'The diagram shows how the zones relate to each other. A surveyed site plan will replace it once the organisers provide one.',
+      closeDetail: 'Close zone details',
+      servicesTitle: 'Services in this zone',
+      accessTag: 'Step-free access',
+      activitiesTitle: 'Activities',
+      pickKicker: 'Pick a zone',
+      pickBody: 'Tap a coloured area on the map to see that zone’s activities, services and photographs.',
+    },
+
+    sponsorTeaser: {
+      kicker: '07 — For brands',
+      titleA: 'is not',
+      titleB: 'a place to',
+      titleC: 'hang a logo',
+      lead:
+        'It is an ecosystem a brand can step into: an experience area, a commercial window, a moment in the stage script, or a name attached to a whole zone.',
+      countSuffix: 'ways to take part, grouped into eight kinds of value.',
+      measureNote: 'With a measurement structure ready to connect to real data afterwards. Partnership contact:',
+      portalCta: 'Enter the partner portal',
+      ticketsTitleA: 'Three ways',
+      ticketsTitleB: 'into',
+      ticketsTitleC: 'the festival',
+      ticketsLead:
+        'Pricing and the on-sale date follow later. What each tier includes is fixed by the experience, not by a number.',
+      priceLabel: 'Price',
+      ticketsCta: 'See the tiers, the wallet and the LED wristband',
+    },
+
+    rail: {
+      filterAria: 'Filter activities by category',
+      prev: 'Back',
+      next: 'Forward',
+      listAria: 'Festival activities',
+      needsSignup: 'Sign-up required',
+    },
+
+    opportunity: {
+      filterAria: 'Filter opportunities by category',
+      listAria: 'List of opportunities',
+      stepsAria: 'Steps of the brand activation',
+      suggestedZone: 'Suggested location:',
+      prevStep: 'Previous step',
+      nextStep: 'Next step',
+    },
+
+    schedule: {
+      views: {
+        day: 'By time block',
+        stage: 'By stage',
+        zone: 'By zone',
+        activity: 'By activity',
+        now: 'My schedule',
+      },
+      viewsAria: 'How to view the programme',
+      allActivities: 'All activities',
+      relativeTimes: 'Relative times — the official clock has not been announced',
+      clashA: 'There are',
+      clashB: 'clashing items in your schedule — the clashes are marked below.',
+      emptyMine: 'Your schedule is empty. Tap the plus on any item in the other views to add it here.',
+      addTo: 'Add to my schedule',
+      removeFrom: 'Remove from my schedule',
+    },
+
+    video: {
+      captionsLabel: 'English',
+      unmute: 'Unmute',
+      mute: 'Mute',
+      comingSoon: 'Video to follow',
+      srNote: 'the video has not been supplied; the poster image is shown instead.',
+    },
+
+    lightMoment: {
+      kicker: 'The signature moment',
+      body:
+        'Thousands of LED wristbands lighting up on the same beat. This is where the “one beat” in the name becomes something you can see — the whole crowd turning into a wave of light.',
+      pause: 'Pause the effect',
+      play: 'Run the effect',
+    },
+
+    gallery: {
+      kits: {
+        'KIT-01': 'Brand & hero',
+        'KIT-02': 'Day Festival',
+        'KIT-03': 'The concert',
+        'KIT-04': 'Community & media',
+        'KIT-05': 'Sponsorship & commerce',
+        'KIT-06': 'Journey & operations',
+      },
+      all: 'All',
+      shapes: { all: 'Any shape', landscape: 'Landscape', portrait: 'Portrait', square: 'Square' },
+      countSuffix: 'images',
+      open: 'Open',
+      like: 'Add to favourites',
+      unlike: 'Remove from favourites',
+      close: 'Close',
+    },
+
+    misc: {
+      unlike: 'Unlike',
+      clearAll: 'Clear all',
+      localOnly:
+        'What you see on this page lives in your browser and is not sent to any server. When the real account system is built, this section connects to it.',
+      estimateDisclaimer:
+        'The figures above are multiplied out from the assumptions you just entered. They are not a forecast by the organisers and not a promise from the festival.',
+      openMap: 'Open the interactive map',
+      heroAlt:
+        'ONE BEAT NIGHT concert: a wave of light from thousands of LED wristbands running across the crowd, the stage blazing in the distance',
+    },
+
+    mediaWall: { close: 'Close image' },
+
+    partnerNav: { aria: 'Contents of the partner page' },
+
+    journey: { stage: 'Stage', progress: 'Journey · stage' },
   },
 
   videos: {

@@ -31,7 +31,7 @@ export function Hero() {
           sizes="full"
           priority
           fill
-          alt="Đêm nhạc ONE BEAT NIGHT: làn sóng ánh sáng từ hàng nghìn vòng tay LED chạy qua khán đài, sân khấu rực sáng phía xa"
+          alt={t.ui.misc.heroAlt}
         />
         <div
           className="absolute inset-0"

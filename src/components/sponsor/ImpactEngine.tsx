@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { impactModules, opportunityCategories } from '@/data/sponsor';
 import { SampleFlag } from '@/components/system/Pending';
+import { useI18n } from '@/i18n/I18nProvider';
 
 /**
  * BỘ ĐO TÁC ĐỘNG (§06).
@@ -13,6 +14,7 @@ import { SampleFlag } from '@/components/system/Pending';
  * được ghi rõ là do họ nhập, không phải cam kết của lễ hội.
  */
 export function ImpactEngine() {
+  const { t } = useI18n();
   const [attendance, setAttendance] = useState(0);
   const [engageRate, setEngageRate] = useState(20);
   const [touchpoints, setTouchpoints] = useState(3);
@@ -33,7 +35,7 @@ export function ImpactEngine() {
     <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
       {/* Kiến trúc đo lường */}
       <div>
-        <p className="kicker mb-5">Đo cái gì</p>
+        <p className="kicker mb-5">{t.ui.impact.whatKicker}</p>
         <ul className="grid gap-2 sm:grid-cols-2">
           {impactModules.map((m) => {
             const color = opportunityCategories[m.category].color;
@@ -44,11 +46,11 @@ export function ImpactEngine() {
                 style={{ borderColor: 'var(--env-card-line)' }}
               >
                 <span className="flex items-baseline justify-between gap-2">
-                  <span className="text-[0.86rem] font-semibold">{m.label}</span>
+                  <span className="text-[0.86rem] font-semibold">{t.impactModules[m.id].label}</span>
                   <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: color }} aria-hidden />
                 </span>
                 <span className="mt-1.5 block text-[0.74rem] leading-snug" style={{ color: 'var(--env-faint)' }}>
-                  {m.description}
+                  {t.impactModules[m.id].description}
                 </span>
                 <span
                   className="num-oversized mt-3 block text-[1.5rem]"
@@ -57,41 +59,39 @@ export function ImpactEngine() {
                   {m.value === null ? '—' : m.value.toLocaleString('vi-VN')}
                 </span>
                 <span className="kicker mt-1 block text-[0.56rem]">
-                  {m.value === null ? 'chờ số liệu thật' : m.unit}
+                  {m.value === null ? t.ui.impact.waiting : t.impactModules[m.id].unit}
                 </span>
               </li>
             );
           })}
         </ul>
         <p className="mt-5 text-[0.78rem] leading-relaxed" style={{ color: 'var(--env-faint)' }}>
-          Mọi ô đang để trống vì lễ hội chưa có số liệu được kiểm chứng. Cấu trúc này nối thẳng được vào dữ liệu thật
-          sau sự kiện — không có con số nào ở đây được đưa ra như một cam kết.
+          {t.ui.impact.emptyNote}
         </p>
       </div>
 
       {/* Công cụ ước lượng do người dùng tự nhập */}
       <div className="surface p-6 sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="kicker">Tự ước lượng</p>
-          <SampleFlag>Số do bạn nhập</SampleFlag>
+          <p className="kicker">{t.ui.impact.estimateKicker}</p>
+          <SampleFlag>{t.ui.impact.yourNumbers}</SampleFlag>
         </div>
         <p className="mt-4 text-[0.86rem] leading-relaxed" style={{ color: 'var(--env-muted)' }}>
-          Nhập giả định của chính thương hiệu bạn để xem cấu trúc đo lường hoạt động thế nào. Lễ hội chưa công bố
-          quy mô, nên phần mềm không tự điền bất kỳ con số nào.
+          {t.ui.impact.estimateLead}
         </p>
 
         <div className="mt-7 space-y-6">
           <Field
-            label="Số khách bạn giả định có mặt"
+            label={t.ui.impact.inAudience}
             value={attendance}
             min={0}
             max={50000}
             step={500}
-            suffix="người"
+            suffix={t.ui.impact.unitPeople}
             onChange={setAttendance}
           />
           <Field
-            label="Tỉ lệ ghé hoạt động của bạn"
+            label={t.ui.impact.visitRate}
             value={engageRate}
             min={1}
             max={60}
@@ -100,30 +100,29 @@ export function ImpactEngine() {
             onChange={setEngageRate}
           />
           <Field
-            label="Số điểm chạm trong hành trình"
+            label={t.ui.impact.touchpointsInput}
             value={touchpoints}
             min={1}
             max={8}
             step={1}
-            suffix="điểm"
+            suffix={t.ui.impact.unitPoints}
             onChange={setTouchpoints}
           />
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <Derived label="Lượt ghé hoạt động" value={hasInput ? derived.onsite : null} />
-          <Derived label="Lượt nhìn thấy thương hiệu" value={hasInput ? derived.impressions : null} />
+          <Derived label={t.ui.impact.derivedVisits} value={hasInput ? derived.onsite : null} />
+          <Derived label={t.ui.impact.derivedImpressions} value={hasInput ? derived.impressions : null} />
           <Derived
-            label="Khoảng khách tiềm năng"
+            label={t.ui.impact.derivedLeads}
             value={null}
             text={hasInput ? `${derived.leadsLow.toLocaleString('vi-VN')} – ${derived.leadsHigh.toLocaleString('vi-VN')}` : '—'}
           />
-          <Derived label="Điểm chạm mỗi khách" value={hasInput ? touchpoints : null} />
+          <Derived label={t.ui.impact.derivedTouchpoints} value={hasInput ? touchpoints : null} />
         </div>
 
         <p className="mt-6 text-[0.72rem] leading-relaxed" style={{ color: 'var(--env-faint)' }}>
-          Kết quả trên là phép nhân từ giả định bạn vừa nhập, không phải dự báo của ban tổ chức và không phải cam kết
-          trong hợp đồng.
+          {t.ui.misc.estimateDisclaimer}
         </p>
       </div>
     </div>

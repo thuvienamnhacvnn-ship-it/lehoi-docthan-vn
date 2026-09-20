@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next';
-import { festival } from '@/data/festival';
 
 /**
  * Bản kê khai để điện thoại cài web này về màn hình chính và mở ra như một ứng dụng thật
@@ -9,9 +8,10 @@ import { festival } from '@/data/festival';
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${festival.name} · ${festival.subtitle}`,
+    name: 'ONE BEAT NIGHT · LỄ HỘI ĐỘC THÂN',
     short_name: 'ONE BEAT',
-    description: festival.positioning,
+    description:
+      'Lễ hội dành cho người độc thân hiện đại — tự do, kết nối, phát triển bản thân và hạnh phúc.',
     lang: 'vi',
     dir: 'ltr',
     start_url: '/?app=1',
