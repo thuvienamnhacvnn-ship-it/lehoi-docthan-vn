@@ -29,18 +29,21 @@ const SPARKS: { x: number; y: number; size: number; delay: number; dur: number }
   { x: 60, y: 60, size: 7, delay: 3000, dur: 4.7 },
 ];
 
-export function HeroEmblem() {
-  return (
-    <div
-      aria-hidden
-      className={
-        // Điện thoại: nhỏ, căn giữa, nằm hẳn phía trên khối chữ.
-        // Từ md trở lên: lệch sang phải 10cm và to gấp đôi như yêu cầu — chặn ở 20vw để
-        // màn hình hẹp không bị mép khung cắt mất logo.
-        'pointer-events-none absolute left-1/2 top-[4%] w-[46vw] -translate-x-1/2 ' +
+export function HeroEmblem({ variant }: { variant: 'floating' | 'inline' }) {
+  const placement =
+    variant === 'floating'
+      ? // Bản desktop: thả nổi trên ảnh, lệch sang phải 10cm và to gấp đôi như yêu cầu.
+        // Chặn ở 20vw để màn hình hẹp không bị mép khung cắt mất logo.
+        'pointer-events-none absolute hidden md:block ' +
         'md:left-[calc(50%+min(10cm,20vw))] md:top-[calc(var(--nav-h)-6px)] md:w-[min(35vw,456px)]'
-      }
-    >
+      : // Bản điện thoại: nằm trong luồng chữ, đứng đầu cột và căn giữa cùng mọi thứ khác.
+        // Có nằm trong luồng thì cả khối mới căn giữa được theo chiều dọc của khung 9:16.
+        // Bề ngang chạy theo chiều CAO màn hình chứ không chỉ theo bề ngang: máy màn
+                // ngắn mà vẫn lấy 42vw thì riêng biểu tượng đã ăn hết chỗ của nút bấm.
+                'pointer-events-none relative mx-auto block w-[min(42vw,17svh)] max-w-[190px] md:hidden';
+
+  return (
+    <div aria-hidden className={placement}>
       {/* Quầng sáng thở phía sau */}
       <span className="obn-emblem-halo" />
 
