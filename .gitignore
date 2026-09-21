@@ -14,3 +14,6 @@ tsconfig.tsbuildinfo
 # thì bản deploy mất sạch 164 tấm — mọi ảnh 404, trang trắng ảnh.
 # 598 tệp WebP, tổng 37MB, tệp lớn nhất 0,4MB: Git và Vercel đều gánh được.
 # Muốn sinh lại từ ảnh gốc: npm run assets
+
+.vercel
+.env*
