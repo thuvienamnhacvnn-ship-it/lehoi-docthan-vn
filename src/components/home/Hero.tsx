@@ -180,14 +180,14 @@ export function Hero() {
           <div className="mt-5 flex flex-wrap items-stretch justify-center gap-3 md:mt-9 md:items-center md:justify-start">
             <L
               href="/tickets"
-              className="fx-b-press inline-flex grow basis-[9.5rem] items-center justify-center rounded-full px-7 py-3.5 text-center text-[0.9rem] font-bold tracking-wide md:grow-0 md:basis-auto"
+              className="fx-b-press inline-flex grow basis-[9.5rem] items-center justify-center rounded-full px-4 py-3.5 text-center text-[0.9rem] font-bold md:px-7 tracking-wide md:grow-0 md:basis-auto"
               style={{ background: 'var(--color-gold)', color: '#16120a' }}
             >
               {t.common.ticketsFull}
             </L>
             <L
               href="/experience"
-              className="fx-b-fill fx-b-press inline-flex grow basis-[9.5rem] items-center justify-center rounded-full border px-7 py-3.5 text-center text-[0.9rem] font-semibold md:grow-0 md:basis-auto"
+              className="fx-b-fill fx-b-press inline-flex grow basis-[9.5rem] items-center justify-center rounded-full border px-4 py-3.5 text-center text-[0.9rem] font-semibold md:px-7 md:grow-0 md:basis-auto"
               style={{ borderColor: 'rgb(244 241 234 / 0.28)', color: '#f4f1ea' }}
             >
               {t.common.explore}
